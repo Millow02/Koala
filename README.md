@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/9d55d07a-9711-4639-82b9-34ec8e223fd1)
+
 # Welcome to Remix!
 
 - 📖 [Remix docs](https://remix.run/docs)
