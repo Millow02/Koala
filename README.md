@@ -1,5 +1,3 @@
-![image](https://github.com/user-attachments/assets/9d55d07a-9711-4639-82b9-34ec8e223fd1)
-![image](https://github.com/user-attachments/assets/380382a6-df0d-4622-938e-0a19609910c2)
 
 # Welcome to Remix!
 
