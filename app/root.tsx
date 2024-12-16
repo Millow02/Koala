@@ -4,23 +4,25 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
-
+import { createBrowserClient, createServerClient } from "@supabase/auth-helpers-remix";
+import { useEffect, useState } from "react";
 import "./tailwind.css";
 
-export const links: LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const env = {
+    SUPABASE_URL: process.env.SUPABASE_URL!,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
+  }
+
+  return { env };
+};
+
+
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -40,6 +42,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+
 export default function App() {
-  return <Outlet />;
+  const { env } = useLoaderData<typeof loader>();
+  const [ supabase ] = useState(() =>
+   createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!)
+   );
+  return <Outlet context={{ supabase }}/>;
 }
