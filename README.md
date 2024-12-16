@@ -1,41 +1,27 @@
 
-# Welcome to Remix!
+# Koala Kidz
 
-- 📖 [Remix docs](https://remix.run/docs)
 
-## Development
+## Description
 
-Run the dev server:
+Koala is a license plate tracking system that allows parking administrators to monitor incoming and outgoing vehicles using a license plate recognition system
 
-```shellscript
-npm run dev
-```
+Koala is a web-based application that is built with Remix + React
 
-## Deployment
 
-First, build your app for production:
+## Team members
 
-```sh
-npm run build
-```
+Scott McDonald
+Angelo Reolegio
+Rihazul Islam
+...
 
-Then run the app in production mode:
 
-```sh
-npm start
-```
 
-Now you'll need to pick a host to deploy it to.
 
-### DIY
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
 
-Make sure to deploy the output of `npm run build`
 
-- `build/server`
-- `build/client`
 
-## Stylings
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+
