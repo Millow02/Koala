@@ -1,8 +1,11 @@
 import type { MetaFunction } from "@remix-run/node";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { Outlet, useLoaderData, useOutletContext, useRevalidator } from "@remix-run/react";
+import { Link, Outlet, useLoaderData, useNavigate, useOutletContext, useRevalidator } from "@remix-run/react";
 import { createBrowserClient, createServerClient, SupabaseClient } from "@supabase/auth-helpers-remix";
 import { useEffect, useState } from "react";
+import { createClient, User } from "@supabase/supabase-js";
+import  Navbar  from "../components/Navbar"
+
 
 import { Database } from "../types/supabase";
 
@@ -37,59 +40,66 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Index() {
 
-
-  const data = useLoaderData();
-
   const { supabase } = useOutletContext<{ supabase: SupabaseClient<Database> }>()
+  const data = useLoaderData();
+  const revalidator = useRevalidator();
+  const navigate = useNavigate();
 
-
-    const signUp = () => {
-       supabase.auth.signUp({
-        email: "smcdo0211@gmail.com",
-        password: "password1234",
-      });
+    const [user, setUser] = useState<User | null>(null);
   
-    };
+    useEffect(() => {
+      const fetchUser = async () => {
+        const { data, error } = await supabase.auth.getUser();
   
-  
-      const signIn = () => {
-        supabase.auth.signInWithPassword({
-          email: "smcdo0211@gmail.com",
-          password: "password1234",
-        });
+        if (error) {
+          console.error("Error fetching user:", error.message);
+        } else {
+          setUser(data?.user || null);
+        }
       };
   
-      const signOut = () => {
-        supabase.auth.signOut();
-      };
+      fetchUser();
+    }, []);
 
-      const revalidator = useRevalidator();
-
-      useEffect(() => {
-        const {data: {subscription }} = supabase.auth.onAuthStateChange(() => {
-          revalidator.revalidate();
-        })
-
-        return () => {
-          subscription.unsubscribe()
-        };
-      }, [supabase, revalidator]);
-
-
+    useEffect(() => {
+      if (user) {
+        navigate("/dashboard"); // navigate to dashboard if a user is signed in
+      }
+    }, [user, navigate]);
 
   return (
-    <div className="flex h-screen items-center justify-center ">
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-      <button className='bg-white m-4 text-black p-3' onClick={signUp}>Sign up</button>
-      <button className='bg-white m-4 text-black p-3' onClick={signIn}>Sign in</button>
-      <button className='bg-white m-4 text-black p-3' onClick={signOut}>Sign out</button>
-      <h1 className="leading text-2xl font-bold text-white">Koala Dashboard</h1> 
+    <div>
+      {!user ? (
+        <div>
+          <Navbar />
+          <div className="flex h-screen items-center justify-center ">
+            <h1 className="leading text-2xl font-bold text-white">Koala landing page</h1> 
+          </div>
+        </div>
+      ) : (
+          <div>
+            Loading...
+          </div>
+      )}
     </div>
-
   );
 }
 
 
-  
+// old code 
 
+    // useEffect(() => {
+    //   const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+    //     if (session?.user) {
+    //       setUser(session.user); 
+    //     } else {
+    //       setUser(null); 
+    //     }
+    //     revalidator.revalidate(); 
+    //   });
+  
+    //   return () => {
+    //     subscription.subscription.unsubscribe(); 
+    //   };
+    // }, [supabase, revalidator]);
 
