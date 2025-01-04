@@ -1,9 +1,21 @@
-import { Outlet, useNavigate } from "@remix-run/react";
+import { Outlet, useNavigate, useOutletContext } from "@remix-run/react";
+import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { useEffect, useState } from "react";
 
+type ContextType = {
+  user: User;
+  supabase: SupabaseClient;
+};
+
 export default function Vehicles() {
+  const { user, supabase } = useOutletContext<ContextType>();
+  const [vehicleName, setVehicleName] = useState("");
+  const [model, setModel] = useState("");
+  const [licensePlate, setLicensePlate] = useState("");
+  const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
   const openCreateVehicleForm = () => {
     setIsModalOpen(true);
     setTimeout(() => setIsAnimating(true), 0);
@@ -44,6 +56,38 @@ export default function Vehicles() {
     }
   };
 
+  const createNewVehicle = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage("");
+    setMessage("");
+
+    if (!vehicleName || !model || !licensePlate) {
+      setMessage("All fields are required");
+      return;
+    }
+    try {
+      const { error } = await supabase.from("Vehicle").insert([
+        {
+          user_id: user.id,
+          name: vehicleName,
+          model,
+          license_plate_number: licensePlate,
+        },
+      ]);
+
+      if (error) {
+        setMessage("Error creating vehicle: " + error.message);
+      } else {
+        setMessage("Vehicle created successfully!");
+        setVehicleName("");
+        setModel("");
+        setLicensePlate("");
+      }
+    } catch (error) {
+      setMessage("Unexpected error has occured");
+    }
+  };
+
   return (
     <div className="relative">
       <h1 className="text-xl font-bold">Vehicles</h1>
@@ -53,6 +97,7 @@ export default function Vehicles() {
       >
         Create new vehicle
       </button>
+      <h2>{user?.email}</h2>
 
       <div>
         {isModalOpen && (
@@ -84,22 +129,15 @@ export default function Vehicles() {
               <hr className="bg-neutral-600 h-px border-0 my-4" />
 
               <div className="flex flex-col w-3/5 pl-6 mt-8">
-                <form>
+                <form onSubmit={createNewVehicle}>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-white mb-1">
                       Vehicle Name
                     </label>
                     <input
                       type="text"
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2"
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-white mb-1">
-                      Brand
-                    </label>
-                    <input
-                      type="text"
+                      value={vehicleName}
+                      onChange={(e) => setVehicleName(e.target.value)}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     />
                   </div>
@@ -109,6 +147,8 @@ export default function Vehicles() {
                     </label>
                     <input
                       type="text"
+                      value={model}
+                      onChange={(e) => setModel(e.target.value)}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     />
                   </div>
@@ -118,15 +158,28 @@ export default function Vehicles() {
                     </label>
                     <input
                       type="text"
+                      value={licensePlate}
+                      onChange={(e) => setLicensePlate(e.target.value)}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     />
-                    <button
-                      type="submit"
-                      className="text-base bg-white text-black rounded-lg p-2 mt-12"
-                    >
-                      Create vehicle
-                    </button>
                   </div>
+                  {message && (
+                    <p
+                      className={`text-sm ${
+                        message.startsWith("Error")
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {message}
+                    </p>
+                  )}
+                  <button
+                    type="submit"
+                    className="text-base bg-white text-black rounded-lg p-2 mt-8 mb-8"
+                  >
+                    Create vehicle
+                  </button>
                 </form>
               </div>
             </div>
