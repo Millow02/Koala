@@ -1,11 +1,20 @@
-import { Outlet, useNavigate, useOutletContext } from "@remix-run/react";
+import {
+  Outlet,
+  useLoaderData,
+  useNavigate,
+  useOutletContext,
+} from "@remix-run/react";
+import { LoaderFunctionArgs } from "@remix-run/server-runtime";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { useEffect, useState } from "react";
+import { Database } from "~/types/supabase";
 
 type ContextType = {
   user: User;
   supabase: SupabaseClient;
 };
+
+type Vehicle = Database["public"]["Tables"]["Vehicle"]["Row"];
 
 export default function Vehicles() {
   const { user, supabase } = useOutletContext<ContextType>();
@@ -15,6 +24,32 @@ export default function Vehicles() {
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  useEffect(() => {
+    const loadVehicles = async () => {
+      if (!user) {
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("Vehicle")
+          .select("*")
+          .eq("user_id", user.id);
+
+        if (error) {
+          console.error("Error fetching vehicles:", error);
+        } else {
+          setVehicles(data || []);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
+      }
+    };
+
+    loadVehicles();
+  }, [supabase, user]);
 
   const openCreateVehicleForm = () => {
     setIsModalOpen(true);
@@ -24,36 +59,6 @@ export default function Vehicles() {
   const closeCreateVehicleForm = () => {
     setTimeout(() => setIsModalOpen(false), 300);
     setIsAnimating(false);
-  };
-
-  const [isMouseDown, setIsMouseDown] = useState(false);
-
-  const handleMouseDown = () => {
-    setIsMouseDown(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsMouseDown(false);
-  };
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener("mousedown", handleMouseDown);
-      document.addEventListener("mouseup", handleMouseUp);
-
-      return () => {
-        document.removeEventListener("mousedown", handleMouseDown);
-        document.removeEventListener("mouseup", handleMouseUp);
-      };
-    }
-  }, [isModalOpen]);
-
-  const handleOverlayClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    if (!isMouseDown) {
-      closeCreateVehicleForm();
-    }
   };
 
   const createNewVehicle = async (e: React.FormEvent) => {
@@ -97,7 +102,17 @@ export default function Vehicles() {
       >
         Create new vehicle
       </button>
-      <h2>{user?.email}</h2>
+
+      <div>
+        <h1>List of vehicles</h1>
+        <ul>
+          {vehicles.map((vehicle) => (
+            <li key={vehicle.id}>
+              {vehicle.name} - {vehicle.license_plate_number}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div>
         {isModalOpen && (
@@ -105,7 +120,7 @@ export default function Vehicles() {
             className={`fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50 transition-opacity duration-300 ${
               isAnimating ? "opacity-100" : "opacity-0"
             }`}
-            onClick={handleOverlayClick}
+            onClick={closeCreateVehicleForm}
           >
             <div
               className={`bg-neutral-800 rounded-lg shadow-2xl  w-1/3 transition-transform duration-300  ${
