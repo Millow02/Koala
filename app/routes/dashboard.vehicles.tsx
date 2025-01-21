@@ -36,7 +36,7 @@ export default function Vehicles() {
         const { data, error } = await supabase
           .from("Vehicle")
           .select("*")
-          .eq("user_id", user.id);
+          .eq("profile_id", user.id);
 
         if (error) {
           console.error("Error fetching vehicles:", error);
@@ -73,7 +73,7 @@ export default function Vehicles() {
     try {
       const { error } = await supabase.from("Vehicle").insert([
         {
-          user_id: user.id,
+          profile_id: user.id,
           name: vehicleName,
           model,
           license_plate_number: licensePlate,
@@ -95,25 +95,58 @@ export default function Vehicles() {
 
   return (
     <div className="relative">
-      <h1 className="text-xl font-bold">Vehicles</h1>
+    <div className="w-full px-12 py-4">
+      <div className="flex justify-between items-center mb-8">  
+      <h1 className="text-2xl font-bold ">List of Vehicles</h1>
       <button
         className="text-base bg-pink-500 rounded-lg p-2"
         onClick={openCreateVehicleForm}
       >
         Create new vehicle
       </button>
-
-      <div>
-        <h1>List of vehicles</h1>
-        <ul>
-          {vehicles.map((vehicle) => (
-            <li key={vehicle.id}>
-              {vehicle.name} - {vehicle.license_plate_number}
-            </li>
-          ))}
-        </ul>
       </div>
-
+      <div className="overflow-x-auto shadow-md rounded-lg">
+        <table className="w-full">
+          {/* Table header */}
+          <thead className="bg-neutral-800 text-white">
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-semibold">
+                Vehicle Name
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold">
+                License Plate
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold">
+                Model
+              </th>
+            </tr>
+          </thead>
+          
+          {/* Table body */}
+          <tbody>
+            {vehicles.map((vehicle, index) => (
+              <tr
+                key={vehicle.id}
+                className={`
+                  ${index % 2 === 0 ? 'bg-neutral-700' : 'bg-neutral-800'}
+                  text-white hover:bg-neutral-600 transition-colors duration-200
+                `}
+              >
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
+                  {vehicle.name}
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
+                  {vehicle.license_plate_number}
+                </td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
+                  {vehicle.model}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
       <div>
         {isModalOpen && (
           <div
@@ -123,7 +156,7 @@ export default function Vehicles() {
             onClick={closeCreateVehicleForm}
           >
             <div
-              className={`bg-neutral-800 rounded-lg shadow-2xl  w-1/3 transition-transform duration-300  ${
+              className={`bg-neutral-800 rounded-lg shadow-2xl  w-3/6 transition-transform duration-300  ${
                 isAnimating ? "scale-100" : "scale-95"
               }`}
               onClick={(e) => e.stopPropagation()}

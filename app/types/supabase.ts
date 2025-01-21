@@ -4,7 +4,7 @@ export type Database = {
       Vehicle: {
         Row: {
           id: string;
-          user_id: string;
+          profile_id: string;
           license_plate_number: string;
           name: string;
           model: string;
@@ -13,7 +13,7 @@ export type Database = {
         };
         Insert: {
           id: string;
-          user_id: string;
+          profile_id: string;
           license_plate_number: string;
           name: string;
           model: string;
@@ -22,7 +22,7 @@ export type Database = {
         };
         Update: {
           id?: string;
-          user_id?: string;
+          profile_id?: string;
           license_plate_number?: string;
           name?: string;
           model?: string;
