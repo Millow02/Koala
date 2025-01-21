@@ -1,4 +1,4 @@
-import { useLoaderData, Outlet, useNavigate } from "@remix-run/react";
+import { useLoaderData, Outlet, useNavigate, data } from "@remix-run/react";
 import Sidebar from "~/components/Sidebar";
 import {
   createBrowserClient,
@@ -10,7 +10,10 @@ import type { Profile } from "~/types/profile";
 import { useEffect, useState } from "react";
 
 type LoaderData = {
-  profile: Profile;
+  env: {
+    SUPABASE_URL: string;
+    SUPABASE_ANON_KEY: string;
+  };
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -27,25 +30,18 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
   };
 
-  const { data } = await supabaseClient.from("Profile").select();
-
   return {
-    profile: data,
-    headers: response.headers,
     env,
+    headers: response.headers,
   };
 };
 
 export default function Dashboard() {
-  const { profile } = useLoaderData<LoaderData>();
-  const { env } = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
-
+  const { env } = useLoaderData<LoaderData>();
+  const [user, setUser] = useState<User | null>(null);
   const [supabase] = useState(() =>
     createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!)
   );
-
-  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -59,7 +55,7 @@ export default function Dashboard() {
     };
 
     fetchUser();
-  }, []);
+  }, [supabase]);
 
   const sections = [
     {
@@ -87,8 +83,11 @@ export default function Dashboard() {
       <Sidebar sections={sections} />
       {/* Main Content */}
       <main className="w-full">
+        <div>
+          <h2></h2>
+        </div>
         <div className="p-6">
-          <Outlet />
+          <Outlet context={{ user, supabase }} />
         </div>
       </main>
     </div>

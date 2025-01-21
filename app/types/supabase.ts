@@ -1,6 +1,36 @@
 export type Database = {
   public: {
     Tables: {
+      Vehicle: {
+        Row: {
+          id: string;
+          profile_id: string;
+          license_plate_number: string;
+          name: string;
+          model: string;
+          colour: string;
+          created_at: string;
+        };
+        Insert: {
+          id: string;
+          profile_id: string;
+          license_plate_number: string;
+          name: string;
+          model: string;
+          colour: string;
+          created_at: string;
+        };
+        Update: {
+          id?: string;
+          profile_id?: string;
+          license_plate_number?: string;
+          name?: string;
+          model?: string;
+          colour?: string;
+          created_at?: string;
+        };
+      };
+
       Profile: {
         Row: {
           id: string; 

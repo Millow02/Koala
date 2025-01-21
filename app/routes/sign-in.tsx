@@ -47,7 +47,7 @@ return (
     </div>
     
  
-    <div className="relative flex flex-col items-center justify-center w-2/6 rounded-3xl bg-gray-950 h-3/5 mt-12 mx-60 px-16 py-8">
+    <div className="relative flex flex-col items-center justify-center w-3/6 rounded-3xl bg-gray-950 h-3/5 mt-12 mx-60 px-16 py-8">
       <div className="flex flex-col items-center justify-center w-2/3">
         <h1 className="text-4xl font-bold mb-4 text-center">Welcome back to Koala</h1>
         <h3 className="text-lg mb-16 text-gray-300">Sign in to your account</h3>

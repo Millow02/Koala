@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sections }) => {
   };
 
   return (
-    <div className="w-64 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
+    <div className="w-1/4 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
       <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
       <div className="space-y-3">
         {sections.map((section) => (
