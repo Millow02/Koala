@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotation>
+<folder>images</folder>
+<filename>aac12cdf-car_3.jpg</filename>
+<source>
+<database>MyDatabase</database>
+<annotation>COCO2017</annotation>
+<image>flickr</image>
+<flickrid>NULL</flickrid>
+<annotator>1</annotator>
+</source>
+<owner>
+<flickrid>NULL</flickrid>
+<name>Label Studio</name>
+</owner>
+<size>
+<width>640</width>
+<height>452</height>
+<depth>3</depth>
+</size>
+<segmented>0</segmented>
+<object>
+<name>license plate</name>
+<pose>Unspecified</pose>
+<truncated>0</truncated>
+<difficult>0</difficult>
+<bndbox>
+<xmin>512</xmin>
+<ymin>266</ymin>
+<xmax>585</xmax>
+<ymax>290</ymax>
+</bndbox>
+</object>
+<object>
+<name>license plate</name>
+<pose>Unspecified</pose>
+<truncated>0</truncated>
+<difficult>0</difficult>
+<bndbox>
+<xmin>660</xmin>
+<ymin>256</ymin>
+<xmax>680</xmax>
+<ymax>270</ymax>
+</bndbox>
+</object>
+</annotation>

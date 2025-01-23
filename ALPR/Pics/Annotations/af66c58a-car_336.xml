@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotation>
+<folder>images</folder>
+<filename>af66c58a-car_336.jpg</filename>
+<source>
+<database>MyDatabase</database>
+<annotation>COCO2017</annotation>
+<image>flickr</image>
+<flickrid>NULL</flickrid>
+<annotator>1</annotator>
+</source>
+<owner>
+<flickrid>NULL</flickrid>
+<name>Label Studio</name>
+</owner>
+<size>
+<width>1024</width>
+<height>616</height>
+<depth>3</depth>
+</size>
+<segmented>0</segmented>
+<object>
+<name>license plate</name>
+<pose>Unspecified</pose>
+<truncated>0</truncated>
+<difficult>0</difficult>
+<bndbox>
+<xmin>413</xmin>
+<ymin>346</ymin>
+<xmax>474</xmax>
+<ymax>371</ymax>
+</bndbox>
+</object>
+<object>
+<name>license plate</name>
+<pose>Unspecified</pose>
+<truncated>0</truncated>
+<difficult>0</difficult>
+<bndbox>
+<xmin>824</xmin>
+<ymin>305</ymin>
+<xmax>868</xmax>
+<ymax>324</ymax>
+</bndbox>
+</object>
+</annotation>
