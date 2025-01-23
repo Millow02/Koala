@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Link,
   useLocation,
@@ -7,23 +7,58 @@ import {
 } from "@remix-run/react";
 import { SupabaseClient } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
+import { User } from "@supabase/supabase-js";
 
-interface SidebarSection {
-  header: string;
-  links: { label: string; path: string }[];
-}
-
-interface SidebarProps {
-  sections: SidebarSection[];
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ sections }) => {
-  const location = useLocation();
+const Sidebar = () => {
   const { supabase } = useOutletContext<{
     supabase: SupabaseClient<Database>;
   }>();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [parkingLots, setParkingLots] = useState<any[]>([]);
+  const [organizations, setOrganizations] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchSidebarData = async () => {
+    try {
+      setIsLoading(true);
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        throw new Error("No authenticated user found");
+      }
+
+      setCurrentUser(user);
+
+      const { data: organizationData, error: organizationError } =
+        await supabase
+          .from("Organization")
+          .select("id, name")
+          .eq("owner", user.id)
+          .order("name");
+
+      if (organizationError) {
+        console.error("Error fetching organizations:", organizationError);
+        setError("Failed to load organizations");
+      }
+
+      setOrganizations(organizationData || []);
+    } catch (err) {
+      console.error("Unexpected error fetching sidebar data:", err);
+      setError("An unexpected error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSidebarData();
+  }, []);
 
   const signOut = async () => {
     try {
@@ -40,12 +75,12 @@ const Sidebar: React.FC<SidebarProps> = ({ sections }) => {
       console.error("Unexpected error:", err);
     }
   };
-
+  // next up display organization data for the current user !!
   return (
-    <div className="w-1/4 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
+    <div className="w-1/6 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
       <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
       <div className="space-y-3">
-        {sections.map((section) => (
+        {/* {sections.map((section) => (
           <div
             key={section.header}
             className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-6 pb-3 mt-0"
@@ -71,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sections }) => {
               ))}
             </ul>
           </div>
-        ))}
+        ))} */}
 
         <button
           className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300"
