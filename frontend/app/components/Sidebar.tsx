@@ -38,9 +38,8 @@ const Sidebar = () => {
       const { data: organizationData, error: organizationError } =
         await supabase
           .from("Organization")
-          .select("id, name")
-          .eq("owner", user.id)
-          .order("name");
+          .select("id, name, owner")
+          .eq("owner", user.id);
 
       if (organizationError) {
         console.error("Error fetching organizations:", organizationError);
@@ -78,17 +77,48 @@ const Sidebar = () => {
   // next up display organization data for the current user !!
   return (
     <div className="w-1/6 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
-      <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
-      <div className="space-y-3">
-        {/* {sections.map((section) => (
-          <div
-            key={section.header}
-            className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-6 pb-3 mt-0"
-          >
-            <h2 className="text-sm font-semibold text-neutral-500">
-              {section.header}
-            </h2>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
+          <div className="space-y-3">
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-6 pb-3 mt-0">
+              <h2 className="text-base font-semibold text-neutral-500">
+                My organizations
+              </h2>
+              {organizations.length > 0 ? (
+                organizations.map((org) => (
+                  <Link
+                    to={`/dashboard/organizations/${org.id}`}
+                    key={org.id}
+                    className="block text-neutral-300 hover:text-white hover:bg-opacity-50 transition duration-300"
+                  >
+                    {org.name}
+                  </Link>
+                ))
+              ) : (
+                <div>No organizations found</div>
+              )}
+            </div>
 
+            <button
+              className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300"
+              onClick={signOut}
+            >
+              Log out
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Sidebar;
+
+{
+  /* {sections.map((section) => (
             <ul className="space-y-3 mt-3">
               {section.links.map((link) => (
                 <li key={link.path} className="text-base text-neutral-300">
@@ -106,17 +136,5 @@ const Sidebar = () => {
               ))}
             </ul>
           </div>
-        ))} */}
-
-        <button
-          className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300"
-          onClick={signOut}
-        >
-          Log out
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default Sidebar;
+        ))} */
+}
