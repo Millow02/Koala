@@ -31,7 +31,7 @@ export default function Preferences() {
       }
 
       try {
-        // Fetch user's first name
+        //fetch user info from Profile table
         const { data: profileData, error: profileError } = await supabase
           .from("Profile")
           .select("first_name, last_name, phone_number")
@@ -44,9 +44,9 @@ export default function Preferences() {
           setFirstName(profileData?.first_name || "");
           setLastName(profileData?.last_name || "");
           setPhoneNumber(profileData?.phone_number || "");
-          console.log("User's first name:", profileData?.first_name);
-          console.log("User's last name:", profileData?.last_name);
-          console.log("User's phone number:", profileData?.phone_number);
+          setOriginalFirstName(profileData?.first_name || "");
+          setOriginalLastName(profileData?.last_name || "");
+          setOriginalPhoneNumber(profileData?.phone_number || "");
         }
       } catch (err) {
         console.error("Unexpected error:", err);
@@ -56,22 +56,42 @@ export default function Preferences() {
     loadPreferences();
   }, [supabase, user]);
 
-  const handleSave = () => {
-    // Save the changes to the database
-    setOriginalFirstName(firstName);
-    setOriginalLastName(lastName);
-    setOriginalPhoneNumber(phoneNumber);
-    setIsModified(false);
+    const handleSave = async () => {
+    try {
+      const { error } = await supabase.from("Profile").update(
+        {
+          first_name: firstName,
+          last_name: lastName,
+          phone_number: phoneNumber,
+        })
+        .eq("id", user.id);
+      if (error) {
+        console.error("Error updating profile:", error.message);
+      } else {
+        // update original values
+        setOriginalFirstName(firstName);
+        setOriginalLastName(lastName);
+        setOriginalPhoneNumber(phoneNumber);
+        setIsModified(false);
+        console.log("Profile updated successfully");
+        console.log("user id: " , user.id);
+        console.log("user: " , user);
+        console.log("first name: " , firstName);
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
   };
 
   const handleUndo = () => {
-    // Revert the changes
+    //revert to original values
     setFirstName(originalFirstName);
     setLastName(originalLastName);
     setPhoneNumber(originalPhoneNumber);
     setIsModified(false);
   };
 
+  //check if fields have been modified
   const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>, value: string) => {
     setter(value);
     setIsModified(
@@ -95,7 +115,7 @@ export default function Preferences() {
             value={firstName}
             onChange={(e) => handleChange(setFirstName, e.target.value)}
             className="w-full border border-gray-300 rounded-lg px-3 py-2"
-            placeholder={firstName}
+            placeholder="Enter first name"
           />
         </div>
         <div className="mb-4">
@@ -107,7 +127,7 @@ export default function Preferences() {
             value={lastName}
             onChange={(e) => handleChange(setLastName, e.target.value)}
             className="w-full border border-gray-300 rounded-lg px-3 py-2"
-            placeholder={lastName}
+            placeholder="Enter last name"
           />
         </div>
         <div className="mb-4">
@@ -117,6 +137,7 @@ export default function Preferences() {
           <input
             type="text"
             className="w-full border border-gray-300 rounded-lg px-3 py-2"
+            placeholder="Enter email"
           />
         </div>
         <div className="mb-4">
@@ -128,7 +149,7 @@ export default function Preferences() {
             value={phoneNumber}
             onChange={(e) => handleChange(setPhoneNumber, e.target.value)}
             className="w-full border border-gray-300 rounded-lg px-3 py-2"
-            placeholder={phoneNumber}
+            placeholder="Enter phone number"
           />
         </div>
         {isModified && (
