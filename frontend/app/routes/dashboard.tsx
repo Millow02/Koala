@@ -80,12 +80,8 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen">
-      <Sidebar sections={sections} />
-      {/* Main Content */}
+      <Sidebar />
       <main className="w-full">
-        <div>
-          <h2></h2>
-        </div>
         <div className="p-6">
           <Outlet context={{ user, supabase }} />
         </div>
