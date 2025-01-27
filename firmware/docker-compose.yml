@@ -1,0 +1,18 @@
+services:
+  koala-pic-capture:
+    image: koala/pic_capture
+    volumes:
+      - shared-data:/app/shared
+
+  koala-img2cloud:
+    image: koala/img2cloud
+    volumes:
+      - shared-data:/app/shared
+
+volumes:
+  shared-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./pictures
