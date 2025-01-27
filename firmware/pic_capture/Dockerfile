@@ -1,4 +1,7 @@
 FROM python:3.12-slim-bookworm
+
+RUN apt update
+RUN apt install -y libcap-dev gcc
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Copy the project into the image
