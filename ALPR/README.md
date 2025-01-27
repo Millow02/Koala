@@ -1,5 +1,7 @@
 To load the convolutional layers from the pre-trained YOLO model (`.weights` file) and attach your own classifier for bounding boxes specific to license plates, you can follow these steps using **Darknet**, **PyTorch**, or **TensorFlow** frameworks:
 
+The following is a tutorial for training your own data for YOLOv3 Tiny
+[https://colab.research.google.com/github/luxonis/depthai-ml-training/blob/master/colab-notebooks/YoloV3_V4_tiny_training.ipynb]
 ---
 
 ## **1. Using the Original Darknet Framework**
