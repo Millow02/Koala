@@ -1,4 +1,4 @@
-path: datasets/my_custom_data  # root of dataset
+path: /nfs/speed-scratch/z_amm/COEN490/YOLOv8n/datasets/my_custom_data  # root of dataset
 train: images/train
 val: images/val
 
