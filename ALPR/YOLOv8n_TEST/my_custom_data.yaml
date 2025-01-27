@@ -1,0 +1,8 @@
+path: datasets/my_custom_data  # root of dataset
+train: images/train
+val: images/val
+
+names:
+  0: No_LP 
+  1: LP
+  # Add more classes as needed
