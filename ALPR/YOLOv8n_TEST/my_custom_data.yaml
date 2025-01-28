@@ -3,6 +3,6 @@ train: images/train
 val: images/val
 
 names:
-  0: No_LP 
-  1: LP
+  0: LP
+  1: no_LP
   # Add more classes as needed
