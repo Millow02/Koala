@@ -30,9 +30,8 @@ export default function Lots() {
       try {
         // for next time, display each of the headers + the lots for the organization for each organization that the user belongs to
         const { data, error } = await supabase
-          .from("organization_members")
+          .from("ParkingLot")
           .select("*")
-          .eq("organization", user.id);
 
         if (error) {
           console.error("Error fetching lots:", error);
@@ -64,6 +63,18 @@ export default function Lots() {
         <div className="bg-transparent">
           have a box for each parking lot okay thank u great
         </div>
+        <div className="flex flex-wrap">
+        {lots.map((lot) => (
+          <div key={lot.id} className="w-full md:w-1/2 lg:w-1/3 p-4">
+            <div className="bg-white shadow-md rounded-lg p-6">
+              <h2 className="text-lg font-bold mb-2">{lot.name}</h2>
+              <p className="text-gray-700 mb-2">Capacity: {lot.capacity}</p>
+              <p className="text-gray-700 mb-2">Available Spots: {lot.current_occupation}</p>
+              {/* Add more relevant information here */}
+            </div>
+          </div>
+        ))}
+      </div>
       </div>
     </div>
   );
