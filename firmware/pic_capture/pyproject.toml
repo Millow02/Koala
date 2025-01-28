@@ -7,5 +7,5 @@ requires-python = ">=3.11"
 dependencies = [
     "picamera2>=0.3.24",
     "python-prctl>=1.8.1",
-    "rpi-gpio>=0.7.1",
+    "rpi-lgpio>=0.6",
 ]
