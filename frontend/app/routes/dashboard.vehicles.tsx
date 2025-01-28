@@ -25,6 +25,9 @@ export default function Vehicles() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [formVisible, setFormVisible] = useState<string | null>(null); 
+  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [messageVisible, setMessageVisible] = useState(false);
 
   useEffect(() => {
     const loadVehicles = async () => {
@@ -93,6 +96,66 @@ export default function Vehicles() {
     }
   };
 
+  const toggleForm = (vehicle: Vehicle) => {
+    setSelectedVehicle(vehicle);
+    setVehicleName(vehicle.name);
+    setModel(vehicle.model);
+    setLicensePlate(vehicle.license_plate_number);
+    setFormVisible(vehicle.id);
+  };
+  const closeForm = () => {
+    setFormVisible(null);
+    setSelectedVehicle(null);
+    setVehicleName("");
+    setModel("");
+    setLicensePlate("");
+  };
+
+  const updateVehicle = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!vehicleName || !model || !licensePlate) {
+      setMessage("All fields are required");
+      setMessageVisible(true);
+      return;
+    }
+    try {
+      const { error } = await supabase
+        .from("Vehicle")
+        .update({
+          name: vehicleName,
+          model,
+          license_plate_number: licensePlate,
+        })
+        .eq("id", selectedVehicle?.id);
+
+      if (error) {
+        setMessage("Error updating vehicle: " + error.message);
+        setMessageVisible(true);
+      } else {
+        setMessage("Vehicle updated successfully!");
+        setMessageVisible(true);
+        setVehicles((prevVehicles) =>
+          prevVehicles.map((v) =>
+            v.id === selectedVehicle?.id
+              ? { ...v, name: vehicleName, model, license_plate_number: licensePlate }
+              : v
+          )
+        );
+        closeForm();
+      }
+    } catch (error) {
+      setMessage("Unexpected error has occurred");
+      setMessageVisible(true);
+    }
+  };
+
+  const closeMessage = () => {
+    setMessageVisible(false);
+    setMessage("");
+  };
+
   return (
     <div className="relative">
       <div className="w-full px-12 py-4">
@@ -118,6 +181,9 @@ export default function Vehicles() {
                 <th className="px-6 py-3 text-left text-sm font-semibold">
                   Model
                 </th>
+                <th className="px-1 py-3">
+
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -137,6 +203,13 @@ export default function Vehicles() {
                   </td>
                   <td className="px-6 py-4 text-sm whitespace-nowrap">
                     {vehicle.model}
+                  </td>
+                  <td className="px-1 py-4 text-sm whitespace-nowrap text-center">
+                    <button className="text-white hover:text-gray-400"
+                      onClick={() => toggleForm(vehicle)}
+                    >
+                      &#x22EE; 
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -230,6 +303,79 @@ export default function Vehicles() {
             </div>
           </div>
         )}
+        {formVisible && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold mb-4">Edit Vehicle</h2>
+            <form onSubmit={updateVehicle}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  value={vehicleName}
+                  onChange={(e) => setVehicleName(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  License Plate
+                </label>
+                <input
+                  type="text"
+                  value={licensePlate}
+                  onChange={(e) => setLicensePlate(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Model
+                </label>
+                <input
+                  type="text"
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                />
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2"
+                  onClick={closeForm} 
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-pink-500 text-white px-4 py-2 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+            {message && <p className="mt-4 text-red-500">{message}</p>}
+          </div>
+        </div>
+      )}
+      {messageVisible && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <p className="text-red-500">{message}</p>
+            <div className="flex justify-end mt-4">
+              <button
+                className="bg-pink-500 text-white px-4 py-2 rounded-lg"
+                onClick={closeMessage}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );
