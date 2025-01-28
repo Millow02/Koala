@@ -59,6 +59,20 @@ const Sidebar = () => {
     fetchSidebarData();
   }, []);
 
+  const location = useLocation();
+
+  const isLotsActive = location.pathname.startsWith("/dashboard/lots");
+
+  const isActiveLink = (orgId: string) => {
+    return location.pathname.includes(`/dashboard/organizations/${orgId}`);
+  };
+
+  const isPreferencesActive = location.pathname.startsWith(
+    "/dashboard/preferences"
+  );
+
+  const isVehiclesActive = location.pathname.startsWith("/dashboard/vehicles");
+
   const signOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -74,7 +88,7 @@ const Sidebar = () => {
       console.error("Unexpected error:", err);
     }
   };
-  // next up display organization data for the current user !!
+
   return (
     <div className="w-1/6 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
       {isLoading ? (
@@ -83,8 +97,26 @@ const Sidebar = () => {
         <>
           <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
           <div className="space-y-3">
-            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-6 pb-3 mt-0">
-              <h2 className="text-base font-semibold text-neutral-500">
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
+              <h2 className="text-base font-semibold text-neutral-500 mb-3">
+                Parking lots
+              </h2>
+              <Link
+                to={`/dashboard/lots`}
+                className={`
+                block transition duration-300 mb-2
+                ${
+                  isLotsActive
+                    ? "text-white"
+                    : "text-neutral-400 hover:text-white"
+                }
+              `}
+              >
+                All parking lots
+              </Link>
+            </div>
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
+              <h2 className="text-base font-semibold text-neutral-500 mb-3">
                 My organizations
               </h2>
               {organizations.length > 0 ? (
@@ -92,7 +124,12 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/organizations/${org.id}`}
                     key={org.id}
-                    className="block text-neutral-300 hover:text-white hover:bg-opacity-50 transition duration-300"
+                    className={`block transition duration-300 mb-2 ${
+                      isActiveLink(org.id)
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
                   >
                     {org.name}
                   </Link>
@@ -100,6 +137,34 @@ const Sidebar = () => {
               ) : (
                 <div>No organizations found</div>
               )}
+            </div>
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
+              <h2 className="text-base font-semibold text-neutral-500 mb-3">
+                Account
+              </h2>
+              <Link
+                to={`/dashboard/preferences`}
+                className={`
+                block transition duration-300 mb-2
+                ${
+                  isPreferencesActive
+                    ? "text-white"
+                    : "text-neutral-400 hover:text-white"
+                }
+              `}
+              >
+                Preferences
+              </Link>
+              <Link
+                to={`/dashboard/vehicles`}
+                className={`block hover:text-white hover:bg-opacity-50 transition duration-300 mb-2 ${
+                  isVehiclesActive
+                    ? "text-white"
+                    : "text-neutral-400 hover:text-white"
+                }`}
+              >
+                Vehicles
+              </Link>
             </div>
 
             <button
@@ -116,25 +181,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-{
-  /* {sections.map((section) => (
-            <ul className="space-y-3 mt-3">
-              {section.links.map((link) => (
-                <li key={link.path} className="text-base text-neutral-300">
-                  <Link
-                    to={link.path}
-                    className={`block p-0 rounded  ${
-                      location.pathname === link.path
-                        ? "text-white"
-                        : "hover:text-white hover:bg-opacity-50 transition duration-300"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))} */
-}

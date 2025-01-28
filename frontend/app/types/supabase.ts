@@ -72,24 +72,30 @@ export type Database = {
           created_at?: string;
         };
       };
-      ParkingLot: {
+      Lots: {
         Row: {
           id: string; 
+          organization: string;
           name: string;
-          description: string;
+          capacity: string;
+          current_occupation: string;
           created_at: string; 
         };
         Insert: {
           id: string; 
+          organization: string;
           name: string;
-          description: string;
-          created_at?: string; 
+          capacity: string;
+          current_occupation: string;
+          created_at: string; 
         };
         Update: {
-          id?: string;
-          name?: string;
-          description?: string;
-          created_at?: string;
+          id: string; 
+          organization: string;
+          name: string;
+          capacity: string;
+          current_occupation: string;
+          created_at: string; 
         };
       };
     };

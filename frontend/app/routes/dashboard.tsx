@@ -6,8 +6,10 @@ import {
   User,
 } from "@supabase/auth-helpers-remix";
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import type { Profile } from "~/types/profile";
+import { Database } from "~/types/supabase";
 import { useEffect, useState } from "react";
+
+type Profile = Database["public"]["Tables"]["Profile"]["Row"];
 
 type LoaderData = {
   env: {
@@ -56,27 +58,6 @@ export default function Dashboard() {
 
     fetchUser();
   }, [supabase]);
-
-  const sections = [
-    {
-      header: "Parking Lots",
-      links: [{ label: "All Parking Lots", path: "/dashboard/lot-a" }],
-    },
-    {
-      header: "Organizations",
-      links: [
-        { label: "Concordia", path: "/dashboard/org-1" },
-        { label: "Mcgill", path: "/dashboard/org-2" },
-      ],
-    },
-    {
-      header: "Account",
-      links: [
-        { label: "Preferences", path: "/dashboard/preferences" },
-        { label: "Vehicles", path: "/dashboard/vehicles" },
-      ],
-    },
-  ];
 
   return (
     <div className="flex h-screen">

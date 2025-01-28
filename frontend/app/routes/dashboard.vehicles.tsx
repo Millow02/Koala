@@ -95,58 +95,55 @@ export default function Vehicles() {
 
   return (
     <div className="relative">
-    <div className="w-full px-12 py-4">
-      <div className="flex justify-between items-center mb-8">  
-      <h1 className="text-2xl font-bold ">List of Vehicles</h1>
-      <button
-        className="text-base bg-pink-500 rounded-lg p-2"
-        onClick={openCreateVehicleForm}
-      >
-        Create new vehicle
-      </button>
-      </div>
-      <div className="overflow-x-auto shadow-md rounded-lg">
-        <table className="w-full">
-          {/* Table header */}
-          <thead className="bg-neutral-800 text-white">
-            <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold">
-                Vehicle Name
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">
-                License Plate
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">
-                Model
-              </th>
-            </tr>
-          </thead>
-          
-          {/* Table body */}
-          <tbody>
-            {vehicles.map((vehicle, index) => (
-              <tr
-                key={vehicle.id}
-                className={`
-                  ${index % 2 === 0 ? 'bg-neutral-700' : 'bg-neutral-800'}
+      <div className="w-full px-12 py-4">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-bold ">List of Vehicles</h1>
+          <button
+            className="text-base bg-pink-500 rounded-lg p-2"
+            onClick={openCreateVehicleForm}
+          >
+            Create new vehicle
+          </button>
+        </div>
+        <div className="overflow-x-auto shadow-md rounded-lg">
+          <table className="w-full">
+            <thead className="bg-neutral-800 text-white">
+              <tr>
+                <th className="px-6 py-3 text-left text-sm font-semibold">
+                  Vehicle Name
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold">
+                  License Plate
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold">
+                  Model
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {vehicles.map((vehicle, index) => (
+                <tr
+                  key={vehicle.id}
+                  className={`
+                  ${index % 2 === 0 ? "bg-neutral-700" : "bg-neutral-800"}
                   text-white hover:bg-neutral-600 transition-colors duration-200
                 `}
-              >
-                <td className="px-6 py-4 text-sm whitespace-nowrap">
-                  {vehicle.name}
-                </td>
-                <td className="px-6 py-4 text-sm whitespace-nowrap">
-                  {vehicle.license_plate_number}
-                </td>
-                <td className="px-6 py-4 text-sm whitespace-nowrap">
-                  {vehicle.model}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                >
+                  <td className="px-6 py-4 text-sm whitespace-nowrap">
+                    {vehicle.name}
+                  </td>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap">
+                    {vehicle.license_plate_number}
+                  </td>
+                  <td className="px-6 py-4 text-sm whitespace-nowrap">
+                    {vehicle.model}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
       <div>
         {isModalOpen && (
           <div
