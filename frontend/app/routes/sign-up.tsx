@@ -57,7 +57,7 @@ export default function SignUp() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white"
+              className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
             />
 
             <h3 className="text-left w-full text-gray-300 mb-2">Password</h3>
@@ -66,7 +66,7 @@ export default function SignUp() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mb-8 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white"
+              className="mb-8 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
             />
 
             <button

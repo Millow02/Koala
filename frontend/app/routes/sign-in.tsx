@@ -59,7 +59,7 @@ return (
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
         />
 
     
@@ -69,7 +69,7 @@ return (
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="mb-8 p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="mb-8 p-3 border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
         />
 
 
