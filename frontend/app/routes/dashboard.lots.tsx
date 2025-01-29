@@ -65,11 +65,19 @@ export default function Lots() {
         </div>
         <div className="flex flex-wrap">
         {lots.map((lot) => (
-          <div key={lot.id} className="w-full md:w-1/2 lg:w-1/3 p-4">
+          <div key={lot.id} className="w-1/2 pt-8">
             <div className="bg-neutral-700 shadow-md rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-2">{lot.name}</h2>
-              <p className="text-white mb-2">Capacity: {lot.capacity}</p>
-              <p className="text-white mb-2">Available Spots: {lot.current_occupation}</p>
+              <h2 className="text-2xl font-bold mb-2">🅿️ {lot.name}</h2>
+              <div className="flex justify-between pr-8">
+              <div className="pl-8">
+              <p>insert address</p>
+              <p>Insert Description</p>
+              </div>
+              <div className="text-right">
+                <p className="text-white mb-2">Capacity: {lot.capacity}</p>
+                <p className="text-white mb-2">Available Spots: {lot.current_occupation}</p>
+              </div>
+              </div>
               {/* Add more relevant information here */}
             </div>
           </div>
