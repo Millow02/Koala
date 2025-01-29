@@ -162,7 +162,7 @@ export default function Vehicles() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold ">List of Vehicles</h1>
           <button
-            className="text-base bg-pink-500 rounded-lg p-2"
+            className="text-base bg-pink-500 rounded-lg p-2 font-bold"
             onClick={openCreateVehicleForm}
           >
             Create new vehicle
@@ -344,27 +344,27 @@ export default function Vehicles() {
               <div className="flex justify-end">
                 <button
                   type="button"
-                  className="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2"
+                  className="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 font-bold"
                   onClick={closeForm} 
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-pink-500 text-white px-4 py-2 rounded-lg"
+                  className="bg-pink-500 text-white px-4 py-2 rounded-lg font-bold"
                 >
                   Save
                 </button>
               </div>
             </form>
-            {message && <p className="mt-4 text-red-500">{message}</p>}
+            {message && <p className="mt-4 text-Black-500">{message}</p>}
           </div>
         </div>
       )}
       {messageVisible && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <p className="text-red-500">{message}</p>
+            <p className="text-Black-500">{message}</p>
             <div className="flex justify-end mt-4">
               <button
                 className="bg-pink-500 text-white px-4 py-2 rounded-lg"

@@ -6,7 +6,9 @@ html,
 body {
   @apply bg-white dark:bg-neutral-900;
 
+  /* get flashbanged scott
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
-  }
+  }*/
+  
 }
