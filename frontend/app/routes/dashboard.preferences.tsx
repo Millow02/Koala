@@ -18,11 +18,14 @@ export default function Preferences() {
   const { user, supabase } = useOutletContext<ContextType>();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [originalFirstName, setOriginalFirstName] = useState("");
   const [originalLastName, setOriginalLastName] = useState("");
+  const [originalEmail, setOriginalEmail] = useState("");
   const [originalPhoneNumber, setOriginalPhoneNumber] = useState("");
   const [isModified, setIsModified] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
     const loadPreferences = async () => {
@@ -34,7 +37,7 @@ export default function Preferences() {
         //fetch user info from Profile table
         const { data: profileData, error: profileError } = await supabase
           .from("Profile")
-          .select("first_name, last_name, phone_number")
+          .select("first_name, last_name, email, phone_number")
           .eq("id", user.id)
           .single();
 
@@ -43,9 +46,11 @@ export default function Preferences() {
         } else {
           setFirstName(profileData?.first_name || "");
           setLastName(profileData?.last_name || "");
+          setEmail(profileData?.email || "");
           setPhoneNumber(profileData?.phone_number || "");
           setOriginalFirstName(profileData?.first_name || "");
           setOriginalLastName(profileData?.last_name || "");
+          setOriginalEmail(profileData?.email || "");
           setOriginalPhoneNumber(profileData?.phone_number || "");
         }
       } catch (err) {
@@ -62,6 +67,7 @@ export default function Preferences() {
         {
           first_name: firstName,
           last_name: lastName,
+          email: email,
           phone_number: phoneNumber,
         })
         .eq("id", user.id);
@@ -71,8 +77,11 @@ export default function Preferences() {
         // update original values
         setOriginalFirstName(firstName);
         setOriginalLastName(lastName);
+        setOriginalEmail(email);
         setOriginalPhoneNumber(phoneNumber);
         setIsModified(false);
+        setPopupVisible(true);
+        setTimeout(() => setPopupVisible(false), 3000);
         console.log("Profile updated successfully");
         console.log("user id: " , user.id);
         console.log("user: " , user);
@@ -97,6 +106,7 @@ export default function Preferences() {
     setIsModified(
       value !== originalFirstName ||
       value !== originalLastName ||
+      value !== originalEmail ||
       value !== originalPhoneNumber
     );
   };
@@ -138,6 +148,8 @@ export default function Preferences() {
               </label>
               <input
                 type="text"
+                value={email}
+                onChange={(e) => handleChange(setEmail, e.target.value)}
                 className="w-full rounded-lg px-3 py-2 bg-neutral-600 placeholder-gray-400"
                 placeholder="Enter email"
               />
@@ -157,22 +169,39 @@ export default function Preferences() {
             {isModified && (
               <div className="flex space-x-4">
                 <button
-                  onClick={handleSave}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                >
-                  Save
-                </button>
-                <button
                   onClick={handleUndo}
-                  className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+                  className="text-base bg-gray-500 py-2 rounded-lg p-2 hover:text-gray-600 active:bg-gray-700 active:text-white hover:scale-105 transition-transform duration-300 px-4  mr-2 font-bold"
                 >
                   Undo
                 </button>
+                <button
+                  className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105 transition-transform duration-300 px-4 font-bold"
+                  onClick={() => {handleSave();
+                    setPopupVisible(false);}}
+                >
+                  Save
+                </button>
+                
               </div>
             )}
         </div>
       </div>
     </div>
+    {popupVisible && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-neutral-600 p-8 rounded-lg shadow-lg">
+            <p className="text-white">Profile updated successfully!</p>
+            <div className="flex justify-end mt-4">
+              <button
+                className="bg-pink-500 text-white px-4 py-2 rounded-lg"
+                onClick={() => setPopupVisible(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
   </div>
   );
 }

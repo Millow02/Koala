@@ -359,7 +359,7 @@ export default function Vehicles() {
                 </button>
                 <button
                   type="submit"
-                  className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105 transition-transform duration-300 px-4   font-bold"
+                  className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105 transition-transform duration-300 px-4 font-bold"
                 >
                   Save
                 </button>
