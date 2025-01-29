@@ -4,10 +4,14 @@
 
 html,
 body {
-  @apply bg-white dark:bg-neutral-900;
+  @apply bg-black dark:bg-neutral-900 text-white;
 
   /* get flashbanged scott
   @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }*/
+  /*
+  :root {
     color-scheme: dark;
   }*/
   
