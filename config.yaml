@@ -1,0 +1,7 @@
+path: C:/Users/niraj/OneDrive/Desktop/localizationtest/data
+train: train/images
+val: valid/images
+
+#Our classes
+names:
+  0: license plate
