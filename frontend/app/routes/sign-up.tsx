@@ -13,11 +13,12 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const signUp = async () => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
@@ -26,13 +27,28 @@ export default function SignUp() {
         setError("Error");
         console.error("Error signing up:", error.message);
       } else {
-        console.log("Sign-up successful");
-        navigate("/");
+        const user = data.user;
+        const { error: profileError } = await supabase
+          .from('Profile')
+          .update({ role: isAdmin ? 'admin' : 'user', phone_number: '' })
+          .eq('id', user?.id);
+
+        if (profileError) {
+          setError("Error updating profile");
+          console.error("Error updating profile:", profileError.message);
+        } else {
+          console.log("Sign-up and profile update successful");
+          navigate("/");
+        }
       }
     } catch (err) {
       setError("An unexpected error occurred");
       console.error("Unexpected error:", err);
     }
+  };
+
+  const handleCheckboxChange = () => {
+    setIsAdmin(!isAdmin);
   };
 
   return (
@@ -50,6 +66,31 @@ export default function SignUp() {
             <h3 className="text-lg mb-16 text-gray-300">
               Create a new account
             </h3>
+
+            
+            <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-neutral-400 p-1 mb-8">
+              <input
+                type="checkbox"
+                className="sr-only"
+                checked={isAdmin}
+                onChange={handleCheckboxChange}
+              />
+              <span
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  !isAdmin ? 'text-primary bg-purple-700' : 'text-body-color'
+                }`}
+              >
+                User
+              </span>
+              <span
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  isAdmin ? 'text-primary bg-purple-700' : 'text-body-color'
+                }`}
+              >
+                Admin
+              </span>
+            </label>
+
 
             <h3 className="text-left w-full text-gray-300 mb-2">Email</h3>
             <input
