@@ -20,6 +20,12 @@ export default function SignUp() {
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+          },
+        },
       });
 
       if (error) {
@@ -50,6 +56,24 @@ export default function SignUp() {
             <h3 className="text-lg mb-16 text-gray-300">
               Create a new account
             </h3>
+
+            <h3 className="text-left w-full text-gray-300 mb-2">First name</h3>
+            <input
+              type="text"
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
+            />
+
+            <h3 className="text-left w-full text-gray-300 mb-2">Last name</h3>
+            <input
+              type="text"
+              placeholder="Last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
+            />
 
             <h3 className="text-left w-full text-gray-300 mb-2">Email</h3>
             <input

@@ -1,4 +1,10 @@
-import { useLoaderData, Outlet, useNavigate, data } from "@remix-run/react";
+import {
+  useLoaderData,
+  Outlet,
+  useNavigate,
+  data,
+  useLocation,
+} from "@remix-run/react";
 import Sidebar from "~/components/Sidebar";
 import {
   createBrowserClient,
@@ -39,11 +45,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function Dashboard() {
+  const location = useLocation();
   const { env } = useLoaderData<LoaderData>();
   const [user, setUser] = useState<User | null>(null);
   const [supabase] = useState(() =>
     createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!)
   );
+
+  const hideSidebarRoutes = ["/dashboard/new-lot"]; // Add any routes where you want to hide sidebar
+  const shouldShowSidebar = !hideSidebarRoutes.includes(location.pathname);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -61,7 +71,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      {shouldShowSidebar && <Sidebar />}
       <main className="w-full">
         <div className="p-6">
           <Outlet context={{ user, supabase }} />
