@@ -17,35 +17,29 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const signUp = async () => {
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            first_name: firstName,
-            last_name: lastName,
-          },
+    const signUpData = {
+      email,
+      password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          role: isAdmin ? 'admin' : 'user',
         },
-      });
-
+      },
+    };
+  
+    console.log("Sign-up data being sent:", signUpData);
+  
+    try {
+      const { data, error } = await supabase.auth.signUp(signUpData);
+  
       if (error) {
         setError("Error");
         console.error("Error signing up:", error.message);
       } else {
-        const user = data.user;
-        const { error: profileError } = await supabase
-          .from('Profile')
-          .update({ role: isAdmin ? 'admin' : 'user', phone_number: '' })
-          .eq('id', user?.id);
-
-        if (profileError) {
-          setError("Error updating profile");
-          console.error("Error updating profile:", profileError.message);
-        } else {
-          console.log("Sign-up and profile update successful");
-          navigate("/");
-        }
+        console.log("Sign-up and profile update successful");
+        navigate("/");
       }
     } catch (err) {
       setError("An unexpected error occurred");
