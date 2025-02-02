@@ -90,7 +90,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-1/6 h-screen bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
+    <div className="w-1/6 max-h-full bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -115,8 +115,8 @@ const Sidebar = () => {
                 All parking lots
               </Link>
             </div>
-            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
-              <h2 className="text-base font-semibold text-neutral-500 mb-3">
+            {/* <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3"> */}
+            {/* <h2 className="text-base font-semibold text-neutral-500 mb-3">
                 My organizations
               </h2>
               {organizations.length > 0 ? (
@@ -137,7 +137,7 @@ const Sidebar = () => {
               ) : (
                 <div>No organizations found</div>
               )}
-            </div>
+            </div> */}
             <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
               <h2 className="text-base font-semibold text-neutral-500 mb-3">
                 Account
@@ -166,7 +166,6 @@ const Sidebar = () => {
                 Vehicles
               </Link>
             </div>
-
 
             <button
               className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300"

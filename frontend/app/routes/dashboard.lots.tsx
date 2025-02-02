@@ -15,12 +15,12 @@ type ContextType = {
   supabase: SupabaseClient;
 };
 
-type Lots = Database["public"]["Tables"]["Lots"]["Row"];
+type ParkingLot = Database["public"]["Tables"]["ParkingLot"]["Row"];
 
 export default function Lots() {
   const { user, supabase } = useOutletContext<ContextType>();
 
-  const [lots, setLots] = useState<Lots[]>([]);
+  const [parkingLots, setParkingLots] = useState<ParkingLot[]>([]);
 
   useEffect(() => {
     const loadLots = async () => {
@@ -35,7 +35,7 @@ export default function Lots() {
         if (error) {
           console.error("Error fetching lots:", error);
         } else {
-          setLots(data || []);
+          setParkingLots(data || []);
         }
       } catch (err) {
         console.error("Unexpected error:", err);
@@ -63,24 +63,28 @@ export default function Lots() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap gap-x-4">
-          {lots.map((lot) => (
-            <div key={lot.id} className="pt-8">
-              <div className="bg-neutral-700 shadow-md rounded-lg p-6">
-                <h2 className="text-2xl font-bold mb-2">🅿️ {lot.name}</h2>
-                <div className="flex justify-between">
-                  <div className="pl-8">
-                    <p>insert address</p>
-                    <p>Insert Description</p>
+        <div className="flex flex-wrap gap-x-2 justify-center">
+          {parkingLots.map((parkingLot) => (
+            <div
+              key={parkingLot.id}
+              className="w-2/5 min-w-64 mt-8 mr-6 rounded-lg border border-neutral-700 hover:border hover:border-white hover:scale-105 transition duration-200 "
+            >
+              <div className="bg-neutral-700 h-64 shadow-md rounded-lg pl-4 pt-4 pr-12 pb-4  hover:border-white">
+                <div className="flex flex-col flex-wrap h-full w-1/2">
+                  <div className="">
+                    <h2 className="text-3xl font-bold mb-auto">
+                      {parkingLot.name}
+                    </h2>
+                    <p className="mb-2">{parkingLot.address}</p>
+                    <p>{parkingLot.description}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-white mb-2">Capacity: {lot.capacity}</p>
-                    <p className="text-white mb-2">
-                      Available Spots: {lot.current_occupation}
+                  <div className="mt-auto">
+                    <p className="text-lg mb-0 pb-0">Capacity</p>
+                    <p className="">
+                      {parkingLot.current_occupancy}/{parkingLot.capacity}
                     </p>
                   </div>
                 </div>
-                {/* Add more relevant information here */}
               </div>
             </div>
           ))}

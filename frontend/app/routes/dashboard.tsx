@@ -15,8 +15,6 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { Database } from "~/types/supabase";
 import { useEffect, useState } from "react";
 
-type Profile = Database["public"]["Tables"]["Profile"]["Row"];
-
 type LoaderData = {
   env: {
     SUPABASE_URL: string;

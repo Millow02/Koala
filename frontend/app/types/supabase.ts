@@ -75,29 +75,35 @@ export type Database = {
           created_at?: string;
         };
       };
-      Lots: {
+      ParkingLot: {
         Row: {
           id: string; 
-          organization: string;
           name: string;
+          description: string;
           capacity: string;
-          current_occupation: string;
+          current_occupancy: string;
+          address: string;
+          organizationId: string;
           created_at: string; 
         };
         Insert: {
           id: string; 
-          organization: string;
           name: string;
+          description: string;
           capacity: string;
-          current_occupation: string;
+          current_occupancy: string;
+          address: string;
+          organizationId: string;
           created_at: string; 
         };
         Update: {
           id: string; 
-          organization: string;
           name: string;
+          description: string;
           capacity: string;
-          current_occupation: string;
+          current_occupancy: string;
+          address: string;
+          organizationId: string;
           created_at: string; 
         };
       };
