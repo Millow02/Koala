@@ -167,6 +167,7 @@ const Sidebar = () => {
               </Link>
             </div>
 
+
             <button
               className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300"
               onClick={signOut}

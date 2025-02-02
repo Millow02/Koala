@@ -20,6 +20,7 @@ export default function Navbar({ isSignedIn, user }: NavbarProps) {
         </Link>
       </div>
 
+
       <div>
         {!user ? (
           <Link to="/sign-in">

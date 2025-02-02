@@ -21,6 +21,12 @@ export default function SignUp() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+          },
+        },
       });
 
       if (error) {
@@ -66,8 +72,6 @@ export default function SignUp() {
             <h3 className="text-lg mb-16 text-gray-300">
               Create a new account
             </h3>
-
-            
             <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-neutral-400 p-1 mb-8">
               <input
                 type="checkbox"
@@ -91,7 +95,22 @@ export default function SignUp() {
               </span>
             </label>
 
+            <input
+              type="text"
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
+            />
 
+            <h3 className="text-left w-full text-gray-300 mb-2">Last name</h3>
+            <input
+              type="text"
+              placeholder="Last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
+            />
             <h3 className="text-left w-full text-gray-300 mb-2">Email</h3>
             <input
               type="email"
