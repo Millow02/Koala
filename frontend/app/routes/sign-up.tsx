@@ -64,12 +64,12 @@ export default function SignUp() {
           <div className="w-2/6 h-3/5 bg-gradient-to-r from-blue-500 via-pink-500 to-purple-500 opacity-50 blur-2xl rounded-lg mt-16"></div>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center w-2/6 rounded-3xl bg-gray-950 h-3/5 mt-12 mx-60 px-16 py-8">
+        <div className="relative flex flex-col items-center justify-center w-2/6 rounded-3xl bg-gray-950 h-4/5 mt-12 mx-60 px-16 py-8">
           <div className="flex flex-col items-center justify-center w-2/3">
             <h1 className="text-4xl font-bold mb-4 text-center">
               Get started with Koala
             </h1>
-            <h3 className="text-lg mb-16 text-gray-300">
+            <h3 className="text-lg mb-10 text-gray-300">
               Create a new account
             </h3>
             <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-neutral-400 p-1 mb-8">
@@ -94,7 +94,8 @@ export default function SignUp() {
                 Admin
               </span>
             </label>
-
+            
+            <h3 className="text-left w-full text-gray-300 mb-2">First name</h3>
             <input
               type="text"
               placeholder="First name"
