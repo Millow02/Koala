@@ -13,32 +13,42 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   const signUp = async () => {
-    try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            first_name: firstName,
-            last_name: lastName,
-          },
+    const signUpData = {
+      email,
+      password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          role: isAdmin ? 'admin' : 'user',
         },
-      });
-
+      },
+    };
+  
+    console.log("Sign-up data being sent:", signUpData);
+  
+    try {
+      const { data, error } = await supabase.auth.signUp(signUpData);
+  
       if (error) {
         setError("Error");
         console.error("Error signing up:", error.message);
       } else {
-        console.log("Sign-up successful");
+        console.log("Sign-up and profile update successful");
         navigate("/");
       }
     } catch (err) {
       setError("An unexpected error occurred");
       console.error("Unexpected error:", err);
     }
+  };
+
+  const handleCheckboxChange = () => {
+    setIsAdmin(!isAdmin);
   };
 
   return (
@@ -48,15 +58,37 @@ export default function SignUp() {
           <div className="w-2/6 h-3/5 bg-gradient-to-r from-blue-500 via-pink-500 to-purple-500 opacity-50 blur-2xl rounded-lg mt-16"></div>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center w-2/6 rounded-3xl bg-gray-950 h-3/5 mt-12 mx-60 px-16 py-8">
+        <div className="relative flex flex-col items-center justify-center w-2/6 rounded-3xl bg-gray-950 h-4/5 mt-12 mx-60 px-16 py-8">
           <div className="flex flex-col items-center justify-center w-2/3">
             <h1 className="text-4xl font-bold mb-4 text-center">
               Get started with Koala
             </h1>
-            <h3 className="text-lg mb-16 text-gray-300">
+            <h3 className="text-lg mb-10 text-gray-300">
               Create a new account
             </h3>
-
+            <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-neutral-400 p-1 mb-8">
+              <input
+                type="checkbox"
+                className="sr-only"
+                checked={isAdmin}
+                onChange={handleCheckboxChange}
+              />
+              <span
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  !isAdmin ? 'text-primary bg-purple-700' : 'text-body-color'
+                }`}
+              >
+                User
+              </span>
+              <span
+                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
+                  isAdmin ? 'text-primary bg-purple-700' : 'text-body-color'
+                }`}
+              >
+                Admin
+              </span>
+            </label>
+            
             <h3 className="text-left w-full text-gray-300 mb-2">First name</h3>
             <input
               type="text"
@@ -74,7 +106,6 @@ export default function SignUp() {
               onChange={(e) => setLastName(e.target.value)}
               className="mb-4 p-3 border rounded w-full focus:outline-none focus:ring-1 focus:ring-white text-black"
             />
-
             <h3 className="text-left w-full text-gray-300 mb-2">Email</h3>
             <input
               type="email"

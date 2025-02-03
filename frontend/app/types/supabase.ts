@@ -35,19 +35,16 @@ export type Database = {
         Row: {
           id: string;
           name: string;
-          owner: string;
           created_at: string;
         };
         Insert: {
           id: string;
           name: string;
-          owner: string;
           created_at: string;
         };
         Update: {
           id: string;
           name: string;
-          owner: string;
           created_at: string;
         };
       };
@@ -58,6 +55,8 @@ export type Database = {
           first_name: string;
           last_name: string;
           email: string;
+          phone_number: string;
+          role: string;
           created_at: string; 
         };
         Insert: {
@@ -65,6 +64,8 @@ export type Database = {
           first_name: string;
           last_name: string;
           email: string;
+          phone_number: string;
+          role: string;
           created_at?: string; 
         };
         Update: {
@@ -72,6 +73,8 @@ export type Database = {
           first_name?: string;
           last_name?: string;
           email?: string;
+          phone_number: string;
+          role: string;
           created_at?: string;
         };
       };
@@ -80,30 +83,30 @@ export type Database = {
           id: string; 
           name: string;
           description: string;
-          capacity: string;
-          current_occupancy: string;
           address: string;
           organizationId: string;
+          capacity: string;
+          current_occupancy: string;
           created_at: string; 
         };
         Insert: {
           id: string; 
           name: string;
           description: string;
-          capacity: string;
-          current_occupancy: string;
           address: string;
           organizationId: string;
+          capacity: string;
+          current_occupancy: string;
           created_at: string; 
         };
         Update: {
           id: string; 
           name: string;
           description: string;
-          capacity: string;
-          current_occupancy: string;
           address: string;
           organizationId: string;
+          capacity: string;
+          current_occupancy: string;
           created_at: string; 
         };
       };
