@@ -1,6 +1,6 @@
-path: C:/Users/niraj/Desktop/Koala/data
+path: C:/Users/niraj/Desktop/Koala/Dataset
 train: train/images
-val: valid/images
+val: val/images
 
 #Our classes
 names:
