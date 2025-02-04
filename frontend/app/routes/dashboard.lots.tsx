@@ -40,11 +40,15 @@ export default function Lots() {
         if (profileError) {
           console.error("Error fetching profile:", profileError);
           return;
-        } else {
-          setOrganizationId(profileData.organizationId ?? null);
         }
 
-        const { data, error } = await supabase.from("ParkingLot").select("*");
+        const organizationId = profileData?.organizationId;
+        setOrganizationId(organizationId);
+
+        const { data, error } = await supabase
+          .from("ParkingLot")
+          .select("*")
+          .eq("organizationId", organizationId);
 
         if (error) {
           console.error("Error fetching lots:", error);
@@ -84,6 +88,8 @@ export default function Lots() {
             )}
           </div>
         </div>
+
+        {/* for next time: should display all the parking lots of your organization */}
         {organizationId ? (
           <div className="flex flex-wrap gap-x-2 justify-center">
             {parkingLots.map((parkingLot) => (
