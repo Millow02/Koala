@@ -1,38 +1,84 @@
 import RPi.GPIO as GPIO
 import time
+from picamera2 import Picamera2
+from datetime import datetime
 
-# GPIO pin that we'll watch for a rising edge
-GPIO_PIN = 17
+# GPIO pins
+TRIG_PIN = 23  # GPIO pin for trigger
+ECHO_PIN = 24  # GPIO pin for echo
 
-def rising_edge_detected(channel):
-    """
-    Callback function that is called when a rising edge is detected.
-    'channel' will be the pin number, e.g., 17.
-    """
-    print(f"Rising edge detected on GPIO {channel}!")
+# Camera setup
+def setup_camera():
+    camera = Picamera2()
+    camera.start()
+    # Allow camera to warm up
+    time.sleep(2)
+    return camera
+
+# Initialize GPIO
+def setup_gpio():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(TRIG_PIN, GPIO.OUT)
+    GPIO.setup(ECHO_PIN, GPIO.IN)
+    GPIO.output(TRIG_PIN, False)
+    time.sleep(2)  # Let sensor settle
+
+# Get distance from sensor
+def get_distance():
+    # Send trigger pulse
+    GPIO.output(TRIG_PIN, True)
+    time.sleep(0.00001)
+    GPIO.output(TRIG_PIN, False)
+    
+    # Get timing
+    while GPIO.input(ECHO_PIN) == 0:
+        pulse_start = time.time()
+        
+    while GPIO.input(ECHO_PIN) == 1:
+        pulse_end = time.time()
+    
+    # Calculate distance
+    pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17150  # Speed of sound * time / 2
+    distance = round(distance, 2)
+    
+    return distance
+
+# Capture image
+def capture_image(camera):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}.jpg"
+    camera.capture_file(f"../pics/{filename}")
+    print(f"Image captured: {filename}")
 
 def main():
-    # Use Broadcom (BCM) pin numbering
-    GPIO.setmode(GPIO.BCM)
-
-    # Set up the pin as input with a pull-down resistor
-    GPIO.setup(GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-    # Add rising edge detection; attach the callback
-    GPIO.add_event_detect(GPIO_PIN, GPIO.RISING, callback=rising_edge_detected, bouncetime=200)
-    
     try:
-        print(f"Listening for a rising edge on GPIO {GPIO_PIN}. Press Ctrl+C to exit.")
-        # Keep the program running so the callback can be triggered
+        # Setup
+        setup_gpio()
+        camera = setup_camera()
+        trigger_distance = 30  # Distance in cm to trigger capture
+        cooldown = 2  # Seconds between captures
+        last_capture = 0
+        
+        print("System ready. Waiting for trigger...")
+        
         while True:
-            time.sleep(1)
+            distance = get_distance()
+            current_time = time.time()
+            
+            # Check if object is within trigger distance and cooldown period has passed
+            if distance <= trigger_distance and (current_time - last_capture) >= cooldown:
+                print(f"Object detected at {distance}cm")
+                capture_image(camera)
+                last_capture = current_time
+            
+            time.sleep(0.1)  # Small delay to prevent CPU overhead
+            
     except KeyboardInterrupt:
-        pass
+        print("\nProgram stopped by user")
     finally:
-        # Clean up GPIO resources
         GPIO.cleanup()
-        print("GPIO cleanup complete. Exiting program.")
+        print("GPIO cleaned up")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
