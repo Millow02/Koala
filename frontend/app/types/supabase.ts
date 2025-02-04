@@ -57,18 +57,30 @@ export type Database = {
           id: string; 
           first_name: string;
           last_name: string;
+          email: string;
+          phone_number: string;
+          role: string;
+          organizationId: number;
           created_at: string; 
         };
         Insert: {
           id: string; 
           first_name: string;
           last_name: string;
+          email: string;
+          phone_number: string;
+          role: string;
+          organizationId: number;
           created_at?: string; 
         };
         Update: {
           id?: string;
           first_name?: string;
           last_name?: string;
+          email?: string;
+          phone_number: string;
+          role: string;
+          organizationId: number;
           created_at?: string;
         };
       };
@@ -77,19 +89,31 @@ export type Database = {
           id: string; 
           name: string;
           description: string;
+          address: string;
+          organizationId: string;
+          capacity: string;
+          current_occupancy: string;
           created_at: string; 
         };
         Insert: {
           id: string; 
           name: string;
           description: string;
-          created_at?: string; 
+          address: string;
+          organizationId: string;
+          capacity: string;
+          current_occupancy: string;
+          created_at: string; 
         };
         Update: {
-          id?: string;
-          name?: string;
-          description?: string;
-          created_at?: string;
+          id: string; 
+          name: string;
+          description: string;
+          address: string;
+          organizationId: string;
+          capacity: string;
+          current_occupancy: string;
+          created_at: string; 
         };
       };
     };

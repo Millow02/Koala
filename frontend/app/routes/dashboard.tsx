@@ -1,4 +1,10 @@
-import { useLoaderData, Outlet, useNavigate, data } from "@remix-run/react";
+import {
+  useLoaderData,
+  Outlet,
+  useNavigate,
+  data,
+  useLocation,
+} from "@remix-run/react";
 import Sidebar from "~/components/Sidebar";
 import {
   createBrowserClient,
@@ -6,7 +12,7 @@ import {
   User,
 } from "@supabase/auth-helpers-remix";
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import type { Profile } from "~/types/profile";
+import { Database } from "~/types/supabase";
 import { useEffect, useState } from "react";
 
 type LoaderData = {
@@ -37,11 +43,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function Dashboard() {
+  const location = useLocation();
   const { env } = useLoaderData<LoaderData>();
   const [user, setUser] = useState<User | null>(null);
   const [supabase] = useState(() =>
     createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!)
   );
+
+  const hideSidebarRoutes = ["/dashboard/new-lot"]; // Add any routes where you want to hide sidebar
+  const shouldShowSidebar = !hideSidebarRoutes.includes(location.pathname);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -57,30 +67,9 @@ export default function Dashboard() {
     fetchUser();
   }, [supabase]);
 
-  const sections = [
-    {
-      header: "Parking Lots",
-      links: [{ label: "All Parking Lots", path: "/dashboard/lot-a" }],
-    },
-    {
-      header: "Organizations",
-      links: [
-        { label: "Concordia", path: "/dashboard/org-1" },
-        { label: "Mcgill", path: "/dashboard/org-2" },
-      ],
-    },
-    {
-      header: "Account",
-      links: [
-        { label: "Preferences", path: "/dashboard/preferences" },
-        { label: "Vehicles", path: "/dashboard/vehicles" },
-      ],
-    },
-  ];
-
   return (
     <div className="flex h-screen">
-      <Sidebar />
+      {shouldShowSidebar && <Sidebar />}
       <main className="w-full">
         <div className="p-6">
           <Outlet context={{ user, supabase }} />

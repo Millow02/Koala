@@ -20,6 +20,7 @@ export default function Navbar({ isSignedIn, user }: NavbarProps) {
         </Link>
       </div>
 
+
       <div>
         {!user ? (
           <Link to="/sign-in">
@@ -28,7 +29,7 @@ export default function Navbar({ isSignedIn, user }: NavbarProps) {
             </button>
           </Link>
         ) : (
-          <Link to="dashboard">
+          <Link to="/dashboard/lots">
             <button className="text-base bg-pink-500 rounded-lg p-2 focus:outline-none">
               Dashboard
             </button>
