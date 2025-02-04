@@ -1,6 +1,6 @@
 /* Img2Cloud */
 
-import { readdir } from "fs/promises";
+import { readdir, readFile } from "fs/promises";
 import { createClient } from "@supabase/supabase-js";
 
 const IMG2CLOUD_LOG_PREFIX = "IMG2CLOUD";
@@ -17,36 +17,61 @@ try {
 		fileSizeLimit: "1MB",
 	});
 } catch (error) {
-	console.log(`${IMG2CLOUD_LOG_PREFIX} - Bucket has already been created`);
+	console.log(`${IMG2CLOUD_LOG_PREFIX} - ${error}`);
 }
 
 const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp"]);
 
 async function watchFolder(folderPath: string) {
 	try {
+		const imageFiles = new Set<string>();
+
 		while (true) {
 			// query all the pictures in the folder
 			const allFiles = await readdir(folderPath);
-			const imageFiles = new Set(
-				allFiles.filter((file) =>
-					IMAGE_EXTENSIONS.has(file.toLowerCase().slice(file.lastIndexOf("."))),
-				),
+
+			allFiles
+				.filter((fileName) =>
+					IMAGE_EXTENSIONS.has(
+						fileName.toLowerCase().slice(fileName.lastIndexOf(".")),
+					),
+				)
+				.forEach((fileName) => {
+					imageFiles.add(fileName);
+				});
+
+			console.log(
+				`${IMG2CLOUD_LOG_PREFIX} - Current image files found in pics/: ${Array.from(imageFiles)}`,
 			);
 
-			console.log("Current images:", imageFiles);
+			imageFiles.forEach(async (image) => {
+				// upload the pictures
+				//
+				const file = await readFile(`${folderPath}/${image}`);
 
-			// upload the pictures
-			// const { data, error } = await supabase.storage
-			// 	.from("pictures")
-			// 	.upload("file_path", file);
-			// if (error) {
-			// 	console.log(`${IMG2CLOUD_LOG_PREFIX} - ${error}`);
-			// } else {
-			// 	// Handle success
-			// }
+				const { data, error } = await supabase.storage
+					.from("pictures")
+					.upload(`public/${image}`, file, { contentType: "image/*" });
 
-			// delete the images
+				if (error) {
+					console.log(
+						`${IMG2CLOUD_LOG_PREFIX} - Error uploading images ${error.name} - ${error.cause} - ${error.message}`,
+					);
+				} else {
+					// Handle success
+					//
+					console.log(
+						`${IMG2CLOUD_LOG_PREFIX} - Upload success: ${data.fullPath} - ${data.id}`,
+					);
+					// We will delete the image files here
+					//
+					// Remove from disk and from Set
+					await Bun.file(`${folderPath}/${image}`).delete();
+					imageFiles.delete(image);
+				}
+			});
 
+			// make sure CPU doesnt spin lock
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 		}
 	} catch (error) {
