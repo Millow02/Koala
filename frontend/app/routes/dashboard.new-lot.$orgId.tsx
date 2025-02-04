@@ -3,8 +3,9 @@ import {
   useLoaderData,
   useNavigate,
   useOutletContext,
+  useParams,
 } from "@remix-run/react";
-import { LoaderFunctionArgs } from "@remix-run/server-runtime";
+import { LoaderFunction } from "@remix-run/server-runtime";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { useEffect, useState } from "react";
 import { Database } from "~/types/supabase";
@@ -14,21 +15,27 @@ type ContextType = {
   supabase: SupabaseClient;
 };
 
-export default function New() {
+export const loader: LoaderFunction = async ({ params, request }) => {
+  return null;
+};
+
+export default function NewLot() {
   const { user, supabase } = useOutletContext<ContextType>();
   const [lotName, setLotName] = useState("");
   const [lotDescription, setLotDescription] = useState("");
   const [lotAddress, setLotAddress] = useState("");
+  const [capacity, setCapacity] = useState("");
   const [message, setMessage] = useState("");
+
+  const { orgId } = useParams();
 
   const navigate = useNavigate();
 
   const createNewLot = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
-    setMessage("");
 
-    if (!lotName || !lotDescription || !lotAddress) {
+    if (!lotName || !lotDescription || !lotAddress || !capacity) {
       setMessage("All fields are required");
       return;
     }
@@ -38,6 +45,8 @@ export default function New() {
           name: lotName,
           description: lotDescription,
           address: lotAddress,
+          capacity: capacity,
+          organizationId: orgId,
         },
       ]);
 
@@ -93,6 +102,17 @@ export default function New() {
               type="text"
               value={lotAddress}
               onChange={(e) => setLotAddress(e.target.value)}
+              className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-white mb-1">
+              Parking lot capacity
+            </label>
+            <input
+              type="text"
+              value={capacity}
+              onChange={(e) => setCapacity(e.target.value)}
               className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
             />
           </div>

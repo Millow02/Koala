@@ -24,22 +24,22 @@ export default function SignUp() {
         data: {
           first_name: firstName,
           last_name: lastName,
-          role: isAdmin ? 'admin' : 'user',
+          role: isAdmin ? "admin" : "user",
         },
       },
     };
-  
+
     console.log("Sign-up data being sent:", signUpData);
-  
+
     try {
       const { data, error } = await supabase.auth.signUp(signUpData);
-  
+
       if (error) {
         setError("Error");
         console.error("Error signing up:", error.message);
       } else {
         console.log("Sign-up and profile update successful");
-        navigate("/");
+        navigate("/dashboard/lots");
       }
     } catch (err) {
       setError("An unexpected error occurred");
@@ -75,20 +75,20 @@ export default function SignUp() {
               />
               <span
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                  !isAdmin ? 'text-primary bg-purple-700' : 'text-body-color'
+                  !isAdmin ? "text-primary bg-purple-700" : "text-body-color"
                 }`}
               >
                 User
               </span>
               <span
                 className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                  isAdmin ? 'text-primary bg-purple-700' : 'text-body-color'
+                  isAdmin ? "text-primary bg-purple-700" : "text-body-color"
                 }`}
               >
                 Admin
               </span>
             </label>
-            
+
             <h3 className="text-left w-full text-gray-300 mb-2">First name</h3>
             <input
               type="text"
