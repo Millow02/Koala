@@ -90,7 +90,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-1/6 max-h-full bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white">
+    <div className="w-1/6 bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start">
       {isLoading ? (
         <div>Loading...</div>
       ) : (
