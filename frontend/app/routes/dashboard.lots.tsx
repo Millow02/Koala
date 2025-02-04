@@ -70,13 +70,22 @@ export default function Lots() {
           <h1 className="text-3xl font-bold ">Parking Lots</h1>
           <div className="flex space-x-8">
             {organizationId ? (
-              <Link
-                to={`/dashboard/new-lot/${organizationId}`}
-                key={organizationId}
-                className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
-              >
-                New Parking Lot
-              </Link>
+              <div>
+                <Link
+                  to={`/dashboard/new-lot/${organizationId}`}
+                  key={organizationId}
+                  className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
+                >
+                  New Parking Lot
+                </Link>
+                <Link
+                  to={`/dashboard/organization/${organizationId}`}
+                  key={organizationId}
+                  className="text-base"
+                >
+                  View Organization
+                </Link>
+              </div>
             ) : (
               <Link
                 to={`/dashboard/new-organization/`}
@@ -93,9 +102,10 @@ export default function Lots() {
         {organizationId ? (
           <div className="flex flex-wrap gap-x-2 justify-center">
             {parkingLots.map((parkingLot) => (
-              <div
+              <Link
                 key={parkingLot.id}
-                className="w-2/5 min-w-64 mt-8 mr-6 rounded-lg border border-neutral-700 hover:border hover:border-white hover:scale-105 transition duration-200 "
+                to={`/dashboard/lots/${parkingLot.id}`}
+                className="w-2/5 min-w-64 mt-8 mr-6 rounded-lg border border-neutral-700 hover:border hover:border-white hover:scale-105 transition duration-200 cursor-pointer"
               >
                 <div className="bg-neutral-700 h-64 shadow-md rounded-lg pl-4 pt-4 pr-12 pb-4  hover:border-white">
                   <div className="flex flex-col flex-wrap h-full w-1/2">
@@ -114,11 +124,11 @@ export default function Lots() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
-          <div>Org Id: no org... create one ?</div>
+          <div>no org... create one ?</div>
         )}
       </div>
     </div>
