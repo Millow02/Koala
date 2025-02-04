@@ -1,4 +1,4 @@
-import { useOutletContext, useParams } from "@remix-run/react";
+import { useNavigate, useOutletContext, useParams } from "@remix-run/react";
 import { LoaderFunction } from "@remix-run/server-runtime";
 import {
   createServerClient,
@@ -15,11 +15,15 @@ export default function OrganizationDetailPage() {
     supabase: SupabaseClient;
   }>();
 
-  const { orgId } = useParams();
+  const navigate = useNavigate();
+
+  const { organizationId } = useParams();
 
   const [organization, setOrganization] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const returnToLots = 0;
 
   useEffect(() => {
     const fetchOrganizationDetails = async () => {
@@ -29,7 +33,7 @@ export default function OrganizationDetailPage() {
         const { data, error } = await supabase
           .from("Organization")
           .select("*")
-          .eq("id", orgId)
+          .eq("id", organizationId)
           .single();
 
         if (error) {
@@ -45,10 +49,10 @@ export default function OrganizationDetailPage() {
       }
     };
 
-    if (orgId) {
+    if (organizationId) {
       fetchOrganizationDetails();
     }
-  }, [supabase, orgId]);
+  }, [supabase, organizationId]);
 
   if (isLoading) {
     return <div>Loading organization details</div>; // you can replace me with a loading skeleton later
