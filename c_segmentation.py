@@ -36,4 +36,4 @@ def segment_characters(image_path):
     cv2.destroyAllWindows()
 
 # Example usage
-segment_characters('Cars54_out_cropped_zoomed.jpg')
+segment_characters('cars9_out_cropped_zoomed.jpg')
