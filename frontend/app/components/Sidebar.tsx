@@ -17,6 +17,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const [parkingLots, setParkingLots] = useState<any[]>([]);
   const [organizations, setOrganizations] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +35,22 @@ const Sidebar = () => {
       }
 
       setCurrentUser(user);
+
+      const { data: profileData, error: profileError } = await supabase
+        .from("Profile")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError) {
+        console.error("Error fetching profile:", profileError);
+        setError("Failed to load profile");
+      } else {
+        setUserRole(profileData?.role || null);
+        // Print user role to the console
+        console.log("User role:", profileData?.role);
+      }
+
 
       const { data: organizationData, error: organizationError } =
         await supabase
@@ -62,6 +79,12 @@ const Sidebar = () => {
   const location = useLocation();
 
   const isLotsActive = location.pathname.startsWith("/dashboard/lots");
+  const isMembershipsActive = location.pathname.startsWith("/dashboard/admin-memberships");
+  const isRecordsActive = location.pathname.startsWith("/dashboard/records");
+  const isAnalyticsActive = location.pathname.startsWith("/dashboard/analytics");
+  const isNotificationsActive = location.pathname.startsWith("/dashboard/notifications");
+  const isFacilitiesActive = location.pathname.startsWith("/dashboard/facilities");
+  const isMapActive = location.pathname.startsWith("/dashboard/map");
 
   const isActiveLink = (orgId: string) => {
     return location.pathname.includes(`/dashboard/organizations/${orgId}`);
@@ -97,24 +120,80 @@ const Sidebar = () => {
         <>
           <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
           <div className="space-y-3">
-            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
-              <h2 className="text-base font-semibold text-neutral-500 mb-3">
-                Parking lots
-              </h2>
-              <Link
-                to={`/dashboard/lots`}
-                className={`
-                block transition duration-300 mb-2
-                ${
-                  isLotsActive
-                    ? "text-white"
-                    : "text-neutral-400 hover:text-white"
-                }
-              `}
-              >
-                All parking lots
-              </Link>
-            </div>
+            {userRole == 'admin' && (
+                <>
+                <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
+                  <h2 className="text-base font-semibold text-neutral-500 mb-3">
+                    Administration
+                  </h2>
+                  <Link
+                    to={`/dashboard/lots`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isLotsActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    Parking Lots
+                  </Link>
+                  <Link
+                    to={`/dashboard/admin-memberships`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isMembershipsActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    Memberships
+                  </Link>
+                  <Link
+                    to={`/dashboard/records`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isRecordsActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    Records
+                  </Link>
+                  <Link
+                    to={`/dashboard/analytics`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isAnalyticsActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    Analytics
+                  </Link>
+                  <Link
+                    to={`/dashboard/notifications`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isNotificationsActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    Notifications
+                  </Link>
+                </div>
+              </>
+            )}
             {/* <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3"> */}
             {/* <h2 className="text-base font-semibold text-neutral-500 mb-3">
                 My organizations
@@ -138,6 +217,41 @@ const Sidebar = () => {
                 <div>No organizations found</div>
               )}
             </div> */}
+            {userRole == 'client' && (
+              <>
+                <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
+                  <h2 className="text-base font-semibold text-neutral-500 mb-3">
+                    Find Parking
+                  </h2>
+                  <Link
+                    to={`/dashboard/facilities`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isFacilitiesActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    All Facilities
+                  </Link>
+                  <Link
+                    to={`/dashboard/map`}
+                    className={`
+                    block transition duration-300 mb-2
+                    ${
+                      isMapActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }
+                  `}
+                  >
+                    Map
+                  </Link>
+                </div>
+              </>
+            )}
             <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
               <h2 className="text-base font-semibold text-neutral-500 mb-3">
                 Account
@@ -155,16 +269,30 @@ const Sidebar = () => {
               >
                 Preferences
               </Link>
-              <Link
-                to={`/dashboard/vehicles`}
-                className={`block hover:text-white hover:bg-opacity-50 transition duration-300 mb-2 ${
-                  isVehiclesActive
-                    ? "text-white"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                Vehicles
-              </Link>
+              {userRole == 'client' && (
+                <>
+                  <Link
+                    to={`/dashboard/vehicles`}
+                    className={`block hover:text-white hover:bg-opacity-50 transition duration-300 mb-2 ${
+                      isVehiclesActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    Vehicles
+                  </Link>
+                  <Link
+                    to="#"
+                    className={`block hover:text-white hover:bg-opacity-50 transition duration-300 mb-2 ${
+                      isVehiclesActive
+                        ? "text-white"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    Memberships
+                  </Link>
+                </>
+              )}
             </div>
 
             <button
