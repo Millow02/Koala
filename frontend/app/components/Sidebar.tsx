@@ -8,7 +8,18 @@ import {
 import { SupabaseClient } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
 import { User } from "@supabase/supabase-js";
-import { UserIcon } from "@heroicons/react/24/solid";
+import { UserIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
+import {
+  Cog6ToothIcon, 
+  TruckIcon, 
+  IdentificationIcon, 
+  BuildingOffice2Icon, 
+  CalendarIcon,
+  PresentationChartLineIcon,
+  BellIcon,
+  MapIcon
+} from "@heroicons/react/24/outline";
+ 
 
 const Sidebar = () => {
   const { supabase } = useOutletContext<{
@@ -123,7 +134,7 @@ const Sidebar = () => {
         <>
           <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
           <div className="space-y-3">
-            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-3 flex items-center pt-3">
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-3 flex items-center pt-4 pb-1">
             <UserIcon className="h-7 w-7 text-neutral-500 mr-2 border rounded-full border-neutral-500" />
               <div>
                 <h2 className="text-base font-semibold text-neutral-500 ">
@@ -136,14 +147,14 @@ const Sidebar = () => {
             </div>
             {userRole == 'admin' && (
                 <>
-                <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
-                  <h2 className="text-base font-semibold text-neutral-500 mb-3">
+                <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-4 pt-3">
+                  <h2 className="text-base font-semibold text-neutral-500">
                     Administration
                   </h2>
                   <Link
                     to={`/dashboard/lots`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isLotsActive
                         ? "text-white"
@@ -151,12 +162,13 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <BuildingOffice2Icon className="h-6 w-6 inline-block mr-2" />
                     Parking Lots
                   </Link>
                   <Link
                     to={`/dashboard/admin-memberships`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isMembershipsActive
                         ? "text-white"
@@ -164,12 +176,13 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <IdentificationIcon className="h-6 w-6 inline-block mr-2" />
                     Memberships
                   </Link>
                   <Link
                     to={`/dashboard/records`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isRecordsActive
                         ? "text-white"
@@ -177,12 +190,13 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <CalendarIcon className="h-6 w-6 inline-block mr-2" />
                     Records
                   </Link>
                   <Link
                     to={`/dashboard/analytics`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isAnalyticsActive
                         ? "text-white"
@@ -190,12 +204,13 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <PresentationChartLineIcon className="h-6 w-6 inline-block mr-2" />
                     Analytics
                   </Link>
                   <Link
                     to={`/dashboard/notifications`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isNotificationsActive
                         ? "text-white"
@@ -203,6 +218,7 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <BellIcon className="h-6 w-6 inline-block mr-2" />
                     Notifications
                   </Link>
                 </div>
@@ -231,16 +247,16 @@ const Sidebar = () => {
                 <div>No organizations found</div>
               )}
             </div> */}
-            {userRole == 'client' && (
+            {userRole == 'admin' && (
               <>
-                <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
-                  <h2 className="text-base font-semibold text-neutral-500 mb-3">
+                <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-4 pt-3">
+                  <h2 className="text-base font-semibold text-neutral-500">
                     Find Parking
                   </h2>
                   <Link
                     to={`/dashboard/facilities`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isFacilitiesActive
                         ? "text-white"
@@ -248,12 +264,13 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <BuildingOffice2Icon className="h-6 w-6 inline-block mr-2" />
                     All Facilities
                   </Link>
                   <Link
                     to={`/dashboard/map`}
                     className={`
-                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isMapActive
                         ? "text-white"
@@ -261,19 +278,20 @@ const Sidebar = () => {
                     }
                   `}
                   >
+                    <MapIcon className="h-6 w-6 inline-block mr-2" />
                     Map
                   </Link>
                 </div>
               </>
             )}
-            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
-              <h2 className="text-base font-semibold text-neutral-500 mb-3">
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-4 pt-3">
+              <h2 className="text-base font-semibold text-neutral-500">
                 Account
               </h2>
               <Link
                 to={`/dashboard/preferences`}
                 className={`
-                block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                 ${
                   isPreferencesActive
                     ? "text-white"
@@ -281,6 +299,7 @@ const Sidebar = () => {
                 }
               `}
               >
+                <Cog6ToothIcon className="h-6 w-6 inline-block mr-2" /> 
                 Preferences
               </Link>
               {userRole == 'client' && (
@@ -288,37 +307,42 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/vehicles`}
                     className={`
-                      block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                      block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
                       isVehiclesActive
                         ? "text-white"
                         : "text-neutral-400 hover:text-white"
                     }`}
                   >
+                    <TruckIcon className="h-6 w-6 inline-block mr-2" />
                     Vehicles
                   </Link>
                   <Link
                     to="#"
                     className={`
-                      block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500 
+                      block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
                       isVehiclesActive
                         ? "text-white"
                         : "text-neutral-400 hover:text-white"
                     }`}
                   >
+                    <IdentificationIcon className="h-6 w-6 inline-block mr-2" />
                     Memberships
                   </Link>
                 </>
               )}
             </div>
-
-            <button
-              className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300 hover:bg-neutral-500"
-              onClick={signOut}
-            >
-              Log out
-            </button>
+            <div className="w-full bg-transparent pl-4 py-2 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600">
+              
+              <button
+                className=" text-base text-left px-1 py-2 pr-14 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500"
+                onClick={signOut}
+              >
+                <ArrowLeftOnRectangleIcon className="h-6 w-6 inline-block mr-2" />
+                Log out
+              </button>
+            </div>
           </div>
         </>
       )}
