@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/car5.jpg'
+image_path = "C:/Users/niraj/Desktop/Koala/c44d319c-car_504.jpg"
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -22,7 +22,7 @@ if image is None:
     exit()
 
 # Load a model
-model = YOLO('C:/Users/niraj/OneDrive/Desktop/Koala/runs/detect/train13/weights/best.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train13/weights/best.pt')  # load a custom model
 
 threshold = 0.5
 
