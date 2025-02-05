@@ -8,6 +8,7 @@ import {
 import { SupabaseClient } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
 import { User } from "@supabase/supabase-js";
+import { UserIcon } from "@heroicons/react/24/solid";
 
 const Sidebar = () => {
   const { supabase } = useOutletContext<{
@@ -18,6 +19,7 @@ const Sidebar = () => {
 
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   const [parkingLots, setParkingLots] = useState<any[]>([]);
   const [organizations, setOrganizations] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +40,7 @@ const Sidebar = () => {
 
       const { data: profileData, error: profileError } = await supabase
         .from("Profile")
-        .select("role")
+        .select("role, first_name, last_name")
         .eq("id", user.id)
         .single();
 
@@ -47,6 +49,7 @@ const Sidebar = () => {
         setError("Failed to load profile");
       } else {
         setUserRole(profileData?.role || null);
+        setUserName(`${profileData?.first_name} ${profileData?.last_name}` || null);
         // Print user role to the console
         console.log("User role:", profileData?.role);
       }
@@ -120,6 +123,17 @@ const Sidebar = () => {
         <>
           <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
           <div className="space-y-3">
+            <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-3 flex items-center pt-3">
+            <UserIcon className="h-7 w-7 text-neutral-500 mr-2 border rounded-full border-neutral-500" />
+              <div>
+                <h2 className="text-base font-semibold text-neutral-500 ">
+                  {userName}
+                </h2>
+                <h2 className="text-sm font-semibold text-neutral-500 ">
+                  {userRole}
+                </h2>
+              </div>
+            </div>
             {userRole == 'admin' && (
                 <>
                 <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3">
