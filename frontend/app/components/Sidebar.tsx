@@ -129,7 +129,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/lots`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isLotsActive
                         ? "text-white"
@@ -142,7 +142,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/admin-memberships`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isMembershipsActive
                         ? "text-white"
@@ -155,7 +155,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/records`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isRecordsActive
                         ? "text-white"
@@ -168,7 +168,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/analytics`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isAnalyticsActive
                         ? "text-white"
@@ -181,7 +181,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/notifications`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isNotificationsActive
                         ? "text-white"
@@ -226,7 +226,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/facilities`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isFacilitiesActive
                         ? "text-white"
@@ -239,7 +239,7 @@ const Sidebar = () => {
                   <Link
                     to={`/dashboard/map`}
                     className={`
-                    block transition duration-300 mb-2
+                    block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                     ${
                       isMapActive
                         ? "text-white"
@@ -259,7 +259,7 @@ const Sidebar = () => {
               <Link
                 to={`/dashboard/preferences`}
                 className={`
-                block transition duration-300 mb-2
+                block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
                 ${
                   isPreferencesActive
                     ? "text-white"
@@ -273,7 +273,9 @@ const Sidebar = () => {
                 <>
                   <Link
                     to={`/dashboard/vehicles`}
-                    className={`block hover:text-white hover:bg-opacity-50 transition duration-300 mb-2 ${
+                    className={`
+                      block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500
+                      ${
                       isVehiclesActive
                         ? "text-white"
                         : "text-neutral-400 hover:text-white"
@@ -283,7 +285,9 @@ const Sidebar = () => {
                   </Link>
                   <Link
                     to="#"
-                    className={`block hover:text-white hover:bg-opacity-50 transition duration-300 mb-2 ${
+                    className={`
+                      block transition duration-300 mb-2 mr-5 rounded hover:bg-neutral-500 
+                      ${
                       isVehiclesActive
                         ? "text-white"
                         : "text-neutral-400 hover:text-white"
@@ -296,7 +300,7 @@ const Sidebar = () => {
             </div>
 
             <button
-              className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300"
+              className="w-full bg-transparent text-base text-left pl-6 py-5 text-neutral-300 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600 hover:text-white transition duration-300 hover:bg-neutral-500"
               onClick={signOut}
             >
               Log out
