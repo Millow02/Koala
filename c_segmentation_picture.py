@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/car5.jpg'
+image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/car5.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -42,12 +42,17 @@ for result in results.boxes.data.tolist():
         # Crop the license plate
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
 
-        # Resize (zoom) the cropped license plate
+        # Resize (zoom) and grayscale the cropped license 
         zoom_factor = 2  # Adjust the zoom factor as needed
-        cropped_plate_zoomed = cv2.resize(cropped_plate, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_LINEAR)
+        cropped_plate_zoomed = cv2.resize(cropped_plate, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_LINEAR,)
+        cropped_plate_zoomed = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
+
+        #Binarization and gaussian blur
+        cropped_plate_zoomed = cv2.GaussianBlur(cropped_plate_zoomed, (3, 3), 0)
+        cropped_plate_zoomed = cv2.threshold(cropped_plate_zoomed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
 
         # Save the cropped and zoomed license plate
-        cropped_plate_path = '{}_cropped_zoomed.jpg'.format(os.path.splitext(output_image_path)[0])
+        cropped_plate_path = '{}_cropped_withgaussianblur.jpg'.format(os.path.splitext(output_image_path)[0])
         cv2.imwrite(cropped_plate_path, cropped_plate_zoomed)
         print(f"Cropped and zoomed license plate saved to: {cropped_plate_path}")
 
