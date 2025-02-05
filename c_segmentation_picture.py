@@ -3,11 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-<<<<<<< HEAD
 image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/car5.jpg'
-=======
-image_path = "C:/Users/niraj/Desktop/Koala/c44d319c-car_504.jpg"
->>>>>>> e2d5095275ea7a46040c1b4b122b89c09db5e55b
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
