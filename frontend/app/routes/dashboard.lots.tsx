@@ -70,7 +70,7 @@ export default function Lots() {
           <h1 className="text-3xl font-bold ">Parking Lots</h1>
           <div className="flex space-x-8">
             {organizationId ? (
-              <div>
+              <div className="flex gap-x-4">
                 <Link
                   to={`/dashboard/new-lot/${organizationId}`}
                   key={organizationId}
@@ -81,7 +81,7 @@ export default function Lots() {
                 <Link
                   to={`/dashboard/organization/${organizationId}`}
                   key={organizationId}
-                  className="text-base"
+                  className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
                 >
                   View Organization
                 </Link>
@@ -90,7 +90,7 @@ export default function Lots() {
               <Link
                 to={`/dashboard/new-organization/`}
                 key={organizationId}
-                className="text-base"
+                className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
               >
                 Create Organization
               </Link>
