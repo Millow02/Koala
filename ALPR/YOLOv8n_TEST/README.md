@@ -13,3 +13,8 @@ Once this is done, note the node umber and port and
 
 run the following command:
 > ssh -L 8888:speed-XX:8888 <ENCS-username>@speed-submit.encs.concordia.ca
+
+Token for Loggin in:
+
+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
+
