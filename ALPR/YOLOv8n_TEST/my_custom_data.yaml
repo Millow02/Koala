@@ -1,12 +1,9 @@
-path: /nfs/speed-scratch/z_amm/COEN490/Koala/ALPR/YOLOv8n_TEST/datasets/my_custom_data  # root of dataset
+path: /nfs/speed-scratch/z_amm/COEN490/Koala/ALPR/YOLOv8n_TEST/datasets/test_data  # root of dataset
 train: images/train
 val: images/val
 
 names:
   0: LP
-<<<<<<< HEAD
   1: no_LP
-=======
-  1: N0_LP
->>>>>>> a543e6d (added capstone account parameter to salloc command)
+
   # Add more classes as needed
