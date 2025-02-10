@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/car5.jpg'
+image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/c44d319c-car_504.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -22,7 +22,7 @@ if image is None:
     exit()
 
 # Load a model
-model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train13/weights/best.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/OneDrive/Desktop/Koala/runs/detect/train13/weights/best.pt')  # load a custom model
 
 threshold = 0.5
 
@@ -43,7 +43,7 @@ for result in results.boxes.data.tolist():
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
 
         # Resize (zoom) and grayscale the cropped license 
-        zoom_factor = 2  # Adjust the zoom factor as needed
+        zoom_factor = 5  # Adjust the zoom factor as needed
         cropped_plate_zoomed = cv2.resize(cropped_plate, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_LINEAR,)
         cropped_plate_zoomed = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
 
