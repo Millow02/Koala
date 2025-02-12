@@ -120,4 +120,34 @@ export type Database = {
     Views: {};
     Functions: {};
   };
+
+  organization_codes: {
+    Row: {
+      id: string; 
+      organization_id: string;
+      code: string;
+      expires_at: string;
+      is_expired: boolean;
+      created_at?: string;
+    };
+    Insert: {
+      id: string; 
+      organization_id: string;
+      code: string;
+      expires_at: string;
+      is_expired: boolean;
+      created_at?: string;
+    };
+    Update: {
+      id: string; 
+      organization_id: string;
+      code: string;
+      expires_at: string;
+      is_expired: boolean;
+      created_at?: string;
+    };
+  };
+  
 };
+
+

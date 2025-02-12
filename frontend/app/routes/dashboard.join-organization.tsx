@@ -4,7 +4,6 @@ import {
   createServerClient,
   SupabaseClient,
 } from "@supabase/auth-helpers-remix";
-import { Copy, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Database } from "~/types/supabase";
 
@@ -15,7 +14,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 type Profile = Database["public"]["Tables"]["Profile"]["Row"];
 type Organization = Database["public"]["Tables"]["Organization"]["Row"];
 
-export default function OrganizationDetailPage() {
+export default function JoinOrganization() {
   const { supabase } = useOutletContext<{
     supabase: SupabaseClient;
   }>();
@@ -26,59 +25,27 @@ export default function OrganizationDetailPage() {
 
   const [organization, setOrganization] = useState<Organization | null>(null);
   const [owner, setOwner] = useState<Profile | null>(null);
-  const [inviteCode, setInviteCode] = useState("");
-
   const [isLoading, setIsLoading] = useState(true);
-  const [loadingCode, setLoadingCode] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  //   const JoinOrganization = async (e: React.FormEvent) => {
+  //     e.preventDefault();
+  //     try {
+  //         setIsLoading(true);
+  //         setError(null);
+
+  //         const { data: inviteData, error: inviteError } = await supabase
+
+  //     }
+
+  //   }
+
   const returnToLots = () => {
     navigate("/dashboard/lots");
-  };
-
-  const generateInviteCode = async () => {
-    try {
-      setLoadingCode(true);
-      setError(null);
-      setCopied(false);
-
-      const code = Math.random().toString(36).substring(2, 10).toUpperCase();
-      const expiresAt = new Date();
-      expiresAt.setMinutes(expiresAt.getMinutes() + 30);
-
-      const { data: codeData, error: codeError } = await supabase
-        .from("organization_codes")
-        .insert([
-          {
-            code,
-            organization_id: organizationId,
-            expires_at: expiresAt.toISOString(),
-            is_expired: false,
-          },
-        ]);
-
-      if (codeError) throw codeError;
-      setInviteCode(code);
-    } catch (err) {
-      setError("Failed to generate invite code");
-      console.error(err);
-    } finally {
-      setLoadingCode(false);
-    }
-  };
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(inviteCode);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 5000);
-    } catch (err) {
-      console.error("Failed to copy text:", err);
-    }
   };
 
   useEffect(() => {
@@ -172,33 +139,6 @@ export default function OrganizationDetailPage() {
               Owner: {owner?.first_name} {owner?.last_name}
             </h3>
             <h3 className="text-2xl">Email: {owner?.email}</h3>
-            <button
-              onClick={generateInviteCode}
-              className="w-64 h-12 text-xl mt-8 rounded-lg border border-white hover:bg-neutral-600 transition-colors"
-            >
-              {loadingCode ? "Generating..." : "Generate invite code"}
-            </button>
-            {inviteCode && (
-              <div className="flex gap-4 mt-8 items-center">
-                <h3 className="text-xl">Invite code: {inviteCode}</h3>
-                <button
-                  onClick={handleCopy}
-                  className="bg-transparent border rounded-lg hover:bg-neutral-600 transition-colors "
-                >
-                  {copied ? (
-                    <div className="flex gap-2 p-2 items-center">
-                      <h3>Copied !</h3>
-                      <Check className="w-5 h-5 text-green-500" />
-                    </div>
-                  ) : (
-                    <div className="flex gap-2 p-2 items-center">
-                      <h3>Copy</h3>
-                      <Copy className="w-5 h-5" />{" "}
-                    </div>
-                  )}
-                </button>
-              </div>
-            )}
           </div>
           <div className="relative">
             <div className="w-full px-12 py-4">
