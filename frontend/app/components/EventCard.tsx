@@ -23,6 +23,9 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
   const [profileDetails, setProfileDetails] = useState<any>(null);
 
   useEffect(() => {
+
+
+
     const fetchRecordAttributes = async () => {
       try {
         console.log("Fetching record attributes for ID:", occupancyRecordId); 
@@ -47,15 +50,12 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
         const [weekday, month, day, year] = formattedDate.split(/,?\s+/);
         const customFormattedDate = `${weekday} ${month} ${day} ${year}`;
 
-
-
         setRecordAttributes({
           ...recordData,
           date: customFormattedDate,
           time: formattedTime,
         });
-
-        console.log("Fetched record attributes:", recordData);
+        //console.log("Fetched record attributes:", recordData);
         
 
         // Fetch camera details using cameraId
@@ -69,9 +69,10 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
           console.error("Error fetching camera details:", cameraError);
           return;
         }
-
         setCameraDetails(cameraData);
-        console.log("Fetched camera details:", cameraData);
+        //console.log("Fetched camera details:", cameraData);
+
+
 
         // Fetch parking lot details using parkingLotId
         const { data: parkingLotData, error: parkingLotError } = await supabase
@@ -84,10 +85,11 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
           console.error("Error fetching parking lot details:", parkingLotError);
           return;
         }
-
         setParkingLotDetails(parkingLotData);
-        console.log("Fetched parking lot details:", parkingLotData);
+        //console.log("Fetched parking lot details:", parkingLotData);
 
+
+        
         // Fetch vehicle details using vehicleId
         const { data: vehicleData, error: vehicleError } = await supabase
           .from("Vehicle")
@@ -99,27 +101,24 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
           console.error("Error fetching vehicle details:", vehicleError);
           return;
         }
-
         setVehicleDetails(vehicleData);
-        console.log("Fetched vehicle details:", vehicleData);
+        //console.log("Fetched vehicle details:", vehicleData);
 
-         // Debugging log for profile_id
-         console.log("Profile ID:", vehicleData.profile_id);
+
 
         // Fetch profile details using profile_id
         const { data: profileData, error: profileError } = await supabase
           .from("Profile")
           .select(" first_name, last_name")
-          .eq("id", "b8313bd9-da4a-482e-b7dc-88914abd3bc2")
+          .eq("id", vehicleData.profile_id)
           .single();
 
         if (profileError) {
           console.error("Error fetching profile details:", profileError);
           return;
         }
-
         setProfileDetails(profileData);
-        console.log("Fetched profile details:", profileData);
+        //console.log("Fetched profile details:", profileData);
 
 
       } catch (err) {
