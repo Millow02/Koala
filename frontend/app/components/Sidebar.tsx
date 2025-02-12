@@ -336,7 +336,7 @@ const Sidebar = () => {
             <div className="w-full bg-transparent pl-4 py-2 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600">
               
               <button
-                className=" text-base text-left px-1 py-2 pr-20 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500 mr-2"
+                className=" text-base text-left px-1 py-2 pr-24 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500"
                 onClick={signOut}
               >
                 <ArrowLeftOnRectangleIcon className="h-6 w-6 inline-block mr-2" />
