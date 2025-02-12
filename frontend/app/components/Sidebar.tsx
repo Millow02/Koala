@@ -127,7 +127,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-1/6 bg-neutral-900 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start">
+    <div className="w-1/6 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start" style={{ backgroundColor: "#333842" }}>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -247,7 +247,7 @@ const Sidebar = () => {
                 <div>No organizations found</div>
               )}
             </div> */}
-            {userRole == 'admin' && (
+            {userRole == 'client' && (
               <>
                 <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-4 pt-3">
                   <h2 className="text-base font-semibold text-neutral-500">
