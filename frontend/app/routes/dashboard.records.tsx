@@ -23,6 +23,7 @@ export default function Records() {
   const [parkingLotIds, setParkingLotIds] = useState<string[]>([]);
   const [cameraIds, setCameraIds] = useState<string[]>([]);
   const [occupancyRecordIds, setOccupancyRecordIds] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
 
   useEffect(() => {
@@ -32,6 +33,8 @@ export default function Records() {
       }
 
       try {
+        setLoading(true);
+
         // Fetch organization ID
         const { data: profileData, error: profileError } = await supabase
           .from("Profile")
@@ -93,9 +96,10 @@ export default function Records() {
         setOccupancyRecordIds(occupancyRecordIds);
         console.log("Fetched occupancy record IDs:", occupancyRecordIds);
 
-
       } catch (err) {
         console.error("Unexpected error:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchEventRecordIds();
@@ -120,9 +124,15 @@ export default function Records() {
       <div className="flex justify-center">
         <div className="overflow-x-auto rounded-lg m-6 border-neutral-600 " style={{ height: "900px", width: "1100px", borderWidth: "2px", backgroundColor: "#333842"  }}> 
           <div className="overflow-y-auto rounded-lg " style={{ backgroundColor: "#333842" }} >
-            {occupancyRecordIds.map((record) => (
-              <EventCard occupancyRecordId={record} />
-            ))}
+            {loading ? (
+              <div className="flex justify-center items-center h-64">
+                <p className="loader"></p>
+              </div>
+            ) : (
+              occupancyRecordIds.map((record) => (
+                <EventCard occupancyRecordId={record} />
+              ))
+            )}
           </div>
         </div>
       </div>

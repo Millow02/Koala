@@ -10,7 +10,7 @@ export default function AdminMemberships() {
       <div className="overflow-x-auto rounded-lg">
         <table className="w-full">
           <thead>
-            <tr className="bg-neutral-800">
+            <tr className="" style={{ backgroundColor: "#333842" }}>
               <th className="text-left p-2">Name</th>
               <th className="text-left p-2">Email</th>
               <th className="text-left p-2">Role</th>

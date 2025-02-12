@@ -170,7 +170,7 @@ export default function Vehicles() {
         </div>
         <div className="overflow-x-auto shadow-md rounded-lg">
           <table className="w-full">
-            <thead className="bg-neutral-800 text-white">
+            <thead className=" text-white" style={{ backgroundColor: "#333842" }}>
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold">
                   Vehicle Name
@@ -191,7 +191,7 @@ export default function Vehicles() {
                 <tr
                   key={vehicle.id}
                   className={`
-                  ${index % 2 === 0 ? "bg-neutral-700" : "bg-neutral-800"}
+                  ${index % 2 === 0 ? "bg-slate-600" : "bg-neutral-800"}
                   text-white hover:bg-neutral-600 transition-colors duration-200
                 `}
                 >

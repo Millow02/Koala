@@ -137,7 +137,7 @@ const Sidebar = () => {
             <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-3 flex items-center pt-4 pb-1">
             <UserIcon className="h-7 w-7 text-neutral-500 mr-2 border rounded-full border-neutral-500" />
               <div>
-                <h2 className="text-base font-semibold text-neutral-500 ">
+                <h2 className="text-base font-semibold text-neutral-300 ">
                   {userName}
                 </h2>
                 <h2 className="text-sm font-semibold text-neutral-500 ">
@@ -336,7 +336,7 @@ const Sidebar = () => {
             <div className="w-full bg-transparent pl-4 py-2 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600">
               
               <button
-                className=" text-base text-left px-1 py-2 pr-14 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500"
+                className=" text-base text-left px-1 py-2 pr-20 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500 mr-2"
                 onClick={signOut}
               >
                 <ArrowLeftOnRectangleIcon className="h-6 w-6 inline-block mr-2" />
