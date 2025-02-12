@@ -58,6 +58,7 @@ export default function OrganizationDetailPage() {
             organization_id: organizationId,
             expires_at: expiresAt.toISOString(),
             is_expired: false,
+            is_used: false,
           },
         ]);
 

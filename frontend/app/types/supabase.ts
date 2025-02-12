@@ -128,6 +128,7 @@ export type Database = {
       code: string;
       expires_at: string;
       is_expired: boolean;
+      is_used: boolean;
       created_at?: string;
     };
     Insert: {
@@ -136,6 +137,7 @@ export type Database = {
       code: string;
       expires_at: string;
       is_expired: boolean;
+      is_used: boolean;
       created_at?: string;
     };
     Update: {
@@ -143,7 +145,8 @@ export type Database = {
       organization_id: string;
       code: string;
       expires_at: string;
-      is_expired: boolean;
+      is_expired: boolean;     
+      is_used: boolean;
       created_at?: string;
     };
   };
