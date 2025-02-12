@@ -3,6 +3,13 @@ import EventCard from "~/components/EventCard";
 import { SupabaseClient, User } from "@supabase/supabase-js";
 import { useOutletContext } from "@remix-run/react";
 
+const mockOccupancyRecordIds = [
+  { id: "1" },
+  { id: "2" },
+  { id: "3" },
+  // Add more mock records as needed
+];
+
 
 type ContextType = {
   user: User;
@@ -15,7 +22,7 @@ export default function Records() {
   const [organizationId, setOrganizationId] = useState<number | null>(null);
   const [parkingLotIds, setParkingLotIds] = useState<string[]>([]);
   const [cameraIds, setCameraIds] = useState<string[]>([]);
-  const [occupancyRecords, setOccupancyRecords] = useState<any[]>([]);
+  const [occupancyRecordIds, setOccupancyRecordIds] = useState<any[]>([]);
 
 
   useEffect(() => {
@@ -83,7 +90,7 @@ export default function Records() {
         }
 
         const occupancyRecordIds = occupancyData?.map((record: { id: string }) => record.id) || [];
-        setOccupancyRecords(occupancyRecordIds);
+        setOccupancyRecordIds(occupancyRecordIds);
         console.log("Fetched occupancy record IDs:", occupancyRecordIds);
 
 
@@ -113,8 +120,8 @@ export default function Records() {
       <div className="flex justify-center">
         <div className="overflow-x-auto rounded-lg m-6 border-neutral-600 " style={{ height: "900px", width: "1100px", borderWidth: "2px", backgroundColor: "#333842"  }}> 
           <div className="overflow-y-auto rounded-lg " style={{ backgroundColor: "#333842" }} >
-            {occupancyRecords.map((record) => (
-              <EventCard occupancyRecordId={record.id} />
+            {occupancyRecordIds.map((record) => (
+              <EventCard occupancyRecordId={record} />
             ))}
           </div>
         </div>
