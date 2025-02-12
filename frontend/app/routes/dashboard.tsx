@@ -70,7 +70,7 @@ export default function Dashboard() {
   return (
     <div className="flex items-start">
       {shouldShowSidebar && <Sidebar />}
-      <main className="w-full">
+      <main className="w-full min-h-screen" style={{ backgroundColor: "#21252b" }}>
         <div className="p-6">
           <Outlet context={{ user, supabase }} />
         </div>
