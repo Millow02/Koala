@@ -81,7 +81,7 @@ export default function Lots() {
                 <Link
                   to={`/dashboard/organization/${organizationId}`}
                   key={organizationId}
-                  className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
+                  className="text-base bg-transparent border-neutral-600 border rounded-lg p-2 active:bg-pink-600"
                 >
                   View Organization
                 </Link>
@@ -96,7 +96,7 @@ export default function Lots() {
                   Create Organization
                 </Link>
                 <Link
-                  to={`/dashboard/join-organization/`}
+                  to={`/dashboard/join-organization`}
                   className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
                 >
                   Join Organization
