@@ -14,7 +14,10 @@ Koala is a web-based application that is built with Remix + React
 Scott McDonald
 Angelo Reolegio
 Rihazul Islam
-Lord of the Seven, Son of Mithrigandar, Destroyer of Legions, Mohammed Zahed
+Mohammed Zahed
+Niraj Patel 
+Minh Tran
+
 ...
 
 
