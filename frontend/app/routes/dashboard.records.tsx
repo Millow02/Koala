@@ -77,7 +77,8 @@ export default function Records() {
       const { data: occupancyData, error: occupancyError } = await supabase
         .from("OccupancyRecord")
         .select("id")
-        .in("cameraId", cameraIds);
+        .in("cameraId", cameraIds)
+        .eq("status", "Processed");
       if (occupancyError) {
         console.error("Error fetching occupancy records:", occupancyError);
         return [];
@@ -124,7 +125,9 @@ export default function Records() {
       
 
 
-    }, 3000);
+    }, 5000);
+
+
     return () => clearInterval(interval);
   }, [supabase, user]);
 

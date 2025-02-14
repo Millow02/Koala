@@ -70,7 +70,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
           return;
         }
         setCameraDetails(cameraData);
-        //console.log("Fetched camera details:", cameraData);
+        console.log("Fetched camera details:", cameraData);
 
 
 
@@ -78,7 +78,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
         const { data: parkingLotData, error: parkingLotError } = await supabase
           .from("ParkingLot")
           .select("name, capacity, current_occupancy")
-          .eq("id", cameraDetails.parkingLotId)
+          .eq("id", cameraData.parkingLotId)
           .single();
 
         if (parkingLotError) {
@@ -122,7 +122,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
 
 
       } catch (err) {
-        console.error("Unexpected error:", err);
+        console.error("OccupancyID:", occupancyRecordId," Unexpected error:", err);
       }
     };
 
