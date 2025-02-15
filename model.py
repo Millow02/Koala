@@ -1,7 +1,11 @@
 from ultralytics import YOLO
 
 # Load YOLOv11 model
-model = YOLO('yolo11n.pt')
+model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train/weights/best.pt')
 
-# Train the model with custom dataset
-results = model.train(data='config.yaml', epochs=1)
+model.export(format="ncnn")
+
+#Save model ncnn format
+model.save("C:/Users/niraj/Desktop/Koala/localisation_pi_model.ncnn")
+
+

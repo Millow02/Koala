@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/car5.jpg'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/0b1b0525-car_363.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -22,7 +22,7 @@ if image is None:
     exit()
 
 # Load a model
-model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train13/weights/best.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train/weights/best.pt')  # load a custom model
 
 threshold = 0.5
 
@@ -42,18 +42,20 @@ for result in results.boxes.data.tolist():
         # Crop the license plate
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
 
-        # Resize (zoom) and grayscale the cropped license 
-        zoom_factor = 2  # Adjust the zoom factor as needed
-        cropped_plate_zoomed = cv2.resize(cropped_plate, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_LINEAR,)
-        cropped_plate_zoomed = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
+        #Resize (zoom) and grayscale the cropped license 
+        #zoom_factor = 2  # Adjust the zoom factor as needed
+        cropped_plate_zoomed = cv2.resize(cropped_plate,(640,480))
 
-        #Binarization and gaussian blur
-        cropped_plate_zoomed = cv2.GaussianBlur(cropped_plate_zoomed, (3, 3), 0)
-        cropped_plate_zoomed = cv2.threshold(cropped_plate_zoomed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+        #Add binarization to zoomed plate
+        processed_plate = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
+        _, processed_plate = cv2.threshold(processed_plate, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    
+        #Add gaussian blur
+        processed_plate = cv2.GaussianBlur(processed_plate, (3, 3), 0)
 
         # Save the cropped and zoomed license plate
-        cropped_plate_path = '{}_cropped_withgaussianblur.jpg'.format(os.path.splitext(output_image_path)[0])
-        cv2.imwrite(cropped_plate_path, cropped_plate_zoomed)
+        cropped_plate_path = '{}_processed.jpg'.format(os.path.splitext(output_image_path)[0])
+        cv2.imwrite(cropped_plate_path,processed_plate)
         print(f"Cropped and zoomed license plate saved to: {cropped_plate_path}")
 
 # Save the output image with bounding boxes
