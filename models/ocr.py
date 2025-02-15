@@ -1,4 +1,6 @@
 import numpy as np
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 
@@ -71,4 +73,4 @@ class_labels = [
 ]
 predicted_label = class_labels[predicted_class[0]]
 
-print(f"The predicted class is: {predicted_label}")
+print(f"{predicted_label}")
