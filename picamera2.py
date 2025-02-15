@@ -11,7 +11,7 @@ picam2.preview_configuration.align()
 picam2.configure("preview")
 picam2.start()
 
-# Load the YOLO11 model
+# Load the YOLO11 model, change path if necessary
 model = YOLO("localisation_pi_model.ncnn")
 
 # Create a directory to save license plates
