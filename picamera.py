@@ -15,7 +15,7 @@ picam2.start()
 model = YOLO("localisation_pi_model.ncnn")
 
 # Create a directory to save license plates
-output_dir = "license_plates"
+output_dir = "license_plates_unprocessed"
 os.makedirs(output_dir, exist_ok=True)
 
 plate_count = 0
