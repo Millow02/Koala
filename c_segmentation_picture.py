@@ -3,7 +3,11 @@ import cv2
 import os
 
 # Use the absolute path to the image file
+<<<<<<< HEAD
 image_path = 'C:/Users/niraj/Desktop/Koala/img/0b1b0525-car_363.jpg'
+=======
+image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/c44d319c-car_504.jpg'
+>>>>>>> b5c5538a53119ee8a1c8bb6d0e80d2103a5f0a13
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -22,7 +26,11 @@ if image is None:
     exit()
 
 # Load a model
+<<<<<<< HEAD
 model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train/weights/best.pt')  # load a custom model
+=======
+model = YOLO('C:/Users/niraj/OneDrive/Desktop/Koala/runs/detect/train13/weights/best.pt')  # load a custom model
+>>>>>>> b5c5538a53119ee8a1c8bb6d0e80d2103a5f0a13
 
 threshold = 0.5
 
@@ -42,9 +50,16 @@ for result in results.boxes.data.tolist():
         # Crop the license plate
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
 
+<<<<<<< HEAD
         #Resize (zoom) and grayscale the cropped license 
         #zoom_factor = 2  # Adjust the zoom factor as needed
         cropped_plate_zoomed = cv2.resize(cropped_plate,(640,480))
+=======
+        # Resize (zoom) and grayscale the cropped license 
+        zoom_factor = 5  # Adjust the zoom factor as needed
+        cropped_plate_zoomed = cv2.resize(cropped_plate, None, fx=zoom_factor, fy=zoom_factor, interpolation=cv2.INTER_LINEAR,)
+        cropped_plate_zoomed = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
+>>>>>>> b5c5538a53119ee8a1c8bb6d0e80d2103a5f0a13
 
         #Add binarization to zoomed plate
         processed_plate = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
