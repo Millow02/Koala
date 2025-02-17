@@ -12,7 +12,7 @@ picam2.configure("preview")
 picam2.start()
 
 # Load the YOLO11 model, change path if necessary
-model = YOLO("localisation_pi_model.ncnn")
+model = YOLO("C:/Users/niraj/OneDrive/Desktop/Koala/localisation_pi_model.ncnn")
 
 # Create a directory to save license plates
 output_dir = "license_plates_unprocessed"
