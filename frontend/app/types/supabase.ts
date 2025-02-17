@@ -149,6 +149,30 @@ export type Database = {
       is_used: boolean;
       created_at?: string;
     };
+
+    Membership: {
+      Row: {
+        id: string; 
+        parkingLotId: string;
+        clientId: string;
+        status: string;
+        created_at?: string;
+      };
+      Insert: {
+        id: string; 
+        parkingLotId: string;
+        clientId: string;
+        status: string;
+        created_at?: string;
+      };
+      Update: {
+        id: string; 
+        parkingLotId: string;
+        clientId: string;
+        status: string;
+        created_at?: string;
+      };
+    };
   };
   
 };
