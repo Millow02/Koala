@@ -41,7 +41,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
         }
 
         const CreatedAt = new Date(recordData.created_at);
-        const optionsDate = { weekday: 'long' as const, year: 'numeric' as const, month: 'short' as const, day: 'numeric' as const };
+        const optionsDate = { weekday: 'short' as const, year: 'numeric' as const, month: 'short' as const, day: 'numeric' as const };
         const optionsTime = { hour: '2-digit' as const, minute: '2-digit' as const, second: '2-digit' as const, hour12: true };
         const formattedDate = CreatedAt.toLocaleDateString('en-US', optionsDate);
         const formattedTime = CreatedAt.toLocaleTimeString('en-US', optionsTime);
@@ -142,7 +142,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
         <h1 className="text-m font-semibold">
           {recordAttributes.time}
         </h1>
-        <p className="text-gray-400 font-semibold mt-8">4 min ago</p>
+        <p className="text-gray-400 font-semibold mt-8">X min ago</p>
       </div>
       <div className="text-m text-gray-200 py-3 pl-6" style={{ flex: "8" }}>
         <p>{cameraDetails.position}: {parkingLotDetails.name}</p>

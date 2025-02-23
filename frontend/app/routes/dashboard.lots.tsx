@@ -67,7 +67,10 @@ export default function Lots() {
     <div className="relative">
       <div className="w-full px-12 py-4">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold ">Parking Lots</h1>
+          <div className="flex flex-col">
+            <h1 className="text-3xl font-bold ">Parking Lots</h1>
+            <h1 className="text-3xl font-bold ">Organization: Concordia University</h1>
+          </div>
           <div className="flex space-x-8">
             {organizationId ? (
               <div className="flex gap-x-4">
