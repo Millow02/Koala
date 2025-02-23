@@ -157,7 +157,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isLotsActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -171,7 +171,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isMembershipsActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -185,7 +185,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isRecordsActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -199,7 +199,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isAnalyticsActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -213,7 +213,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isNotificationsActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -259,7 +259,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isFacilitiesActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -273,7 +273,7 @@ const Sidebar = () => {
                     block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                     ${
                       isMapActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }
                   `}
@@ -294,7 +294,7 @@ const Sidebar = () => {
                 block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                 ${
                   isPreferencesActive
-                    ? "text-white"
+                    ? "text-white border-l-4 border-pink-500 hover:rounded"
                     : "text-neutral-400 hover:text-white"
                 }
               `}
@@ -310,8 +310,8 @@ const Sidebar = () => {
                       block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
                       isVehiclesActive
-                        ? "text-white"
-                        : "text-neutral-400 hover:text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
+                        : "text-neutral-400 hover:text-white" 
                     }`}
                   >
                     <TruckIcon className="h-6 w-6 inline-block mr-2" />
@@ -323,7 +323,7 @@ const Sidebar = () => {
                       block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
                       isVehiclesActive
-                        ? "text-white"
+                        ? "text-white border-l-4 border-pink-500 hover:rounded"
                         : "text-neutral-400 hover:text-white"
                     }`}
                   >

@@ -197,31 +197,40 @@ export default function Preferences() {
             </div>
           </div>
 
-        {isModified && (
-              <div className="flex space-x-4">
-                <button
-                  onClick={handleUndo}
-                  className="text-base bg-slate-500 py-2 rounded-lg p-2 hover:text-gray-600 active:bg-gray-700 active:text-white hover:scale-105 transition-transform duration-300 px-4  mr-2 font-bold"
-                >
-                  Undo
-                </button>
-                <button
-                  className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105 transition-transform duration-300 px-4 font-bold"
-                  onClick={() => {handleSave();
-                    setPopupVisible(false);}}
-                >
-                  Save
-                </button>
-                
-              </div>
-            )}
+          <div className="flex space-x-4">
+            <button
+              onClick={handleUndo}
+              className={`text-base py-2 rounded-lg p-2 transition-transform duration-300 px-4 mr-2 font-bold ${
+                isModified
+                  ? "bg-slate-500 hover:text-gray-600 active:bg-gray-700 active:text-white hover:scale-105"
+                  : "bg-gray-400 cursor-not-allowed"
+              }`}
+              disabled={!isModified}
+            >
+              Undo
+            </button>
+            <button
+              className={`text-base rounded-lg p-2 transition-transform duration-300 px-4 font-bold ${
+                isModified
+                  ? "bg-pink-500 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105"
+                  : "bg-pink-300 cursor-not-allowed"
+              }`}
+              onClick={() => {
+                handleSave();
+                setPopupVisible(false);
+              }}
+              disabled={!isModified}
+            >
+              Save
+            </button>
+          </div>
       </div>
     </div>
     {popupVisible && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-neutral-600 p-8 rounded-lg shadow-lg">
-            <p className="text-white">Profile updated successfully!</p>
-            <div className="flex justify-end mt-4">
+          <div className="p-8 rounded-lg shadow-lg border-neutral-600 border-2" style={{ backgroundColor: "#333842" }}>
+            <p className="text-white font-semibold text-lg">Profile updated successfully!</p>
+            <div className="flex justify-end mt-8">
               <button
                 className="bg-pink-500 text-white px-4 py-2 rounded-lg"
                 onClick={() => setPopupVisible(false)}
