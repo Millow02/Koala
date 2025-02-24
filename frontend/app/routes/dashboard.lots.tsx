@@ -9,6 +9,7 @@ import { LoaderFunctionArgs } from "@remix-run/server-runtime";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { useEffect, useState } from "react";
 import { Database } from "~/types/supabase";
+import { MapPinIcon } from "@heroicons/react/24/outline";
 
 type ContextType = {
   user: User;
@@ -66,10 +67,12 @@ export default function Lots() {
   return (
     <div className="relative">
       <div className="w-full px-12 py-4">
+      <h1 className="text-3xl font-bold ">Parking Lots</h1>
+      <hr className="border-pink-500 border-1 my-6" />
         <div className="flex justify-between items-center mb-8">
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold ">Parking Lots</h1>
-            <h1 className="text-3xl font-bold ">Organization: Concordia University</h1>
+            
+            <h1 className="text-3xl font-semibold ">Organization: Concordia University</h1>
           </div>
           <div className="flex space-x-8">
             {organizationId ? (
@@ -116,23 +119,28 @@ export default function Lots() {
               <Link
                 key={parkingLot.id}
                 to={`/dashboard/lots/${parkingLot.id}`}
-                className="w-2/5 min-w-64 mt-8 mr-6 rounded-lg border border-neutral-700 hover:border hover:border-white hover:scale-105 transition duration-200 cursor-pointer"
+                className="w-4/6 min-w-64 mt-8 mr-6 rounded-xl border border-neutral-500 hover:border hover:border-white hover:scale-105 transition duration-200 cursor-pointer"
               >
-                <div className="bg-neutral-700 h-64 shadow-md rounded-lg pl-4 pt-4 pr-12 pb-4  hover:border-white">
-                  <div className="flex flex-col flex-wrap h-full w-1/2">
-                    <div className="">
-                      <h2 className="text-3xl font-bold mb-auto">
-                        {parkingLot.name}
-                      </h2>
-                      <p className="mb-2">{parkingLot.address}</p>
-                      <p>{parkingLot.description}</p>
+                <div className="h-64 shadow-md rounded-xl  hover:border-white" style={{ backgroundColor: "#333842" }}>
+                  <div className="flex flex-col flex-wrap h-full">
+                    <h2 className="text-3xl font-semibold bg-sky-900 px-2 py-4 rounded-t-xl border-b-2 border-neutral-500">
+                      {parkingLot.name}
+                    </h2>
+
+                    <div className="p-4">
+                      <div className="flex">
+                        <MapPinIcon className="h-6 w-6 inline-block" />
+                        <p className="mb-2">{parkingLot.address}</p>
+                      </div>
+                        <p>{parkingLot.description}</p>
+                      <div className="mt-auto">
+                        <p className="text-lg mb-0 pb-0">Capacity</p>
+                        <p className="">
+                          {parkingLot.current_occupancy}/{parkingLot.capacity}
+                        </p>
+                      </div>
                     </div>
-                    <div className="mt-auto">
-                      <p className="text-lg mb-0 pb-0">Capacity</p>
-                      <p className="">
-                        {parkingLot.current_occupancy}/{parkingLot.capacity}
-                      </p>
-                    </div>
+
                   </div>
                 </div>
               </Link>

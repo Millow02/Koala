@@ -145,18 +145,9 @@ export default function Records() {
         <h1 className="text-3xl font-bold">Event Record</h1>
         <hr className="border-pink-500 border-1 my-6" />
       </div>
-      <div className="flex justify-center" style={{width: "1500px"}}>
+      <div className="flex justify-center" style={{width: "1400px"}}>
         <div className="overflow-x-auto rounded-lg m-6 border-neutral-600" style={{ height: "900px", width: "1100px", borderWidth: "2px", backgroundColor: "#333842" }}>
           <div className="overflow-y-auto rounded-lg" style={{ backgroundColor: "#333842" }}>
-            {loading ? (
-              <div className="flex justify-center items-center h-64">
-                <div className="loader"></div>
-              </div>
-            ) : (
-              occupancyRecordIds.map((record) => (
-                <EventCard key={record} occupancyRecordId={record} />
-              ))
-            )}
             {loading ? (
               <div className="flex justify-center items-center h-64">
                 <div className="loader"></div>
@@ -169,7 +160,7 @@ export default function Records() {
           </div>
         </div>
 
-        <div className="rounded-lg border-2 border-neutral-600 mt-6 p-4" style={{height: "600px", width: "350px", backgroundColor: "#333842" }}>
+        <div className="rounded-lg border-2 border-neutral-600 mt-6 p-4" style={{height: "600px", width: "250px", backgroundColor: "#333842" }}>
           <div className="flex mb-6">
             <AdjustmentsVerticalIcon className="h-8 w-8 inline-block" />
             <div className="text-2xl font-semibold">
