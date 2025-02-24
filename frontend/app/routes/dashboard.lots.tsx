@@ -123,23 +123,47 @@ export default function Lots() {
               >
                 <div className="h-64 shadow-md rounded-xl  hover:border-white" style={{ backgroundColor: "#333842" }}>
                   <div className="flex flex-col flex-wrap h-full">
-                    <h2 className="text-3xl font-semibold bg-sky-900 px-2 py-4 rounded-t-xl border-b-2 border-neutral-500">
-                      {parkingLot.name}
-                    </h2>
-
-                    <div className="p-4">
-                      <div className="flex">
-                        <MapPinIcon className="h-6 w-6 inline-block" />
-                        <p className="mb-2">{parkingLot.address}</p>
-                      </div>
-                        <p>{parkingLot.description}</p>
-                      <div className="mt-auto">
-                        <p className="text-lg mb-0 pb-0">Capacity</p>
-                        <p className="">
-                          {parkingLot.current_occupancy}/{parkingLot.capacity}
-                        </p>
-                      </div>
+                    <div className="flex bg-sky-900 px-2 py-4 rounded-t-xl border-b-2 border-neutral-500">
+                      <h2 className="text-3xl font-semibold ">
+                        {parkingLot.name}
+                      </h2>
                     </div>
+
+                    <div className="flex">
+                      <div className="min-w-48 min-h-36 w-48 h-36 border-2 m-4 rounded-md border-neutral-500 bg-slate-400">
+                        insert image here
+                      </div>
+
+                      <div className="p-4">
+                        <div className="flex">
+                          <MapPinIcon className="h-6 w-6 inline-block" />
+                          <p className="mb-2">{parkingLot.address}</p>
+                        </div>
+                          <p className="mb-5">{parkingLot.description}</p>
+                        <div className="flex items-center">
+                          <p className="text-med font-semibold mr-6 w-36">Cameras Total: </p>
+                          <p className="">
+                            5
+                          </p>
+                        </div>
+                        <div className="flex items-center">
+                          <p className="text-med font-semibold mr-6 w-36">Membership Total: </p>
+                          <p className="">
+                            5
+                          </p>
+                        </div>
+                        <div className="flex items-center">
+                          <p className="text-med font-semibold mr-6 w-36">Capacity: </p>
+                          <p className="">
+                            {parkingLot.current_occupancy}/{parkingLot.capacity}
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                    
+
+                    
 
                   </div>
                 </div>
