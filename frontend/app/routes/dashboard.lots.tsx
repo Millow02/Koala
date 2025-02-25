@@ -72,7 +72,7 @@ export default function Lots() {
         <div className="flex justify-between items-center mb-8">
           <div className="flex flex-col">
             
-            <h1 className="text-3xl font-semibold ">Organization: Concordia University</h1>
+            <h1 className="text-3xl font-semibold ">Organization: Insert Org Name</h1>
           </div>
           <div className="flex space-x-8">
             {organizationId ? (
