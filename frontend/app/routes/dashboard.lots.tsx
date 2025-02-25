@@ -24,6 +24,7 @@ export default function Lots() {
 
   const [parkingLots, setParkingLots] = useState<ParkingLot[]>([]);
   const [organizationId, setOrganizationId] = useState<number | null>(null);
+  const [organizationName, setOrganizationName] = useState<string | null>(null);
 
   useEffect(() => {
     const loadLots = async () => {
@@ -46,15 +47,30 @@ export default function Lots() {
         const organizationId = profileData?.organizationId;
         setOrganizationId(organizationId);
 
-        const { data, error } = await supabase
-          .from("ParkingLot")
-          .select("*")
-          .eq("organizationId", organizationId);
+        if (organizationId) {
+          const { data: organizationData, error: organizationError } = await supabase
+            .from("Organization")
+            .select("name")
+            .eq("id", organizationId)
+            .single();
 
-        if (error) {
-          console.error("Error fetching lots:", error);
-        } else {
-          setParkingLots(data || []);
+          if (organizationError) {
+            console.error("Error fetching organization:", organizationError);
+            return;
+          }
+
+          setOrganizationName(organizationData?.name || "Unknown Organization");
+
+          const { data: parkingLotData, error: parkingLotError } = await supabase
+            .from("ParkingLot")
+            .select("*")
+            .eq("organizationId", organizationId);
+
+          if (parkingLotError) {
+            console.error("Error fetching lots:", parkingLotError);
+          } else {
+            setParkingLots(parkingLotData || []);
+          }
         }
       } catch (err) {
         console.error("Unexpected error:", err);
@@ -72,7 +88,7 @@ export default function Lots() {
         <div className="flex justify-between items-center mb-8">
           <div className="flex flex-col">
             
-            <h1 className="text-3xl font-semibold ">Organization: Insert Org Name</h1>
+            <h1 className="text-3xl font-semibold ">Organization: {organizationName}</h1>
           </div>
           <div className="flex space-x-8">
             {organizationId ? (
@@ -131,7 +147,17 @@ export default function Lots() {
 
                     <div className="flex">
                       <div className="min-w-48 min-h-36 w-48 h-36 border-2 m-4 rounded-md border-neutral-500 bg-slate-400">
-                        insert image here
+                        {parkingLot.picture ? (
+                            <img
+                              src={parkingLot.picture}
+                              alt={parkingLot.name}
+                              className="w-full h-full object-cover rounded-md"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-300 rounded-md flex items-center justify-center">
+                              No Image
+                            </div>
+                          )}
                       </div>
 
                       <div className="p-4">

@@ -94,6 +94,7 @@ export type Database = {
           capacity: string;
           current_occupancy: string;
           created_at: string; 
+          picture: string;
         };
         Insert: {
           id: string; 
@@ -104,6 +105,7 @@ export type Database = {
           capacity: string;
           current_occupancy: string;
           created_at: string; 
+          picture: string;
         };
         Update: {
           id: string; 
@@ -114,6 +116,7 @@ export type Database = {
           capacity: string;
           current_occupancy: string;
           created_at: string; 
+          picture: string;
         };
       };
     };
