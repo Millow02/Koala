@@ -79,7 +79,7 @@ export default function Records() {
         .from("OccupancyRecord")
         .select("id")
         .in("cameraId", cameraIds)
-        .eq("status", "Processed");
+        .in("status", ["Processed", "Attention-Required"]);
       if (occupancyError) {
         console.error("Error fetching occupancy records:", occupancyError);
         return [];
