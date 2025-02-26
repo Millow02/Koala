@@ -95,14 +95,14 @@ export default function Lots() {
               <div className="flex gap-x-4">
                 <Link
                   to={`/dashboard/new-lot/${organizationId}`}
-                  key={organizationId}
+                  key={`new-lot-${organizationId}`}
                   className="text-base bg-pink-500 rounded-lg p-2 hover:scale-105 transition-transform duration-300 active:bg-pink-600"
                 >
                   New Parking Lot
                 </Link>
                 <Link
                   to={`/dashboard/organization/${organizationId}`}
-                  key={organizationId}
+                  key={`view-org-${organizationId}`}
                   className="text-base bg-transparent border-neutral-600 border rounded-lg p-2 active:bg-pink-600"
                 >
                   View Organization
@@ -133,9 +133,10 @@ export default function Lots() {
           <div className="flex flex-wrap gap-x-2 justify-center">
             {parkingLots.map((parkingLot) => (
               <Link
-                key={parkingLot.id}
-                to={`/dashboard/lots/${parkingLot.id}`}
+                key={`parking-lot-${parkingLot.id}`}
+                to={`/dashboard/lot/${parkingLot.id}`}
                 className="w-4/6 min-w-64 mt-8 mr-6 rounded-xl border border-neutral-500 hover:border hover:border-white hover:scale-105 transition duration-200 cursor-pointer"
+                onClick={() => console.log(`Navigating to parking lot ${parkingLot.id}`)}
               >
                 <div className="h-64 shadow-md rounded-xl  hover:border-white" style={{ backgroundColor: "#333842" }}>
                   <div className="flex flex-col flex-wrap h-full">
@@ -169,13 +170,13 @@ export default function Lots() {
                         <div className="flex items-center">
                           <p className="text-med font-semibold mr-6 w-36">Cameras Total: </p>
                           <p className="">
-                            5
+                            insert total
                           </p>
                         </div>
                         <div className="flex items-center">
                           <p className="text-med font-semibold mr-6 w-36">Membership Total: </p>
                           <p className="">
-                            5
+                            insert total
                           </p>
                         </div>
                         <div className="flex items-center">

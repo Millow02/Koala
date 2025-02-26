@@ -17,9 +17,7 @@ export default function ParkingLotDetails() {
   const { parkingLotId } = useParams();
   const [parkingLot, setParkingLot] = useState<ParkingLot | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { supabase } = useOutletContext<{
-      supabase: SupabaseClient;
-    }>();
+  const { supabase } = useOutletContext<ContextType>();
 
   useEffect(() => {
     const fetchParkingLot = async () => {
@@ -36,13 +34,15 @@ export default function ParkingLotDetails() {
 
       if (error) {
         setError("Parking lot not found");
+        console.error("Error fetching parking lot:", error);
       } else {
         setParkingLot(data);
+        console.log(data);
       }
     };
 
     fetchParkingLot();
-  }, [parkingLotId]);
+  }, [parkingLotId, supabase]);
 
   if (error) {
     return <div>{error}</div>;
