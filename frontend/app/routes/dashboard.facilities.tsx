@@ -188,7 +188,7 @@ export default function Facilities() {
           ...prev,
           [lot.id]: true,
         }));
-      }, index * 100);
+      }, index * 250);
     });
   };
 
