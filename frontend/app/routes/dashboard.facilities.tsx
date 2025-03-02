@@ -207,7 +207,7 @@ export default function Facilities() {
             }`}
             style={{ backgroundColor: "#333842" }}
           >
-            <div className="max-h-30 max-w-48 ml-4 rounded-md">
+            <div className="max-w-64  ml-4">
               {parkingLot.picture ? (
                 <img
                   src={parkingLot.picture}
@@ -215,11 +215,12 @@ export default function Facilities() {
                   className="w-full h-full object-cover rounded-md"
                 />
               ) : (
-                <div className="h-48 w-48 bg-neutral-600 text-2xl font-bold rounded-md flex items-center justify-center">
-                  No Image
+                <div className="w-64 h-64 bg-neutral-600 text-2xl font-bold rounded-md flex items-center justify-center text-white">
+                  <p>No Image</p>
                 </div>
               )}
             </div>
+
             <div className="w-full flex flex-col ml-4 justify-between gap-3">
               <div className="flex justify-between">
                 <div className="flex flex-col gap-2">
