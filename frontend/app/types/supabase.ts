@@ -86,7 +86,7 @@ export type Database = {
       };
       ParkingLot: {
         Row: {
-          id: string; 
+          id: number; 
           name: string;
           description: string;
           address: string;
@@ -158,6 +158,7 @@ export type Database = {
         id: string; 
         parkingLotId: string;
         clientId: string;
+        vehicle_id: number;
         status: string;
         created_at?: string;
       };
@@ -165,6 +166,7 @@ export type Database = {
         id: string; 
         parkingLotId: string;
         clientId: string;
+        vehicle_id: number;
         status: string;
         created_at?: string;
       };
@@ -172,6 +174,7 @@ export type Database = {
         id: string; 
         parkingLotId: string;
         clientId: string;
+        vehicle_id: number;
         status: string;
         created_at?: string;
       };

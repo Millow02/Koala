@@ -10,16 +10,16 @@ import { Database } from "~/types/supabase";
 import { User } from "@supabase/supabase-js";
 import { UserIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import {
-  Cog6ToothIcon, 
-  TruckIcon, 
-  IdentificationIcon, 
-  BuildingOffice2Icon, 
+  Cog6ToothIcon,
+  TruckIcon,
+  IdentificationIcon,
+  BuildingOffice2Icon,
   CalendarIcon,
   PresentationChartLineIcon,
   BellIcon,
-  MapIcon
+  MapIcon,
+  ArrowLeftEndOnRectangleIcon,
 } from "@heroicons/react/24/outline";
- 
 
 const Sidebar = () => {
   const { supabase } = useOutletContext<{
@@ -60,11 +60,12 @@ const Sidebar = () => {
         setError("Failed to load profile");
       } else {
         setUserRole(profileData?.role || null);
-        setUserName(`${profileData?.first_name} ${profileData?.last_name}` || null);
+        setUserName(
+          `${profileData?.first_name} ${profileData?.last_name}` || null
+        );
         // Print user role to the console
         console.log("User role:", profileData?.role);
       }
-
 
       const { data: organizationData, error: organizationError } =
         await supabase
@@ -93,11 +94,19 @@ const Sidebar = () => {
   const location = useLocation();
 
   const isLotsActive = location.pathname.startsWith("/dashboard/lots");
-  const isMembershipsActive = location.pathname.startsWith("/dashboard/admin-memberships");
+  const isMembershipsActive = location.pathname.startsWith(
+    "/dashboard/admin-memberships"
+  );
   const isRecordsActive = location.pathname.startsWith("/dashboard/records");
-  const isAnalyticsActive = location.pathname.startsWith("/dashboard/analytics");
-  const isNotificationsActive = location.pathname.startsWith("/dashboard/notifications");
-  const isFacilitiesActive = location.pathname.startsWith("/dashboard/facilities");
+  const isAnalyticsActive = location.pathname.startsWith(
+    "/dashboard/analytics"
+  );
+  const isNotificationsActive = location.pathname.startsWith(
+    "/dashboard/notifications"
+  );
+  const isFacilitiesActive = location.pathname.startsWith(
+    "/dashboard/facilities"
+  );
   const isMapActive = location.pathname.startsWith("/dashboard/map");
 
   const isActiveLink = (orgId: string) => {
@@ -127,7 +136,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-1/6 min-w-20 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start" style={{ backgroundColor: "#333842" }}>
+    <div
+      className="w-1/6 min-w-20 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start"
+      style={{ backgroundColor: "#333842" }}
+    >
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -135,7 +147,7 @@ const Sidebar = () => {
           <h1 className="text-lg font-medium ml-6 mt-3 mb-3">Dashboard</h1>
           <div className="space-y-3">
             <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-3 flex items-center pt-4 pb-1">
-            <UserIcon className="h-7 w-7 text-neutral-500 mr-2 border rounded-full border-neutral-500" />
+              <UserIcon className="h-7 w-7 text-neutral-500 mr-2 border rounded-full border-neutral-500" />
               <div>
                 <h2 className="text-base font-semibold text-neutral-300 ">
                   {userName}
@@ -145,8 +157,8 @@ const Sidebar = () => {
                 </h2>
               </div>
             </div>
-            {userRole == 'admin' && (
-                <>
+            {userRole == "admin" && (
+              <>
                 <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-4 pt-3">
                   <h2 className="text-base font-semibold text-neutral-500">
                     Administration
@@ -224,30 +236,7 @@ const Sidebar = () => {
                 </div>
               </>
             )}
-            {/* <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-6 pt-3"> */}
-            {/* <h2 className="text-base font-semibold text-neutral-500 mb-3">
-                My organizations
-              </h2>
-              {organizations.length > 0 ? (
-                organizations.map((org) => (
-                  <Link
-                    to={`/dashboard/organizations/${org.id}`}
-                    key={org.id}
-                    className={`block transition duration-300 mb-2 ${
-                      isActiveLink(org.id)
-                        ? "text-white"
-                        : "text-neutral-400 hover:text-white"
-                    }
-                  `}
-                  >
-                    {org.name}
-                  </Link>
-                ))
-              ) : (
-                <div>No organizations found</div>
-              )}
-            </div> */}
-            {userRole == 'client' && (
+            {userRole == "admin" && (
               <>
                 <div className="border border-neutral-600 border-l-0 border-r-0 border-b-0 pl-4 pt-3">
                   <h2 className="text-base font-semibold text-neutral-500">
@@ -299,20 +288,20 @@ const Sidebar = () => {
                 }
               `}
               >
-                <Cog6ToothIcon className="h-6 w-6 inline-block mr-2" /> 
+                <Cog6ToothIcon className="h-6 w-6 inline-block mr-2" />
                 Preferences
               </Link>
-              {userRole == 'client' && (
+              {userRole == "admin" && (
                 <>
                   <Link
                     to={`/dashboard/vehicles`}
                     className={`
                       block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
-                      isVehiclesActive
-                        ? "text-white border-l-4 border-pink-500 hover:rounded"
-                        : "text-neutral-400 hover:text-white" 
-                    }`}
+                        isVehiclesActive
+                          ? "text-white border-l-4 border-pink-500 hover:rounded"
+                          : "text-neutral-400 hover:text-white"
+                      }`}
                   >
                     <TruckIcon className="h-6 w-6 inline-block mr-2" />
                     Vehicles
@@ -322,10 +311,10 @@ const Sidebar = () => {
                     className={`
                       block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
-                      isVehiclesActive
-                        ? "text-white border-l-4 border-pink-500 hover:rounded"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
+                        isVehiclesActive
+                          ? "text-white border-l-4 border-pink-500 hover:rounded"
+                          : "text-neutral-400 hover:text-white"
+                      }`}
                   >
                     <IdentificationIcon className="h-6 w-6 inline-block mr-2" />
                     Memberships
@@ -333,13 +322,12 @@ const Sidebar = () => {
                 </>
               )}
             </div>
-            <div className="w-full bg-transparent pl-4 py-2 px-0 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600">
-              
+            <div className="bg-transparent pl-4 py-2 pr-5 focus:outline-none border border-l-0 border-r-0 border-b-neutral-600 border-t-neutral-600">
               <button
-                className=" text-base text-left px-1 py-2 pr-24 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500"
+                className="w-full text-base text-left py-2 rounded text-neutral-400 hover:text-white transition duration-300 hover:bg-neutral-500"
                 onClick={signOut}
               >
-                <ArrowLeftOnRectangleIcon className="h-6 w-6 inline-block mr-2" />
+                <ArrowLeftEndOnRectangleIcon className="h-6 w-6 inline-block mr-2" />
                 Log out
               </button>
             </div>
