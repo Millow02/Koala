@@ -95,7 +95,7 @@ const Sidebar = () => {
 
   const isLotsActive = location.pathname.startsWith("/dashboard/lots");
   const isMembershipsActive = location.pathname.startsWith(
-    "/dashboard/admin-memberships"
+    "/dashboard/client-memberships"
   );
   const isRecordsActive = location.pathname.startsWith("/dashboard/records");
   const isAnalyticsActive = location.pathname.startsWith(
@@ -176,20 +176,6 @@ const Sidebar = () => {
                   >
                     <BuildingOffice2Icon className="h-6 w-6 inline-block mr-2" />
                     Parking Lots
-                  </Link>
-                  <Link
-                    to={`/dashboard/admin-memberships`}
-                    className={`
-                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
-                    ${
-                      isMembershipsActive
-                        ? "text-white border-l-4 border-pink-500 hover:rounded"
-                        : "text-neutral-400 hover:text-white"
-                    }
-                  `}
-                  >
-                    <IdentificationIcon className="h-6 w-6 inline-block mr-2" />
-                    Memberships
                   </Link>
                   <Link
                     to={`/dashboard/records`}
@@ -307,11 +293,11 @@ const Sidebar = () => {
                     Vehicles
                   </Link>
                   <Link
-                    to="#"
+                    to="/dashboard/client-memberships"
                     className={`
                       block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
                       ${
-                        isVehiclesActive
+                        isMembershipsActive
                           ? "text-white border-l-4 border-pink-500 hover:rounded"
                           : "text-neutral-400 hover:text-white"
                       }`}
