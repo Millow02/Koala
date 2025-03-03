@@ -1,4 +1,10 @@
-import { useLoaderData, Outlet, useNavigate } from "@remix-run/react";
+import {
+  useLoaderData,
+  Outlet,
+  useNavigate,
+  data,
+  useLocation,
+} from "@remix-run/react";
 import Sidebar from "~/components/Sidebar";
 import {
   createBrowserClient,
@@ -6,11 +12,14 @@ import {
   User,
 } from "@supabase/auth-helpers-remix";
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import type { Profile } from "~/types/profile";
+import { Database } from "~/types/supabase";
 import { useEffect, useState } from "react";
 
 type LoaderData = {
-  profile: Profile;
+  env: {
+    SUPABASE_URL: string;
+    SUPABASE_ANON_KEY: string;
+  };
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -27,25 +36,22 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
   };
 
-  const { data } = await supabaseClient.from("Profile").select();
-
   return {
-    profile: data,
-    headers: response.headers,
     env,
+    headers: response.headers,
   };
 };
 
 export default function Dashboard() {
-  const { profile } = useLoaderData<LoaderData>();
-  const { env } = useLoaderData<typeof loader>();
-  const navigate = useNavigate();
-
+  const location = useLocation();
+  const { env } = useLoaderData<LoaderData>();
+  const [user, setUser] = useState<User | null>(null);
   const [supabase] = useState(() =>
     createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!)
   );
 
-  const [user, setUser] = useState<User | null>(null);
+  const hideSidebarRoutes = ["/dashboard/new-lot"]; // Add any routes where you want to hide sidebar
+  const shouldShowSidebar = !hideSidebarRoutes.includes(location.pathname);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -59,36 +65,14 @@ export default function Dashboard() {
     };
 
     fetchUser();
-  }, []);
-
-  const sections = [
-    {
-      header: "Parking Lots",
-      links: [{ label: "All Parking Lots", path: "/dashboard/lot-a" }],
-    },
-    {
-      header: "Organizations",
-      links: [
-        { label: "Concordia", path: "/dashboard/org-1" },
-        { label: "Mcgill", path: "/dashboard/org-2" },
-      ],
-    },
-    {
-      header: "Account",
-      links: [
-        { label: "Preferences", path: "/dashboard/preferences" },
-        { label: "Vehicles", path: "/dashboard/vehicles" },
-      ],
-    },
-  ];
+  }, [supabase]);
 
   return (
-    <div className="flex h-screen">
-      <Sidebar sections={sections} />
-      {/* Main Content */}
-      <main className="w-full">
+    <div className="flex items-start">
+      {shouldShowSidebar && <Sidebar />}
+      <main className="w-full min-h-screen" style={{ backgroundColor: "#21252b" }}>
         <div className="p-6">
-          <Outlet />
+          <Outlet context={{ user, supabase }} />
         </div>
       </main>
     </div>

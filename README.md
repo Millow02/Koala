@@ -11,9 +11,14 @@ Koala is a web-based application that is built with Remix + React
 
 ## Team members
 
-Scott McDonald
-Angelo Reolegio
-Rihazul Islam
+- [ ] Scott McDonald
+- [ ] Angelo Reolegio
+- [ ] Rihazul Islam
+- [ ] Mohammed Zahed
+- [ ] Niraj Patel
+- [ ] Minh Tran
+- [ ] Barthalomew Quantavius 
+
 ...
 
 
