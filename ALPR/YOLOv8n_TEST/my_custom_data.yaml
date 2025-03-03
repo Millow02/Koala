@@ -1,9 +1,0 @@
-path: /nfs/speed-scratch/z_amm/COEN490/Koala/ALPR/YOLOv8n_TEST/datasets/test_data  # root of dataset
-train: images/train
-val: images/val
-
-names:
-  0: LP
-  1: no_LP
-
-  # Add more classes as needed

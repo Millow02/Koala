@@ -1,4 +1,6 @@
-ultralytics 
+ultralytics
+tensorflow
 opencv-contrib-python
-numpy
+numpy 
 matplotlib
+
