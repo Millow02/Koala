@@ -76,7 +76,7 @@ export default function Records() {
 
       // Fetch occupancy records using camera IDs
       const { data: occupancyData, error: occupancyError } = await supabase
-        .from("OccupancyRecord")
+        .from("OccupancyEvent")
         .select("id")
         .in("cameraId", cameraIds)
         .in("status", ["Processed", "Attention-Required"]);
