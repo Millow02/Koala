@@ -137,7 +137,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="w-1/6 min-w-20 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start"
+      className="w-1/6 min-w-48 backdrop-blur-md border border-neutral-600 border-t-0 border-l-0 text-white top-0 sticky h-screen items-start"
       style={{ backgroundColor: "#333842" }}
     >
       {isLoading ? (
