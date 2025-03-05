@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/Desktop/Koala/img/0b1b0525-car_363_out_processed.jpg'
+image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/H5G2CY2R4RCKTHI4WH4HOYSIBY_out_processed.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -29,7 +29,7 @@ dim = (width, height)
 resized_image = cv2.resize(image, dim, interpolation=cv2.INTER_LINEAR)
 
 # Load a model
-model = YOLO('C:/Users/niraj/Desktop/Koala/best_segment.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/OneDrive/Desktop/Koala/best_segment.pt')  # load a custom model
 
 # Perform prediction
 results = model.predict(resized_image)
