@@ -27,7 +27,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
     try {
       console.log("Fetching record attributes for ID:", occupancyRecordId); 
       const { data: recordData, error: recordError } = await supabase
-        .from("OccupancyRecord")
+        .from("OccupancyEvent")
         .select("created_at, vehicleId, license_plate, cameraId, status")
         .eq("id", occupancyRecordId)
         .single();

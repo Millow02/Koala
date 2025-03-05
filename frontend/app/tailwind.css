@@ -53,3 +53,33 @@ body {
   background-color: #999;
 }
 
+@layer components {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 18px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #333842;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-500;
+    border: 3px solid transparent;
+    border-left: 5px solid transparent; 
+    background-clip: content-box;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  
+  .scrollbar-padding-bottom {
+    padding-bottom: 20px;
+  }
+}
