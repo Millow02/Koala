@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { SupabaseClient, User } from "@supabase/supabase-js";
 import { useOutletContext } from "@remix-run/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { InformationCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 type ContextType = {
   user: User;
@@ -10,9 +10,10 @@ type ContextType = {
 
 interface EventCardProps {
   occupancyRecordId: string;
+  onRecordUpdate?: () => void;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
+const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate }) => {
   
   const { supabase } = useOutletContext<ContextType>();
   const [recordAttributes, setRecordAttributes] = useState<any>(null);
@@ -21,6 +22,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
   const [vehicleDetails, setVehicleDetails] = useState<any>(null);
   const [profileDetails, setProfileDetails] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
   
   // Define fetchRecordAttributes outside the useEffect
   const fetchRecordAttributes = async () => {
@@ -130,6 +132,14 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const openDetailsModal = () => {
+    setShowDetailsModal(true);
+  };
+  
+  const closeDetailsModal = () => {
+    setShowDetailsModal(false);
+  };
   
   const handleResolve = async () => {
     try {
@@ -153,13 +163,36 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
     }
   };
 
+  const handleArchive = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    try {
+      const { error } = await supabase
+        .from("OccupancyEvent")
+        .update({ status: "Archived" })
+        .eq("id", occupancyRecordId);
+        
+      if (error) {
+        console.error("Error archiving record:", error);
+      } else {
+        console.log("Record archived successfully");
+        if (onRecordUpdate) {
+          onRecordUpdate();
+        }
+      }
+    } catch (err) {
+      console.error("Error in archive operation:", err);
+    }
+  };
+
   if (!recordAttributes || !cameraDetails || !parkingLotDetails || !vehicleDetails || !profileDetails) {
     return null;
   }
 
   return (
     <>
-      <div className="bg-slate-600 shadow-lg rounded-lg flex h-40 mx-8 my-6 hover:border-2 hover:border-neutral-500 hover:scale-105 transition-transform duration-300">
+      <div className="bg-slate-600 shadow-lg rounded-lg flex h-40 mx-8 my-6 hover:border-4 hover:border-neutral-500 transition-transform duration-300"
+        onClick={openDetailsModal}>
         <div className={`${recordAttributes.status === "Attention-Required" ? "bg-red-700" : "bg-sky-900"} rounded-l-lg py-4 pl-4 text-white border-slate-600 border-2 border-r-neutral-300`} style={{ flex: "2" }}>
           <h1 className="text-l font-semibold">
             {recordAttributes.date}
@@ -184,7 +217,8 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
           </div>
         </div>
         <div className="" style={{ flex: "2" }}>
-          <InformationCircleIcon className="h-8 w-8 ml-24 mt-8" />
+          <XMarkIcon className="h-6 w-6 ml-24 mt-8 rounded-full text-neutral-400 hover:text-white hover:cursor-pointer"
+          onClick={handleArchive} />
           {recordAttributes.status === "Attention-Required" && (
             <button 
             onClick={handleResolveClick} 
@@ -213,6 +247,96 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId }) => {
                 className="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 ">
                 Confirm
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDetailsModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-slate-700 p-8 rounded-xl shadow-xl w-3/4 max-w-5xl relative">
+            <button 
+              onClick={closeDetailsModal}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+
+            <h2 className="text-2xl font-bold text-white mb-6">Event Details</h2>
+            
+            <div className="flex flex-col md:flex-row gap-8">
+
+              <div className="md:w-2/5 bg-slate-800 rounded-lg overflow-hidden">
+                <div className="h-72 w-full flex items-center justify-center bg-slate-800 rounded-lg">
+                  <img 
+                    src={`/api/images/${recordAttributes.id}`} 
+                    alt="Vehicle capture"
+                    className="max-h-full max-w-full object-contain"
+                    onError={(e) => {
+                      // Replace the img element with a div containing "No image available" text
+                      const parent = e.currentTarget.parentElement;
+                      if (parent) {
+                        // Create a new element with the message
+                        const noImageDiv = document.createElement('div');
+                        noImageDiv.className = "text-gray-400 text-xl";
+                        noImageDiv.innerText = "No image available";
+                        
+                        // Replace the image with this message
+                        parent.replaceChild(noImageDiv, e.currentTarget);
+                      }
+                    }}
+                  />
+                </div>
+                <div className="p-4 bg-slate-800">
+                  <p className="text-gray-400 text-sm">Image captured at {recordAttributes.time}</p>
+                </div>
+              </div>
+              
+              {/* Details section */}
+              <div className="md:w-3/5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-200">
+                  <div>
+                    <p className="text-gray-400 text-sm">Date & Time</p>
+                    <p className="text-xl">{recordAttributes.date} at {recordAttributes.time}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Location</p>
+                    <p className="text-xl">{cameraDetails.position}: {parkingLotDetails.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">License Plate</p>
+                    <p className="text-xl font-semibold">{recordAttributes.license_plate}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Status</p>
+                    <p className={`text-xl font-semibold ${recordAttributes.status === "Attention-Required" ? "text-red-500" : "text-green-500"}`}>
+                      {recordAttributes.status}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Owner</p>
+                    <p className="text-xl">{profileDetails.first_name} {profileDetails.last_name}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Camera</p>
+                    <p className="text-xl">{cameraDetails.name}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-gray-400 text-sm">Occupancy</p>
+                    <p className="text-xl">{parkingLotDetails.current_occupancy} of {parkingLotDetails.capacity} spaces filled</p>
+                  </div>
+                </div>
+                
+                {recordAttributes.status === "Attention-Required" && (
+                  <div className="mt-8 flex justify-end">
+                    <button 
+                      onClick={handleResolveClick}
+                      className="bg-pink-500 text-white py-2 px-6 rounded-lg hover:bg-pink-600">
+                      Mark as Resolved
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -106,6 +106,8 @@ export default function Records() {
     setOccupancyRecordIds(occupancyRecordIds);
 
     setLoading(false);
+
+    await queryEventRecordIds();
   };
 
 
@@ -133,6 +135,7 @@ export default function Records() {
   }, [supabase, user]);
 
 
+  
 
 
 
@@ -154,7 +157,11 @@ export default function Records() {
               </div>
             ) : (
               occupancyRecordIds.map((record) => (
-                <EventCard key={record} occupancyRecordId={record} />
+                <EventCard 
+                  key={record} 
+                  occupancyRecordId={record}
+                  onRecordUpdate={updateEventRecordIds} 
+                />
               ))
             )}
           </div>
