@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image files
-image_path = 'C:/Users/niraj/Desktop/Koala/img/plate1.png'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/quebec-car-license-plate-with-snow-in-winter-season-FAT51P.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -23,7 +23,7 @@ if image is None:
 
 # Load a model
 
-model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train/weights/best.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/Desktop/Koala/best.pt')  # load a custom model
 
 threshold = 0.5
 
@@ -42,7 +42,6 @@ for result in results.boxes.data.tolist():
 
         # Crop the license plate
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
-
 
         #Resize (zoom) and grayscale the cropped licensee
         cropped_plate_zoomed = cv2.resize(cropped_plate,(640,480))

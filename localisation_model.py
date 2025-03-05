@@ -7,5 +7,3 @@ model.export(format="ncnn")
 
 #Save model ncnn format
 model.save("C:/Users/niraj/Desktop/Koala/localisation_pi_model.ncnn")
-
-
