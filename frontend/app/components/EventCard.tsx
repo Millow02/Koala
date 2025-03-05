@@ -30,7 +30,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
       console.log("Fetching record attributes for ID:", occupancyRecordId); 
       const { data: recordData, error: recordError } = await supabase
         .from("OccupancyEvent")
-        .select("created_at, vehicleId, license_plate, cameraId, status")
+        .select("created_at, vehicleId, license_plate, cameraId, status, image")
         .eq("id", occupancyRecordId)
         .single();
 
@@ -262,34 +262,36 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
               <XMarkIcon className="h-6 w-6" />
             </button>
 
-            <h2 className="text-2xl font-bold text-white mb-6">Event Details</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">Event Details</h2>
             
             <div className="flex flex-col md:flex-row gap-8">
 
-              <div className="md:w-2/5 bg-slate-800 rounded-lg overflow-hidden">
-                <div className="h-72 w-full flex items-center justify-center bg-slate-800 rounded-lg">
+              <div className="md:w-2/5 bg-slate-800 rounded-lg overflow-hidden h-72">
+                {recordAttributes.image ? (
                   <img 
-                    src={`/api/images/${recordAttributes.id}`} 
+                    src={recordAttributes.image} 
                     alt="Vehicle capture"
-                    className="max-h-full max-w-full object-contain"
+                    className="h-full w-full object-cover"
                     onError={(e) => {
-                      // Replace the img element with a div containing "No image available" text
                       const parent = e.currentTarget.parentElement;
                       if (parent) {
-                        // Create a new element with the message
                         const noImageDiv = document.createElement('div');
-                        noImageDiv.className = "text-gray-400 text-xl";
-                        noImageDiv.innerText = "No image available";
+                        noImageDiv.className = "h-full w-full flex items-center justify-center";
                         
-                        // Replace the image with this message
+                        const textSpan = document.createElement('span');
+                        textSpan.className = "text-gray-400 text-xl";
+                        textSpan.innerText = "No image available";
+                        
+                        noImageDiv.appendChild(textSpan);
                         parent.replaceChild(noImageDiv, e.currentTarget);
                       }
                     }}
                   />
-                </div>
-                <div className="p-4 bg-slate-800">
-                  <p className="text-gray-400 text-sm">Image captured at {recordAttributes.time}</p>
-                </div>
+                ) : (
+                  <div className="h-full w-full flex items-center justify-center">
+                    <span className="text-gray-400 text-xl">No image available</span>
+                  </div>
+                )}
               </div>
               
               {/* Details section */}
