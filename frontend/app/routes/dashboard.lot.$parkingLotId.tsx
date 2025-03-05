@@ -18,6 +18,8 @@ export default function ParkingLotDetails() {
   const [parkingLot, setParkingLot] = useState<ParkingLot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { supabase } = useOutletContext<ContextType>();
+  const [occupancyRecords, setOccupancyRecords] = useState<Array<any>>([]);
+
 
   useEffect(() => {
     const fetchParkingLot = async () => {
@@ -38,6 +40,19 @@ export default function ParkingLotDetails() {
       } else {
         setParkingLot(data);
         console.log(data);
+
+        const { data: occupancyData, error: occupancyError } = await supabase
+          .from("Occupancy")
+          .select("id, vehicleId, vehicleOwner, LicensePlate, isPermitted")
+          .eq("facilityId", parkingLotId)
+          .eq("Status", "Active");
+
+        if (occupancyError) {
+          console.error("Error fetching occupancy records:", occupancyError);
+        } else {
+          setOccupancyRecords(occupancyData || []);
+          console.log("Occupancy records:", occupancyData);
+        }
       }
     };
 
@@ -73,17 +88,29 @@ export default function ParkingLotDetails() {
             />
           </div>
           <div className="overflow-y-auto rounded-b-3xl custom-scrollbar scrollbar-padding-bottom" style={{ height: "600px" }}>
-            {Array(10).fill(0).map((_, index) => (
-              <div key={index} className="flex h-28 bg-slate-700 m-5 items-center text-xl rounded-lg">
-                <CheckCircleIcon className="h-12 w-12 ml-8 mr-10 text-green-500 flex-shrink-0" />
-                <div className="w-64 font-semibold">NAYNAY</div>
-                <div className="w-48 font-semibold">Bob Mcboberson</div>
-                <div className="flex-grow"></div>
-                <button className="mr-8 py-2 px-8 bg-pink-500 rounded-xl font-semibold hover:bg-pink-600 transition-colors">
-                  View
-                </button>
+            
+            {occupancyRecords.length > 0 ? (
+              occupancyRecords.map((record) => (
+                <div key={record.id} className="flex h-28 bg-slate-700 m-5 items-center text-xl rounded-lg">
+                  {record.isPermitted ? (
+                    <CheckCircleIcon className="h-12 w-12 ml-8 mr-10 text-green-500 flex-shrink-0" />
+                  ) : (
+                    <XCircleIcon className="h-12 w-12 ml-8 mr-10 text-red-500 flex-shrink-0" />
+                  )}
+                  <div className="w-64 font-semibold">{record.LicensePlate || "Unknown"}</div>
+                  <div className="w-48 font-semibold">{record.vehicleOwner || "Unknown"}</div>
+                  <div className="flex-grow"></div>
+                  <button className="mr-8 py-2 px-8 bg-pink-500 rounded-xl font-semibold hover:bg-pink-600 transition-colors">
+                    View
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="flex h-28 justify-center items-center text-xl text-gray-400">
+                No vehicles currently in this parking lot
               </div>
-            ))}
+            )}
+            
             
           </div>
         </div>
