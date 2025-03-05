@@ -176,6 +176,9 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
         console.error("Error archiving record:", error);
       } else {
         console.log("Record archived successfully");
+
+        console.log("onRecordUpdate callback exists:", !!onRecordUpdate);
+        
         if (onRecordUpdate) {
           onRecordUpdate();
         }

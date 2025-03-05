@@ -101,13 +101,15 @@ export default function Records() {
 
 
   const updateEventRecordIds = async () => {
+    console.log("updateEventRecordIds called");
     setLoading(true);
-    const occupancyRecordIds = await queryEventRecordIds();
-    setOccupancyRecordIds(occupancyRecordIds);
+    const newOccupancyRecordIds = await queryEventRecordIds();
+    console.log("Previous records:", occupancyRecordIds);
+    console.log("New records:", newOccupancyRecordIds);
+    setOccupancyRecordIds(newOccupancyRecordIds);
 
     setLoading(false);
 
-    await queryEventRecordIds();
   };
 
 
