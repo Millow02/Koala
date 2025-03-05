@@ -145,7 +145,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
     try {
       // Update the record status to "Processed"
       const { error } = await supabase
-        .from("OccupancyRecord")
+        .from("OccupancyEvent")
         .update({ status: "Processed" })
         .eq("id", occupancyRecordId);
         
@@ -221,36 +221,18 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
           onClick={handleArchive} />
           {recordAttributes.status === "Attention-Required" && (
             <button 
-            onClick={handleResolveClick} 
-            className="bg-pink-500 text-white w-32 py-2 px-1 rounded-lg mt-6 text-sm font-semibold">
+              onClick={(e) => {
+                e.stopPropagation(); // This prevents the click from bubbling up to the card
+                handleResolveClick();
+              }} 
+              className="bg-pink-500 text-white w-32 py-2 px-1 rounded-lg mt-6 text-sm font-semibold">
               Mark as Resolved
             </button>
           )}
         </div>
       </div>
       
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-slate-700 p-6 rounded-xl shadow-xl w-96">
-            <h2 className="text-xl font-bold text-white mb-4">Resolve Record</h2>
-            <p className="text-gray-200 mb-6">
-              Are you sure you want to change the status to "Processed"?
-            </p>
-            <div className="flex justify-end gap-4">
-              <button 
-                onClick={closeModal}
-                className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600">
-                Cancel
-              </button>
-              <button 
-                onClick={handleResolve}
-                className="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 ">
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
 
       {showDetailsModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -339,6 +321,29 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-slate-700 p-6 rounded-xl shadow-xl w-96">
+            <h2 className="text-xl font-bold text-white mb-4">Resolve Record</h2>
+            <p className="text-gray-200 mb-6">
+              Are you sure you want to change the status to "Processed"?
+            </p>
+            <div className="flex justify-end gap-4">
+              <button 
+                onClick={closeModal}
+                className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600">
+                Cancel
+              </button>
+              <button 
+                onClick={handleResolve}
+                className="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 ">
+                Confirm
+              </button>
             </div>
           </div>
         </div>
