@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image files
-image_path = 'C:/Users/niraj/Desktop/Koala/img/quebec-car-license-plate-with-snow-in-winter-season-FAT51P.jpg'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/plate1.png'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -23,7 +23,7 @@ if image is None:
 
 # Load a model
 
-model = YOLO('C:/Users/niraj/Desktop/Koala/best.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/Desktop/Koala/best_localisation.pt')  # load a custom model
 
 threshold = 0.5
 
@@ -53,13 +53,12 @@ for result in results.boxes.data.tolist():
         #Add gaussian blur
         processed_plate = cv2.GaussianBlur(processed_plate, (3, 3), 0)
 
+        # Apply morphological operations to remove noise
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+        processed_plate = cv2.morphologyEx(processed_plate, cv2.MORPH_CLOSE, kernel)
+
+
         # Save the cropped and zoomed license plate
         cropped_plate_path = '{}_processed.jpg'.format(os.path.splitext(output_image_path)[0])
         cv2.imwrite(cropped_plate_path,processed_plate)
         print(f"Cropped and zoomed license plate saved to: {cropped_plate_path}")
-
-# Save the output image with bounding boxes
-cv2.imwrite(output_image_path, image)
-print(f"Output image saved to: {output_image_path}")
-
-cv2.destroyAllWindows()

@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 # Load YOLOv11 model
-model = YOLO('C:/Users/niraj/Desktop/Koala/runs/detect/train/weights/best.pt')
+model = YOLO('C:/Users/niraj/Desktop/Koala/best_localisation.pt')
 
 model.export(format="ncnn")
 

@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/Desktop/Koala/img/0b1b0525-car_363_out_processed.jpg'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/plate2.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -39,7 +39,7 @@ box_count = 0
 for result in results:
     for box in result.boxes:
         x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
-        cv2.rectangle(resized_image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.rectangle(resized_image, (x1, y1), (x2, y2), (0, 255, 0), 5)
         
         # Extract the segmented box
         segmented_box = resized_image[y1:y2, x1:x2]
