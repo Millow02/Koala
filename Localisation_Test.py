@@ -3,7 +3,11 @@ import cv2
 import os
 
 # Use the absolute path to the image files
+<<<<<<< HEAD
 image_path = 'C:/Users/niraj/Desktop/Koala/img/plate1.png'
+=======
+image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/plate2.jpg'
+>>>>>>> 1092e9e2ef451f632acc98269a629c15089272eb
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -23,7 +27,11 @@ if image is None:
 
 # Load a model
 
+<<<<<<< HEAD
 model = YOLO('C:/Users/niraj/Desktop/Koala/best_localisation.pt')  # load a custom model
+=======
+model = YOLO('C:/Users/niraj/OneDrive/Desktop/Koala/best_localisation.pt')  # load a custom model
+>>>>>>> 1092e9e2ef451f632acc98269a629c15089272eb
 
 threshold = 0.5
 
@@ -44,7 +52,7 @@ for result in results.boxes.data.tolist():
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
 
         #Resize (zoom) and grayscale the cropped licensee
-        cropped_plate_zoomed = cv2.resize(cropped_plate,(640,480))
+        cropped_plate_zoomed = cv2.resize(cropped_plate,(640,640))
         cropped_plate_zoomed = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
 
         #Add binarization to zoomed plate
