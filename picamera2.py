@@ -48,6 +48,6 @@ while True:
     # Break the loop if 'q' is pressed
     if cv2.waitKey(1) == ord("q"):
         break
-
+    
 # Release resources and close windows
 cv2.destroyAllWindows()
