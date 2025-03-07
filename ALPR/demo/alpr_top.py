@@ -89,7 +89,7 @@ def process_images(input_dir, localisation_model, segmentation_model, sr_model, 
                                 for f in os.listdir(segmented_dir) 
                                 if f.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp'))])
         # Assume target size based on your OCR model's expected input; adjust if needed.
-        recognized_text = ocr_engine.ocr_from_segments(segment_files, target_size=(28, 28))
+        recognized_text = ocr_engine.ocr_from_segments(segment_files)
         
         input("Press Enter to continue...")
         
@@ -104,10 +104,11 @@ def process_images(input_dir, localisation_model, segmentation_model, sr_model, 
         print(f"Error in processing thread: {str(e)}")
     
 def process_images_sequentially(pics_folder="./pics", input_folder="./input",
-                                localisation_model="./models/localisation_model.pt",
-                                segmentation_model="./models/segmentation_model.pt",
-                                sr_model="./models/LapSRN_x2.pb",
-                                ocr_model="./models/ocr_model.h5"):
+                                localisation_model="/home/z4hed/COEN490/Koala/ALPR/models/localisation_model.pt",
+
+                                segmentation_model="/home/z4hed/COEN490/Koala/ALPR/./models/segmentation_model.pt",
+                                sr_model="/home/z4hed/COEN490/Koala/ALPR/models/LapSRN_x2.pb",
+                                ocr_model="/home/z4hed/COEN490/Koala/ALPR/models/ocr_model.h5"):
     """
     Processes images sequentially by:
       - Copying each image from the pics_folder to the input_folder.
