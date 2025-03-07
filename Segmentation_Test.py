@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/Desktop/Koala/img/plate_out_processed.jpg'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/plate1_out_processed.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -12,7 +12,7 @@ print(f"Absolute image path: {os.path.abspath(image_path)}")
 
 # Check if the image file exists
 if not os.path.exists(image_path):
-    print("Error: Image file does not exist.")
+    print("Error: Image file does not exis t.")
     exit()
 
 # Read the image
@@ -21,7 +21,7 @@ if image is None:
     print("Error: Could not read image.")
     exit()
 # Load a model
-model = YOLO('C:/Users/niraj/Desktop/Koala/best_segment.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/Desktop/Koala/best.pt')  # load a custom model
 
 # Perform prediction
 results = model.predict(image)
@@ -36,12 +36,6 @@ for result in results:
         boxes.append((x1, class_name))
         cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 5)
         cv2.putText(image, class_name, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-        
-        # Extract the segmented box
-        #segmented_box = resized_image[y1:y2, x1:x2]
-        #segmented_box_path = '{}_box_{}_{}.jpg'.format(os.path.splitext(image_path)[0], class_name, len(boxes) - 1)
-        #cv2.imwrite(segmented_box_path, segmented_box)
-        #print(f"Segmented box saved to: {segmented_box_path}")
 
 # Sort boxes by x-coordinate and concatenate class names to form the license plate string
 boxes.sort(key=lambda b: b[0])
