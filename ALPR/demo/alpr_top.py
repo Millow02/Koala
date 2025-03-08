@@ -63,6 +63,8 @@ def process_images(input_dir, localisation_model, segmentation_model, sr_model, 
         rectified_dir = f"./output/rectified/session_{session_number}"
         segmented_dir = f"./output/segmented/session_{session_number}"
         
+        # Localiser 
+
         # Create required directories
         os.makedirs(cropped_dir, exist_ok=True)
         os.makedirs(rectified_dir, exist_ok=True)
@@ -70,22 +72,19 @@ def process_images(input_dir, localisation_model, segmentation_model, sr_model, 
         
         # --- Localisation: Crop license plates from the input image(s) ---
         log("TOP", f"Beginning localisation for input image at {input_dir}")
+
+        localiser.set_directories(input_dir, cropped_dir)
         cropped_paddings = [-5, -10, 0, 10, 20]
-        cropped_directories = localiser.crop_license_plate(input_dir, cropped_dir, padding_levels=cropped_paddings)
+        cropped_directories = localiser.crop_license_plate(padding_levels=cropped_paddings)
         
         log("TOP", "Post Localisation Report!")
         log("TOP", f"Cropped Directories: {cropped_directories}")
 
         # --- Rectification: Straighten each cropped license plate image ---
-        # (The rectification, segmentation, and OCR parts remain commented for now.)
-        # for directory in os.listdir(cropped_dir): 
-        #     for image in os.listdir(directory): 
-        #         crop_filename = os.path.join(cropped_dir, directory, image)
-        #         image = cv2.imread(crop_filename)
-        #         rectified = rectifier.rectify(image)
-        #         if rectified is not None:
-        #             rectified_filename = os.path.join(rectified_dir, f"rectified_{idx+1}.jpg")
-        #             cv2.imwrite(rectified_filename, rectified)
+
+        rectifier.set_directories(cropped_directories, rectified_dir)
+        score = rectifier.rectify() + sementer.segment_characters()
+        
         #
         # for file in os.listdir(rectified_dir):
         #     if file.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp')):

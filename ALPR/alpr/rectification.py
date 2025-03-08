@@ -8,6 +8,10 @@ class Rectification:
         self.sr.readModel(sr_model_path)
         self.sr.setModel("lapsrn", 2)
 
+    def set_directories(cropped_dir, output_dir):
+        self.cropped_dir = cropped_dir        
+        self.output_dir = output_dir
+
     def preprocess(self, image):
         # Upsample and resize to a standard dimension for processing.
         image = self.sr.upsample(image)
@@ -35,7 +39,7 @@ class Rectification:
         rect[3] = pts[np.argmax(diff)]
         return rect
 
-    def rectify(self, image):
+    def rectify_image(self, image):
         preprocessed = self.preprocess(image)
         contour = self.generate_contour(preprocessed)
         if contour is None:
@@ -47,3 +51,20 @@ class Rectification:
                           [0, self.output_size[1]]])
         H, _ = cv2.findHomography(np.float32(pts), dst)
         return cv2.warpPerspective(preprocessed, H, self.output_size)
+
+    def rectify(self): 
+        for directory in cropped_dir: 
+            crop_filename = os.path.join(cropped_dir, directory, image)
+            image = cv2.imread(crop_filename)
+            rectified = rectifier.rectify(image)
+            if rectified is not None:
+                rectified_filename = os.path.join(rectified_dir, f"rectified_{idx+1}.jpg")
+                cv2.imwrite(rectified_filename, rectified)
+    # (The rectification, segmentation, and OCR parts remain commented for now.)
+    #     for image in os.listdir(directory): 
+    #         crop_filename = os.path.join(cropped_dir, directory, image)
+    #         image = cv2.imread(crop_filename)
+    #         rectified = rectifier.rectify(image)
+    #         if rectified is not None:
+    #             rectified_filename = os.path.join(rectified_dir, f"rectified_{idx+1}.jpg")
+    #             cv2.imwrite(rectified_filename, rectified)

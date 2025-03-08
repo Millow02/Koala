@@ -11,7 +11,11 @@ class Localisation:
     def replace_model(self, model_path):
         self.model = YOLO(model_path)
 
-    def crop_license_plate(self, image_path, output_dir, padding_levels=[20], confidence=0.25, iou=0.45):
+    def set_directories(input_, output_dir):
+        self.image_path = input_
+        self.output_dir = output_dir
+
+    def crop_license_plate(self, padding_levels=[20], confidence=0.25, iou=0.45):
         """
         The licence plate detection can be filtered using two variables:
             confidence & iou
@@ -22,12 +26,12 @@ class Localisation:
         A list of all padding levels needs to be passed and list of all the cropped directories is returned.
         """
 
-        image = cv2.imread(image_path)
+        image = cv2.imread(self.image_path)
         if image is None:
-            log("LOCALISATION", f"{image_path} does not contain an image.")
+            log("LOCALISATION", f"{self.image_path} does not contain an image.")
             raise ValueError("Image path invalid or image format not supported.")
 
-        results = self.model.predict(source=image_path, conf=confidence, iou=iou)
+        results = self.model.predict(source=self.image_path, conf=confidence, iou=iou)
     
         log("LOCALISATION", f"Cropped Image successfully, number of license plates detected - {len(results)}.")
         cropped_directories = []
@@ -36,7 +40,7 @@ class Localisation:
             for idx, box in enumerate(boxes):
                 for padding in padding_levels:
 
-                    specific_crop_dir = os.path.join(output_dir, f"crop_{padding}")
+                    specific_crop_dir = os.path.join(self.output_dir, f"crop_{padding}")
                     os.makedirs(specific_crop_dir , exist_ok=True)
                     
                     x1, y1, x2, y2 = map(int, box)
@@ -50,4 +54,4 @@ class Localisation:
                     cropped_directories.append(specific_crop_dir)
                     log("LOCALISATION", f"Saved image {crop_filename} in directory {specific_crop_dir}.")
 
-        return output_dir
+        return cropped_directories
