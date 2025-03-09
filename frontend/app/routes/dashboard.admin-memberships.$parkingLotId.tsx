@@ -1,5 +1,5 @@
 import { useParams, Link, useOutletContext } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
 import { MapPinIcon } from "@heroicons/react/24/outline";
@@ -24,8 +24,16 @@ export default function AdminMemberships() {
 
   const [parkingLot, setParkingLot] = useState<ParkingLot>();
   const [memberships, setMemberships] = useState<MembershipWithRelations[]>([]);
-  const [membershipId, setMembershipId] = useState<number | null>(null);
   const [actionPopup, setActionPopup] = useState(false);
+  const [pendingMemberships, setPendingMemberships] = useState<
+    MembershipWithRelations[]
+  >([]);
+  const [activeMemberships, setActiveMemberships] = useState<
+    MembershipWithRelations[]
+  >([]);
+  const [declinedMemberships, setDeclindMemberships] = useState<
+    MembershipWithRelations[]
+  >([]);
   const [activeMembershipId, setActiveMembershipId] = useState<number | null>(
     null
   );
@@ -35,6 +43,7 @@ export default function AdminMemberships() {
   const popupRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
     const fetchParkingLot = async () => {
@@ -64,6 +73,10 @@ export default function AdminMemberships() {
 
     fetchParkingLot();
   }, [parkingLotId, supabase]);
+
+  const handleRefresh = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -98,9 +111,34 @@ export default function AdminMemberships() {
           )
         `
           )
-          .eq("parkingLotId", parkingLotId);
+          .eq("parkingLotId", parkingLotId)
+          .order("id", { ascending: true });
 
         if (memberError) throw memberError;
+
+        const pendingMemberships = memberData.filter(
+          (member) => member.status === "Pending"
+        );
+
+        const declinedMemberships = memberData.filter(
+          (member) => member.status === "Declined"
+        );
+
+        const activeMemberships = memberData.filter(
+          (member) =>
+            member.status !== "Pending" && member.status !== "Declined"
+        );
+
+        setPendingMemberships(
+          pendingMemberships as unknown as MembershipWithRelations[]
+        );
+        setActiveMemberships(
+          activeMemberships as unknown as MembershipWithRelations[]
+        );
+
+        setDeclindMemberships(
+          declinedMemberships as unknown as MembershipWithRelations[]
+        );
 
         setMemberships(memberData as unknown as MembershipWithRelations[]);
       } catch (err) {
@@ -110,7 +148,30 @@ export default function AdminMemberships() {
       }
     };
     fetchMembers();
-  }, [parkingLotId, supabase, user]);
+  }, [parkingLotId, supabase, user, refreshTrigger]);
+
+  const updateMemberStatus = async (
+    membershipId: string | null,
+    parkingLotId: string | null,
+    memberStatus: string | null
+  ) => {
+    if (!user) return;
+
+    try {
+      const { error } = await supabase
+        .from("Membership")
+        .update({ status: memberStatus })
+        .eq("clientId", membershipId)
+        .eq("parkingLotId", parkingLotId);
+
+      if (error) throw error;
+    } catch (err) {
+      console.error("Membership status update error:", err);
+    } finally {
+      handleRefresh();
+      setActionPopup(false);
+    }
+  };
 
   const handleActionPopup = (
     membershipId: number | null,
@@ -118,20 +179,18 @@ export default function AdminMemberships() {
   ) => {
     event.stopPropagation();
     if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current); // Clear any pending close action
+      clearTimeout(timeoutRef.current);
     }
 
     if (actionPopup && activeMembershipId === membershipId) {
-      // If clicking the same button, close the popup
       setActionPopup(false);
       setActiveMembershipId(null);
     } else {
-      // If clicking a different button, close the previous popup first
       setActionPopup(false);
       setTimeout(() => {
         setActiveMembershipId(membershipId);
         setActionPopup(true);
-      }, 10); // Tiny delay to allow state update
+      }, 10);
     }
   };
 
@@ -167,23 +226,24 @@ export default function AdminMemberships() {
       {parkingLot ? (
         <div>
           <div className="flex justify-between">
-            <h1 className="text-3xl font-bold">Manage members</h1>
+            <h1 className="text-3xl font-bold">Members</h1>
             <h1 className="text-3xl font-bold">{parkingLot.name}</h1>
           </div>
           <hr className="border-pink-500 border-1 my-6" />
 
-          <div className="overflow-x-auto rounded-lg">
+          <div className="overflow-x-auto rounded-lg mb-10">
+            <h2 className="text-3xl mb-4">Active Members</h2>
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-800">
-                  <th className="text-left p-2">Name</th>
-                  <th className="text-left p-2">Email</th>
-                  <th className="text-left p-2">Status</th>
-                  <th className="text-left p-2">Actions</th>
+                  <th className="text-left p-2 w-1/4">Name</th>
+                  <th className="text-left p-2 w-1/4">Email</th>
+                  <th className="text-left p-2 w-1/4">Status</th>
+                  <th className="text-left p-2 w-1/6">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {memberships.map((membership, index) => (
+                {activeMemberships.map((membership, index) => (
                   <tr
                     key={membership.id || index}
                     className={
@@ -207,19 +267,174 @@ export default function AdminMemberships() {
                       {actionPopup && activeMembershipId === membership.id && (
                         <div
                           ref={popupRef}
-                          className="flex flex-col bg-neutral-600 absolute p-1 shadow-lg rounded text-white z-10"
+                          className="flex flex-col bg-neutral-600 absolute p-2 shadow-lg rounded-lg text-white z-10"
                         >
-                          <button className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md">
+                          <button
+                            className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md"
+                            onClick={async (e) =>
+                              await updateMemberStatus(
+                                membership.clientId,
+                                membership.parkingLotId,
+                                "Accepted"
+                              )
+                            }
+                          >
                             Accept
                           </button>
-                          <button className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md">
+                          <button
+                            className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md"
+                            onClick={async (e) =>
+                              await updateMemberStatus(
+                                membership.clientId,
+                                membership.parkingLotId,
+                                "Declined"
+                              )
+                            }
+                          >
                             Decline
                           </button>
-                          <button className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md">
-                            Place on hold
+                          <button
+                            className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md"
+                            onClick={async (e) =>
+                              await updateMemberStatus(
+                                membership.clientId,
+                                membership.parkingLotId,
+                                "Pending"
+                              )
+                            }
+                          >
+                            Set to pending
+                          </button>
+                          <button
+                            className="cursor-pointer p-1 hover:bg-neutral-500 rounded-md"
+                            onClick={async (e) =>
+                              await updateMemberStatus(
+                                membership.clientId,
+                                membership.parkingLotId,
+                                "Payment required"
+                              )
+                            }
+                          >
+                            Payment required
                           </button>
                         </div>
                       )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="overflow-x-auto rounded-lg mb-10">
+            <h2 className="text-3xl mb-4">Pending Members</h2>
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-800">
+                  <th className="text-left p-2 w-1/4">Name</th>
+                  <th className="text-left p-2 w-1/4">Email</th>
+                  <th className="text-left p-2 w-1/4">Status</th>
+                  <th className="text-left p-2 w-1/6">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pendingMemberships.map((membership, index) => (
+                  <tr
+                    key={membership.id || index}
+                    className={
+                      index % 2 === 0 ? "bg-neutral-800" : "bg-neutral-600"
+                    }
+                  >
+                    <td className="p-2">
+                      {membership.Profile?.first_name}{" "}
+                      {membership.Profile?.last_name}
+                    </td>
+                    <td className="p-2">{membership.Profile?.email}</td>
+                    <td className="p-2">{membership.status}</td>
+                    <td className="p-2">
+                      <div className="flex space-x-4">
+                        <button
+                          className="cursor-pointer px-4 py-2 bg-green-500 hover:bg-green-400 rounded-md"
+                          onClick={async (e) =>
+                            await updateMemberStatus(
+                              membership.clientId,
+                              membership.parkingLotId,
+                              "Accepted"
+                            )
+                          }
+                        >
+                          Accept
+                        </button>
+                        <button
+                          className="cursor-pointer px-4 py-2 bg-red-400 hover:bg-neutral-500 rounded-md"
+                          onClick={async (e) =>
+                            await updateMemberStatus(
+                              membership.clientId,
+                              membership.parkingLotId,
+                              "Declined"
+                            )
+                          }
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="overflow-x-auto rounded-lg">
+            <h2 className="text-3xl mb-4">Declined Members</h2>
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-800">
+                  <th className="text-left p-2 w-1/4">Name</th>
+                  <th className="text-left p-2 w-1/4">Email</th>
+                  <th className="text-left p-2 w-1/4">Status</th>
+                  <th className="text-left p-2 w-1/6">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {declinedMemberships.map((membership, index) => (
+                  <tr
+                    key={membership.id || index}
+                    className={
+                      index % 2 === 0 ? "bg-neutral-800" : "bg-neutral-600"
+                    }
+                  >
+                    <td className="p-2">
+                      {membership.Profile?.first_name}{" "}
+                      {membership.Profile?.last_name}
+                    </td>
+                    <td className="p-2">{membership.Profile?.email}</td>
+                    <td className="p-2">{membership.status}</td>
+                    <td className="p-2">
+                      <div className="flex space-x-4">
+                        <button
+                          className="cursor-pointer px-4 py-2 bg-green-500 hover:bg-green-400 rounded-md"
+                          onClick={async (e) =>
+                            await updateMemberStatus(
+                              membership.clientId,
+                              membership.parkingLotId,
+                              "Accepted"
+                            )
+                          }
+                        >
+                          Accept
+                        </button>
+                        <button
+                          className="cursor-pointer px-4 py-2 bg-red-400 hover:bg-neutral-500 rounded-md"
+                          onClick={async (e) =>
+                            await updateMemberStatus(
+                              membership.clientId,
+                              membership.parkingLotId,
+                              "Pending"
+                            )
+                          }
+                        >
+                          Pending
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -233,9 +448,3 @@ export default function AdminMemberships() {
     </div>
   );
 }
-
-//   return (
-
-//
-//   );
-// }
