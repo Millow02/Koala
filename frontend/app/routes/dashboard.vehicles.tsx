@@ -25,7 +25,7 @@ export default function Vehicles() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [formVisible, setFormVisible] = useState<string | null>(null); 
+  const [formVisible, setFormVisible] = useState<string | null>(null);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [messageVisible, setMessageVisible] = useState(false);
 
@@ -139,7 +139,12 @@ export default function Vehicles() {
         setVehicles((prevVehicles) =>
           prevVehicles.map((v) =>
             v.id === selectedVehicle?.id
-              ? { ...v, name: vehicleName, model, license_plate_number: licensePlate }
+              ? {
+                  ...v,
+                  name: vehicleName,
+                  model,
+                  license_plate_number: licensePlate,
+                }
               : v
           )
         );
@@ -170,7 +175,10 @@ export default function Vehicles() {
         </div>
         <div className="overflow-x-auto shadow-md rounded-lg">
           <table className="w-full">
-            <thead className=" text-white" style={{ backgroundColor: "#333842" }}>
+            <thead
+              className=" text-white"
+              style={{ backgroundColor: "#333842" }}
+            >
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold">
                   Vehicle Name
@@ -181,9 +189,7 @@ export default function Vehicles() {
                 <th className="px-6 py-3 text-left text-sm font-semibold">
                   Model
                 </th>
-                <th className="px-1 py-3">
-
-                </th>
+                <th className="px-1 py-3"></th>
               </tr>
             </thead>
             <tbody>
@@ -205,10 +211,11 @@ export default function Vehicles() {
                     {vehicle.model}
                   </td>
                   <td className="px-1 py-4 text-sm whitespace-nowrap text-center">
-                    <button className="text-white hover:text-gray-400"
+                    <button
+                      className="text-white hover:text-gray-400"
                       onClick={() => toggleForm(vehicle)}
                     >
-                      &#x22EE; 
+                      &#x22EE;
                     </button>
                   </td>
                 </tr>
@@ -232,7 +239,9 @@ export default function Vehicles() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between px-6 mt-4">
-                <h2 className="text-white text-3xl font-bold">Add New Vehicle 🚗</h2>
+                <h2 className="text-white text-3xl font-bold">
+                  Add New Vehicle 🚗
+                </h2>
                 <button
                   className="flex items-center justify-center rounded-full p-2 hover:bg-neutral-900 hover:opacity-100 hover:duration-300"
                   onClick={closeCreateVehicleForm}
@@ -304,88 +313,86 @@ export default function Vehicles() {
           </div>
         )}
         {formVisible && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
-          <div className="bg-neutral-800 rounded-lg shadow-lg w-1/2">
-            <div className="ml-6 mt-6 mb-6">
-              <h2 className="text-3xl font-bold mb-4 mb-3">Edit Vehicle</h2>
-            </div>
-            <hr className="bg-neutral-600 h-px border-0 my-4" />
-            <div className="m-6">
-              
-            <form onSubmit={updateVehicle}>
-              <div className="w-3/5">
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-white mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    value={vehicleName}
-                    onChange={(e) => setVehicleName(e.target.value)}
-                    className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
-                  />
-                </div>
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-white mb-1">
-                    License Plate
-                  </label>
-                  <input
-                    type="text"
-                    value={licensePlate}
-                    onChange={(e) => setLicensePlate(e.target.value)}
-                    className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
-                  />
-                </div>
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-white mb-1">
-                    Model
-                  </label>
-                  <input
-                    type="text"
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                    className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
-                  />
-                </div>
-                
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
+            <div className="bg-neutral-800 rounded-lg shadow-lg w-1/2">
+              <div className="ml-6 mt-6 mb-6">
+                <h2 className="text-3xl font-bold mb-3">Edit Vehicle</h2>
               </div>
-              <div className="flex mt-12">
-                <button
-                  type="button"
-                  className="text-base bg-gray-500 py-2 rounded-lg p-2 hover:text-gray-600 active:bg-gray-700 active:text-white hover:scale-105 transition-transform duration-300 px-4  mr-2 font-bold"
-                  onClick={closeForm} 
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105 transition-transform duration-300 px-4 font-bold"
-                >
-                  Save
-                </button>
+              <hr className="bg-neutral-600 h-px border-0 my-4" />
+              <div className="m-6">
+                <form onSubmit={updateVehicle}>
+                  <div className="w-3/5">
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-white mb-1">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        value={vehicleName}
+                        onChange={(e) => setVehicleName(e.target.value)}
+                        className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-white mb-1">
+                        License Plate
+                      </label>
+                      <input
+                        type="text"
+                        value={licensePlate}
+                        onChange={(e) => setLicensePlate(e.target.value)}
+                        className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-white mb-1">
+                        Model
+                      </label>
+                      <input
+                        type="text"
+                        value={model}
+                        onChange={(e) => setModel(e.target.value)}
+                        className="w-full rounded-lg px-3 py-2 text-white bg-neutral-600"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex mt-12">
+                    <button
+                      type="button"
+                      className="text-base bg-gray-500 py-2 rounded-lg p-2 hover:text-gray-600 active:bg-gray-700 active:text-white hover:scale-105 transition-transform duration-300 px-4  mr-2 font-bold"
+                      onClick={closeForm}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 active:bg-pink-700 active:text-white hover:scale-105 transition-transform duration-300 px-4 font-bold"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
-            </div>
-            
-            {message && <p className="mt-4 text-Black-500">{message}</p>}
-          </div>
-        </div>
-      )}
-      {messageVisible && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <p className="text-Black-500">{message}</p>
-            <div className="flex justify-end mt-4">
-              <button
-                className="bg-pink-500 text-white px-4 py-2 rounded-lg"
-                onClick={closeMessage}
-              >
-                Close
-              </button>
+
+              {message && <p className="mt-4 text-Black-500">{message}</p>}
             </div>
           </div>
-        </div>
-      )}
+        )}
+        {messageVisible && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-20 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <p className="text-Black-500">{message}</p>
+              <div className="flex justify-end mt-4">
+                <button
+                  className="bg-pink-500 text-white px-4 py-2 rounded-lg"
+                  onClick={closeMessage}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
