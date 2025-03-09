@@ -237,6 +237,41 @@ export type Database = {
         }
       ];
     };
+
+    notifications: {
+      Row: {
+        id: number;
+        user_id: number;
+        content: string;
+        type: string;
+        is_read: boolean;
+        created_at?: string;
+      };
+      Insert: {
+        id: number;
+        user_id: number;
+        content: string;
+        type: string;
+        is_read: boolean;
+        created_at?: string;
+      }; 
+      Update: {
+        id: number;
+        user_id: number;
+        content: string;
+        type: string;
+        is_read: boolean;
+        created_at?: string;
+      };
+      Relationships: [
+        {
+          foreignKeyName: "notification_profile_id_fk";
+          columns: ["user_id"];
+          referencedRelation: "Profile";
+          referencedColumns: ["id"];
+        }
+      ];
+    }
   };
 };
 };
