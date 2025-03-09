@@ -8,7 +8,7 @@ from alpr.localisation import Localisation
 from alpr.rectification import Rectification
 from alpr.segmentation import Segmentation
 from alpr.ocr import OCR
-from alpr.utils import log,add_bp 
+from alpr.utils import starter_log, log, add_bp, test_manager
 
 def ensure_and_clear_folder(folder_path):
     """
@@ -32,7 +32,13 @@ def ensure_and_clear_folder(folder_path):
             except Exception as e:
                 log("TOP", f"Failed to delete {file_path}. Reason: {e}")
 
-def process_images(input_dir, localisation_model, segmentation_model, sr_model, ocr_model, session_number=0):
+def process_images(
+        input_dir, 
+        localisation_model, 
+        segmentation_model, 
+        sr_model, ocr_model, 
+        session_number=0, 
+        cropped_paddings = [-5, -10, 0, 10, 20]):
     """
     Processes images using the ALPR pipeline by performing:
       - Localisation (plate detection and cropping)
@@ -74,7 +80,7 @@ def process_images(input_dir, localisation_model, segmentation_model, sr_model, 
         log("TOP", f"Beginning localisation for input image at {input_dir}")
 
         localiser.set_directories(input_dir, cropped_dir)
-        cropped_paddings = [-5, -10, 0, 10, 20]
+        
         cropped_directories = localiser.crop_license_plate(padding_levels=cropped_paddings)
         
         log("TOP", "Post Localisation Report!")
@@ -111,11 +117,12 @@ def process_images(input_dir, localisation_model, segmentation_model, sr_model, 
     except Exception as e:
         log("TOP", f"Error in processing thread: {str(e)}")
     
-def process_images_sequentially(pics_folder="./pics", input_folder="./input",
-                                localisation_model="../models/localisation_model.pt",
-                                segmentation_model="../models/segmentation_model.pt",
-                                sr_model="../models/LapSRN_x2.pb",
-                                ocr_model="../models/ocr_model.h5"):
+def process_images_sequentially(
+        pics_folder="./pics", input_folder="./input",
+        localisation_model="../models/localisation_model.pt",
+        segmentation_model="../models/segmentation_model.pt",
+        sr_model="../models/LapSRN_x2.pb",
+        ocr_model="../models/ocr_model.h5"):
     """
     Processes images sequentially by:
       - Copying each image from the pics_folder to the input_folder.
@@ -162,6 +169,7 @@ def main():
     # process_thread = threading.Thread(target=process_images_sequentially)
     # process_thread.start()
     # process_thread.join()
+    starter_log()
     process_images_sequentially()
 
 if __name__ == "__main__":
