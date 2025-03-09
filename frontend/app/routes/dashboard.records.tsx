@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import EventCard from "~/components/EventCard";
 import { SupabaseClient, User } from "@supabase/supabase-js";
 import { useOutletContext } from "@remix-run/react";
+import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
 
 type ContextType = {
   user: User;
@@ -75,10 +76,10 @@ export default function Records() {
 
       // Fetch occupancy records using camera IDs
       const { data: occupancyData, error: occupancyError } = await supabase
-        .from("OccupancyRecord")
+        .from("OccupancyEvent")
         .select("id")
         .in("cameraId", cameraIds)
-        .eq("status", "Processed");
+        .in("status", ["Processed", "Attention-Required"]);
       if (occupancyError) {
         console.error("Error fetching occupancy records:", occupancyError);
         return [];
@@ -142,10 +143,10 @@ export default function Records() {
     <div className="relative">
       <div className="w-full px-12 py-4">
         <h1 className="text-3xl font-bold">Event Record</h1>
-        <p className="pt-3">View all events of your facilities.</p>
+        <hr className="border-pink-500 border-1 my-6" />
       </div>
-      <div className="flex justify-center">
-        <div className="overflow-x-auto rounded-lg m-6 border-neutral-600" style={{ height: "900px", width: "1100px", borderWidth: "2px", backgroundColor: "#333842" }}>
+      <div className="flex justify-center" style={{width: "1400px"}}>
+        <div className="overflow-x-auto rounded-lg m-6 ml-16 border-neutral-600" style={{ height: "900px", width: "1100px", borderWidth: "2px", backgroundColor: "#333842" }}>
           <div className="overflow-y-auto rounded-lg" style={{ backgroundColor: "#333842" }}>
             {loading ? (
               <div className="flex justify-center items-center h-64">
@@ -158,6 +159,56 @@ export default function Records() {
             )}
           </div>
         </div>
+
+        <div className="rounded-lg border-2 border-neutral-600 mt-6 p-4" style={{height: "450px", width: "250px", backgroundColor: "#333842" }}>
+          <div className="flex mb-6">
+            <AdjustmentsVerticalIcon className="h-8 w-8 inline-block" />
+            <div className="text-2xl font-semibold">
+              Filters
+            </div>
+          </div>
+          <div className="text-xl font-semibold">
+            By Date:
+          </div>
+          <div className="mt-2 mb-4">
+            <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
+              <option value="all">All</option>
+              <option value="recent">Recent</option>
+            </select>
+          </div>
+          <div className="text-xl font-semibold">
+            By Type:
+          </div>
+          <div className="mt-2 mb-4">
+            <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
+              <option value="all">All</option>
+              <option value="Only Intruders">Only Intruders</option>
+            </select>
+          </div>
+          <div className="text-xl font-semibold">
+            By Location:
+          </div>
+          <div className="mt-2 mb-4">
+            <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
+              <option value="all">All</option>
+              <option>Camera 1</option>
+              <option>Camera 2</option>
+            </select>
+          </div>
+
+          <div className="flex">
+            <button className="bg-slate-500 text-white px-4 py-2 mt-4 rounded-lg mr-4">
+              Reset
+            </button>
+            <button className="bg-pink-500 text-white px-4 py-2 mt-4 rounded-lg">
+              Apply
+            </button>
+          </div>
+          
+
+        </div>
+          
+
       </div>
     </div>
   );
