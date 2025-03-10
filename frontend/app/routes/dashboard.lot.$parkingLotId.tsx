@@ -56,6 +56,17 @@ export default function ParkingLotDetails() {
   const { supabase } = useOutletContext<ContextType>();
   const [occupancyRecords, setOccupancyRecords] = useState<Array<any>>([]);
   const [totalCapacity, setTotalCapacity] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedRecord, setSelectedRecord] = useState<any>(null);
+
+  const openVehicleDetailsModal = (record: any) => {
+    setSelectedRecord(record);
+    setIsModalOpen(true);
+  };
+  
+  const closeVehicleDetailsModal = () => {
+    setIsModalOpen(false);
+  };
 
 
   useEffect(() => {
@@ -81,7 +92,7 @@ export default function ParkingLotDetails() {
 
         const { data: occupancyData, error: occupancyError } = await supabase
           .from("Occupancy")
-          .select("id, vehicleId, vehicleOwner, LicensePlate, isPermitted")
+          .select("id, vehicleId, vehicleOwner, LicensePlate, isPermitted, entryTime")
           .eq("facilityId", parkingLotId)
           .eq("Status", "Active");
 
@@ -204,7 +215,10 @@ export default function ParkingLotDetails() {
                     <div className="w-64 font-semibold">{record.LicensePlate || "Unknown"}</div>
                     <div className="w-48 font-semibold">{record.vehicleOwner || "Unknown"}</div>
                     <div className="flex-grow"></div>
-                    <button className="mr-8 py-2 px-8 bg-pink-500 rounded-xl font-semibold hover:bg-pink-600 transition-colors">
+                    <button 
+                    className="mr-8 py-2 px-8 bg-pink-500 rounded-xl font-semibold hover:bg-pink-600 transition-colors"
+                    onClick={() => openVehicleDetailsModal(record)}
+                    >
                       View
                     </button>
                   </div>
@@ -288,6 +302,80 @@ export default function ParkingLotDetails() {
           </div>
         </div>
       </div>
+      {isModalOpen && selectedRecord && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-slate-800 rounded-2xl max-w-2xl w-full mx-4 overflow-hidden">
+            {/* Modal header */}
+            <div className="border-b border-slate-700 p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-bold">Vehicle Details</h2>
+              <button 
+                className="p-2 hover:bg-slate-700 rounded-full transition-colors"
+                onClick={closeVehicleDetailsModal}
+              >
+                <XCircleIcon className="h-8 w-8" />
+              </button>
+            </div>
+            
+            {/* Modal content */}
+            <div className="p-6">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="col-span-2 flex items-center mb-2">
+                  {selectedRecord.isPermitted ? (
+                    <div className="flex items-center text-green-500">
+                      <CheckCircleIcon className="h-8 w-8 mr-2" />
+                      <span className="text-xl font-semibold">Authorized Vehicle</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center text-red-500">
+                      <XCircleIcon className="h-8 w-8 mr-2" />
+                      <span className="text-xl font-semibold">Unauthorized Vehicle</span>
+                    </div>
+                  )}
+                </div>
+                
+                <div>
+                  <p className="text-gray-400 mb-1">License Plate</p>
+                  <p className="text-2xl font-semibold">{selectedRecord.LicensePlate || "Unknown"}</p>
+                </div>
+                
+                <div>
+                  <p className="text-gray-400 mb-1">Owner</p>
+                  <p className="text-2xl font-semibold">{selectedRecord.vehicleOwner || "Unknown"}</p>
+                </div>
+                
+                <div>
+                  <p className="text-gray-400 mb-1">Vehicle ID</p>
+                  <p className="text-xl">{selectedRecord.vehicleId || "N/A"}</p>
+                </div>
+                
+                <div>
+                  <p className="text-gray-400 mb-1">Entered At</p>
+                  <p className="text-xl">
+                    {selectedRecord.entryTime || "Unknown"}
+                  </p>
+                </div>
+                
+                
+              </div>
+              
+              <div className="mt-8 space-y-4">
+                <h3 className="text-xl font-semibold">Actions</h3>
+                <div className="flex gap-4">
+                  <button className="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+                    Contact Owner
+                  </button>
+                  {!selectedRecord.isPermitted && (
+                    <button className="flex-1 py-3 bg-pink-500 rounded-lg hover:bg-pink-600 transition-colors">
+                      Set to Authorized
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+    
   );
 }
