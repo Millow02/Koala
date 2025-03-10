@@ -2,7 +2,10 @@ import { useParams, Link, useOutletContext } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
-import { MagnifyingGlassIcon, XCircleIcon, CheckCircleIcon, AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, XCircleIcon, CheckCircleIcon, AdjustmentsVerticalIcon, PresentationChartBarIcon } from "@heroicons/react/24/outline";
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart, Doughnut } from "react-chartjs-2";
 
 type ParkingLot = {
   name: string;
@@ -13,12 +16,46 @@ type ContextType = {
   supabase: SupabaseClient;
 };
 
+
+const doughnutLabelPlugin = {
+  id: 'doughnutLabel',
+  afterDatasetsDraw(chart: any) {
+    const { ctx, data } = chart;
+    const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+    const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+    
+    ctx.save();
+    ctx.textAlign = 'center';
+    
+    const labels = chart.options.plugins.doughnutLabel.labels || [];
+    
+    labels.forEach((label: any, i: number) => {
+      const fontStyle = label.font || {};
+      ctx.font = `${fontStyle.weight || ''} ${fontStyle.size || '16px'} ${fontStyle.family || 'Arial'}`;
+      ctx.fillStyle = label.color || '#fff';
+      
+      // Offset for multiple lines of text
+      const lineHeight = parseInt(fontStyle.size || '16', 10) * 1.2;
+      const offset = (labels.length - 1) * lineHeight / 2;
+      const y = centerY + i * lineHeight - offset;
+      
+      ctx.fillText(label.text, centerX, y);
+    });
+    
+    ctx.restore();
+  }
+};
+
+ChartJS.register(ArcElement, Tooltip, Legend, doughnutLabelPlugin);
+
+
 export default function ParkingLotDetails() {
   const { parkingLotId } = useParams();
   const [parkingLot, setParkingLot] = useState<ParkingLot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { supabase } = useOutletContext<ContextType>();
   const [occupancyRecords, setOccupancyRecords] = useState<Array<any>>([]);
+  const [totalCapacity, setTotalCapacity] = useState<number>(0);
 
 
   useEffect(() => {
@@ -30,7 +67,7 @@ export default function ParkingLotDetails() {
 
       const { data, error } = await supabase
         .from("ParkingLot")
-        .select("name")
+        .select("name, capacity")
         .eq("id", parkingLotId)
         .single();
 
@@ -39,6 +76,7 @@ export default function ParkingLotDetails() {
         console.error("Error fetching parking lot:", error);
       } else {
         setParkingLot(data);
+        setTotalCapacity(data.capacity || 0);
         console.log(data);
 
         const { data: occupancyData, error: occupancyError } = await supabase
@@ -58,6 +96,69 @@ export default function ParkingLotDetails() {
 
     fetchParkingLot();
   }, [parkingLotId, supabase]);
+
+  const currentOccupancy = occupancyRecords.length;
+  const currentAvailability = totalCapacity - currentOccupancy;
+
+  const chartData = {
+    labels: ["Occupied", "Available"],
+    datasets: [
+      {
+        data: [currentOccupancy, currentAvailability],
+        backgroundColor: [
+          '#EC4899', 
+          '#475569', 
+        ],
+        borderColor: [
+          '#BE185D', 
+          '#4B5563', 
+        ],
+        borderWidth: 1,
+        hoverOffset: 4
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '70%', // Makes the doughnut hole larger
+    plugins: {
+      legend: {
+        display: false,
+        position: 'bottom' as const,
+        labels: {
+          color: 'white', // White text for legend labels
+          font: {
+            size: 14
+          }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context: any) {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+            const percentage = Math.round((value / total) * 100);
+            return `${label}: ${value} (${percentage}%)`;
+          }
+        }
+      },
+      doughnutLabel: {
+        labels: [
+          {
+            text: `${currentOccupancy}`,
+            font: {
+              size: '48px',
+              weight: 'bold'
+            },
+            color: '#EC4899'
+          }
+        ]
+      }
+    },
+  };
 
   if (error) {
     return <div>{error}</div>;
@@ -118,44 +219,71 @@ export default function ParkingLotDetails() {
             </div>
           </div>
 
-          <div className="rounded-3xl border-2 border-neutral-600 ml-6 p-4" style={{height: "350px", width: "300px", backgroundColor: "#333842" }}>
-            <div className="flex mb-6">
-              <AdjustmentsVerticalIcon className="h-8 w-8 inline-block" />
-              <div className="text-2xl font-semibold">
-                Filters
+          <div>
+
+          
+            <div className="rounded-3xl border-2 border-neutral-600 ml-6 p-4" style={{height: "350px", width: "300px", backgroundColor: "#333842" }}>
+              <div className="flex mb-6">
+                <AdjustmentsVerticalIcon className="h-8 w-8 inline-block" />
+                <div className="text-2xl font-semibold">
+                  Filters
+                </div>
+              </div>
+              <div className="text-xl font-semibold">
+                Sort By:
+              </div>
+              <div className="mt-2 mb-4">
+                <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
+                  <option value="all">Latest First</option>
+                  <option value="recent">Oldest First</option>
+                  <option value="recent"> Name Alphabetical A-Z</option>
+                </select>
+              </div>
+              <div className="text-xl font-semibold">
+                Type:
+              </div>
+              <div className="mt-2 mb-4">
+                <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
+                  <option value="all">All</option>
+                  <option value="Only Intruders">Only Intruders</option>
+                  <option value="Only Intruders">Only Admins</option>
+                </select>
+              </div>
+              
+
+              <div className="flex">
+                <button className="bg-slate-500 text-white px-4 py-2 mt-4 rounded-lg mr-4">
+                  Reset
+                </button>
+                <button className="bg-pink-500 text-white px-4 py-2 mt-4 rounded-lg">
+                  Apply
+                </button>
+              </div>
+              
+
+            </div>
+
+            <div className="rounded-3xl border-2 border-neutral-600 ml-6 p-4 mt-6" style={{height: "390px", width: "300px", backgroundColor: "#333842" }}>
+              <div className="flex mb-6">
+                <PresentationChartBarIcon className="h-8 w-8 inline-block" />
+                <div className="text-2xl font-semibold">
+                  Occupancy
+                </div>
+              </div>
+              <div className="h-48 relative mb-4">
+                <Doughnut data={chartData} options={chartOptions} />
+              </div>
+              <div className="flex justify-between text-center mt-6 mx-5">
+                <div>
+                  <p className="text-gray-400 text-lg">Available</p>
+                  <p className="text-2xl font-bold">{currentAvailability}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-lg">Capacity</p>
+                  <p className="text-2xl font-bold">{totalCapacity}</p>
+                </div>
               </div>
             </div>
-            <div className="text-xl font-semibold">
-              Sort By:
-            </div>
-            <div className="mt-2 mb-4">
-              <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
-                <option value="all">Latest First</option>
-                <option value="recent">Oldest First</option>
-                <option value="recent"> Name Alphabetical A-Z</option>
-              </select>
-            </div>
-            <div className="text-xl font-semibold">
-              Type:
-            </div>
-            <div className="mt-2 mb-4">
-              <select className="w-full px-3 py-2 bg-slate-600 text-white rounded-lg">
-                <option value="all">All</option>
-                <option value="Only Intruders">Only Intruders</option>
-                <option value="Only Intruders">Only Admins</option>
-              </select>
-            </div>
-            
-
-            <div className="flex">
-              <button className="bg-slate-500 text-white px-4 py-2 mt-4 rounded-lg mr-4">
-                Reset
-              </button>
-              <button className="bg-pink-500 text-white px-4 py-2 mt-4 rounded-lg">
-                Apply
-              </button>
-            </div>
-            
 
           </div>
         </div>
