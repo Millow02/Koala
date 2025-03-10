@@ -313,9 +313,38 @@ export default function ParkingLotDetails() {
 
           </div>
         </div>
+        
+        <div className="flex mt-12">
+        <div className="border-neutral-600 border-2 rounded-3xl width" style={{ backgroundColor: "#333842", width: "900px" }}>
+            <div className="flex items-center py-4 px-6 relative">
+              <h2 className="text-2xl font-semibold absolute left-1/2 transform -translate-x-1/2">Camera Statuses</h2>
+              <div className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors">
+                <span className="mr-1">Refresh</span>
+                <ArrowPathIcon className="h-5 w-5" />
+              </div>
+            </div>
+            <hr className="border-neutral-600 border-2" />
+            <div className="relative mx-10 my-4">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search Camera"
+                className="block w-full bg-slate-600 border-none rounded-xl py-4 pl-12 pr-4 text-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-white"
+              />
+            </div>
+            <div className="overflow-y-auto rounded-b-3xl custom-scrollbar scrollbar-padding-bottom" style={{ height: "600px" }}>
+              
+             
+              
+              
+            </div>
+          </div>
+        </div>
       </div>
       {isModalOpen && selectedRecord && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
           <div className="bg-slate-800 rounded-2xl max-w-2xl w-full mx-4 overflow-hidden">
             {/* Modal header */}
             <div className="border-b border-slate-700 p-6 flex justify-between items-center">
@@ -328,7 +357,7 @@ export default function ParkingLotDetails() {
               </button>
             </div>
             
-            {/* Modal content */}
+            
             <div className="p-6">
               <div className="grid grid-cols-2 gap-6">
                 <div className="col-span-2 flex items-center mb-2">
@@ -370,7 +399,7 @@ export default function ParkingLotDetails() {
                 
               </div>
               
-                            <div className="mt-8 space-y-4">
+              <div className="mt-8 space-y-4">
                 <h3 className="text-xl font-semibold">Actions</h3>
                 <div className="flex gap-4">
                   <button className="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
@@ -383,7 +412,7 @@ export default function ParkingLotDetails() {
                   )}
                 </div>
                 
-                {/* Archive button */}
+                
                 <button className="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors flex items-center justify-center mt-4">
                   <ArchiveBoxIcon className="h-5 w-5 mr-2" />
                   <span>Set Status to Archived</span>
