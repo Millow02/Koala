@@ -11,7 +11,7 @@ class Localisation:
     def replace_model(self, model_path):
         self.model = YOLO(model_path)
 
-    def set_directories(input_, output_dir):
+    def set_directories(self, input_, output_dir):
         self.image_path = input_
         self.output_dir = output_dir
 

@@ -8,6 +8,7 @@ from alpr.localisation import Localisation
 from alpr.rectification import Rectification
 from alpr.segmentation import Segmentation
 from alpr.ocr import OCR
+from alpr.upscaler import Upscaler
 from alpr.utils import starter_log, log, add_bp, test_manager
 
 def ensure_and_clear_folder(folder_path):
@@ -59,9 +60,11 @@ def process_images(
     """
     try:
         # Instantiate ALPR components
+        tm = test_manager()
+        upscaler_ = Upscaler(sr_model)
         localiser = Localisation(localisation_model)
-        rectifier = Rectification(sr_model)
-        segmenter = Segmentation(segmentation_model)
+        rectifier = Rectification(upscaler_, tm)
+        segmenter = Segmentation(segmentation_model, upscaler_)
         # ocr_engine = OCR(ocr_model)
         
         # Directories for intermediate outputs
@@ -89,12 +92,13 @@ def process_images(
         # --- Rectification: Straighten each cropped license plate image ---
 
         rectifier.set_directories(cropped_directories, rectified_dir)
-        score = rectifier.rectify() + sementer.segment_characters()
+        score = rectifier.rectify() 
         
-        #
-        # for file in os.listdir(rectified_dir):
-        #     if file.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp')):
-        #         segmenter.segment_characters(rectified_path, segmented_dir)
+        # --- Segmentation : Segment each character ---
+        segmenter.set_directories(cropped_dir=cropped_directories, 
+                                  rectified_dir=rectified_dir, 
+                                  output_dir=segmented_dir)
+        segmenter.segment()
         #
         # segment_files = sorted([os.path.join(segmented_dir, f) 
         #                         for f in os.listdir(segmented_dir) 

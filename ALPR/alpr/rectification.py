@@ -2,6 +2,7 @@ import os
 import cv2
 import numpy as np
 from alpr.utils import log, add_bp, test_manager
+from alpr.upscaler import Upscaler
 
 class Rectification:
     """
@@ -9,8 +10,11 @@ class Rectification:
     techniques, and homography transformation. It is typically used for tasks like 
     rectifying license plate images.
     """
-    def __init__(self, sr_model_path, test_manager, output_size=(794, 400), 
-                 cropped_dir=None, output_dir=None, power_level=3):
+    def __init__(self, 
+                 upscaler, 
+                 test_manager, 
+                 output_size=(794, 400), 
+                 power_level=3):
         """
         Initialize the Rectification object with model configuration and processing parameters.
         
@@ -23,9 +27,7 @@ class Rectification:
             power_level (int, optional): Determines the threshold level for generating grayscale images.
         """
         self.output_size = output_size
-        self.sr = cv2.dnn_superres.DnnSuperResImpl_create()
-        self.sr.readModel(sr_model_path)
-        self.sr.setModel("lapsrn", 2)
+        self.sr = upscaler.get_sr() 
         self.input_height = 640
         self.input_weight = 640
         self.contour_detection_area = 0.8  # Cannot be less than 0.5
@@ -39,7 +41,7 @@ class Rectification:
         self.test_manager = test_manager
         self.power_level = power_level
 
-        # Set directories if provided
+    def set_directories(self, cropped_dir, output_dir):
         self.cropped_dir = cropped_dir
         self.output_dir = output_dir
         if self.cropped_dir and self.output_dir:
@@ -203,9 +205,7 @@ class Rectification:
         ]
         contour_elements.extend(processed_grays)
         contour_elements.extend(processed_grays_v)
-        
-        # Pass intermediate results to the test manager.
-        self.test_manager(contour_elements)
+         
         return rgb_image, contour_elements
 
     def plot_contour(self, image_input, contours_output):
@@ -217,11 +217,13 @@ class Rectification:
             contours_output (list): List to append the detected contour.
         """
         log("RECTIFICATION", "Plotting detected contour.")
-        number_plate_contour = self.draw_contours(image_input)
+        number_plate_contour = self.detect_contours(image_input)
         if number_plate_contour is not None:
             cv2.drawContours(image_input, [number_plate_contour], -1, (0, 255, 0), 3)
             contours_output.append(number_plate_contour)
             log("RECTIFICATION", "Contour with 4 corners plotted.")
+        else:
+            log("RECTIFICATION", "Did not detect contour.")
 
     def order_points(self, pts):
         """
@@ -245,7 +247,7 @@ class Rectification:
 
     def restructure_array(self, arr):
         """
-        Restructure the array of points to the required format for rectification.
+        Restructure the array of points to the required format for rectifiction.
         
         Args:
             arr (list): List of points from contour detection.
@@ -301,6 +303,7 @@ class Rectification:
             preprocessed = self.preprocess_image(image)
             processed_rgb, contour_elements = self.generate_contour_elements(preprocessed)
 
+
             detected_contours = []
             # Loop through each processed element to plot contours.
             for element in contour_elements:
@@ -352,7 +355,7 @@ class Rectification:
         log("RECTIFICATION", f"Total rectified images: {successful_rectifications}")
         return successful_rectifications
 
-    def draw_contours(self, processed_img):
+    def detect_contours(self, processed_img):
         """
         Find and return the best contour that likely represents a number plate.
         

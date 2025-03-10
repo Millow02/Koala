@@ -299,9 +299,6 @@ def generate_contours(image_path, no_plot=False):
 
     return image, output_contour 
 
-    
-
-
 def restructure_array(arr):
     """
     Takes an indivitual set of points and returns the correct format required for the rectangle detector
