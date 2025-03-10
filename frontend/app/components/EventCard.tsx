@@ -194,7 +194,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
 
   return (
     <>
-      <div className="bg-slate-600 shadow-lg rounded-lg flex h-40 mx-8 my-6 hover:border-4 hover:border-neutral-500 transition-transform duration-300"
+      <div className="bg-slate-600 shadow-lg rounded-lg flex h-40 mx-8 my-6 hover:border-2 hover:border-white transition-transform duration-300"
         onClick={openDetailsModal}>
         <div className={`${recordAttributes.status === "Attention-Required" ? "bg-red-700" : "bg-sky-900"} rounded-l-lg py-4 pl-4 text-white border-slate-600 border-2 border-r-neutral-300`} style={{ flex: "2" }}>
           <h1 className="text-l font-semibold">
