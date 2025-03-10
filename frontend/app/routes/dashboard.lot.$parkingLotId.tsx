@@ -2,7 +2,7 @@ import { useParams, Link, useOutletContext } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
-import { MagnifyingGlassIcon, XCircleIcon, CheckCircleIcon, AdjustmentsVerticalIcon, PresentationChartBarIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, XCircleIcon, CheckCircleIcon, AdjustmentsVerticalIcon, PresentationChartBarIcon, ArrowPathIcon, ArchiveBoxIcon } from "@heroicons/react/24/outline";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Chart, Doughnut } from "react-chartjs-2";
@@ -184,14 +184,24 @@ export default function ParkingLotDetails() {
   return (
     <div className="relative">
       <div className="w-full px-12 py-4">
-        <h1 className="text-3xl font-bold">{parkingLot.name}</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">{parkingLot.name}</h1>
+          <div className="flex items-center">
+            <span className="h-3 w-3 rounded-full bg-green-500 mr-2"></span>
+            <span className="text-green-500 font-medium">Active</span>
+          </div>
+        </div>
         <hr className="border-pink-500 border-1 my-6" />
         <div className="flex">
 
         
           <div className="border-neutral-600 border-2 rounded-3xl width" style={{ backgroundColor: "#333842", width: "900px" }}>
-            <div className="flex justify-center py-4">
-              <h2 className="text-2xl font-semibold">Vehicles on Premise</h2>
+            <div className="flex items-center py-4 px-6 relative">
+              <h2 className="text-2xl font-semibold absolute left-1/2 transform -translate-x-1/2">Vehicles on Premise</h2>
+              <div className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors">
+                <span className="mr-1">Refresh</span>
+                <ArrowPathIcon className="h-5 w-5" />
+              </div>
             </div>
             <hr className="border-neutral-600 border-2" />
             <div className="relative mx-10 my-4">
@@ -360,7 +370,7 @@ export default function ParkingLotDetails() {
                 
               </div>
               
-              <div className="mt-8 space-y-4">
+                            <div className="mt-8 space-y-4">
                 <h3 className="text-xl font-semibold">Actions</h3>
                 <div className="flex gap-4">
                   <button className="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
@@ -372,6 +382,12 @@ export default function ParkingLotDetails() {
                     </button>
                   )}
                 </div>
+                
+                {/* Archive button */}
+                <button className="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors flex items-center justify-center mt-4">
+                  <ArchiveBoxIcon className="h-5 w-5 mr-2" />
+                  <span>Set Status to Archived</span>
+                </button>
               </div>
             </div>
           </div>
