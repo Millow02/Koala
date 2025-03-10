@@ -34,10 +34,12 @@ const doughnutLabelPlugin = {
       ctx.font = `${fontStyle.weight || ''} ${fontStyle.size || '16px'} ${fontStyle.family || 'Arial'}`;
       ctx.fillStyle = label.color || '#fff';
       
-      // Offset for multiple lines of text
       const lineHeight = parseInt(fontStyle.size || '16', 10) * 1.2;
       const offset = (labels.length - 1) * lineHeight / 2;
-      const y = centerY + i * lineHeight - offset;
+      
+      // Add a significant vertical offset to move text lower
+      const verticalOffset = 10; // Changed from 0 to 15 pixels
+      const y = centerY + i * lineHeight - offset + verticalOffset;
       
       ctx.fillText(label.text, centerX, y);
     });
@@ -161,7 +163,7 @@ export default function ParkingLotDetails() {
           {
             text: `${currentOccupancy}`,
             font: {
-              size: '48px',
+              size: '36px',
               weight: 'bold'
             },
             color: '#EC4899'
