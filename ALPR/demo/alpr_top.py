@@ -1,7 +1,10 @@
 import os
-import cv2
-import threading
+import sys
 import shutil
+
+# Add the project root to sys.path
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, project_root)
 
 # Import our modularized ALPR classes
 from alpr.localisation import Localisation
@@ -106,15 +109,7 @@ def process_images(
             rectified_dir=rectified_dir,
             output_dir=segmented_dir,
         )
-        segmenter.segment()
-        #
-        # segment_files = sorted([os.path.join(segmented_dir, f)
-        #                         for f in os.listdir(segmented_dir)
-        #                         if f.lower().endswith(('.jpg', '.jpeg', '.png', '.bmp'))])
-        # recognized_text = ocr_engine.ocr_from_segments(segment_files)
-
-        log("TOP", "Press Enter to continue...")
-        input()  # Wait for user input
+        license_plate = segmenter.segment()
 
         # Optionally clear intermediate folders after processing
         for crop_dir in cropped_directories:
@@ -124,7 +119,7 @@ def process_images(
 
         log("TOP", "Cleared all the folders, proceeding with next step.")
         log("TOP", "-----------------------------------------------\n")
-        return "Replace this with lp number"
+        return license_plate
 
     except Exception as e:
         log("TOP", f"Error in processing thread: {str(e)}")
@@ -189,9 +184,6 @@ def main():
     """
     Main function to run the license plate detection pipeline.
     """
-    # process_thread = threading.Thread(target=process_images_sequentially)
-    # process_thread.start()
-    # process_thread.join()
     starter_log()
     process_images_sequentially()
 
