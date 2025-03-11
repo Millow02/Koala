@@ -1,0 +1,16 @@
+{
+  "name": "img2cloud",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "canvas": "^3.1.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "supabase": "^2.9.6"
+  }
+}
