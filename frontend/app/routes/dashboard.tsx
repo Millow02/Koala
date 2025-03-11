@@ -14,6 +14,7 @@ import {
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { Database } from "~/types/supabase";
 import { useEffect, useState } from "react";
+import { getSupabase } from "supabase/client";
 
 type LoaderData = {
   env: {
@@ -49,6 +50,8 @@ export default function Dashboard() {
   const [supabase] = useState(() =>
     createBrowserClient(env.SUPABASE_URL!, env.SUPABASE_ANON_KEY!)
   );
+
+  // const supabase = getSupabase();
 
   const hideSidebarRoutes = ["/dashboard/new-lot"]; // Add any routes where you want to hide sidebar
   const shouldShowSidebar = !hideSidebarRoutes.includes(location.pathname);
