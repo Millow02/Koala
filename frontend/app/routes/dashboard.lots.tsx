@@ -29,6 +29,9 @@ export default function Lots() {
   const [organizationName, setOrganizationName] = useState<string | null>(null);
   const [animatedCards, setAnimatedCards] = useState<AnimatedCardsState>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [membershipCounts, setMembershipCounts] = useState<Record<number, number>>({});
+  const [cameraCounts, setCameraCounts] = useState<Record<number, number>>({});
+  const [occupancyCounts, setOccupancyCounts] = useState<Record<number, number>>({});
 
   useEffect(() => {
     const loadLots = async () => {
@@ -77,6 +80,65 @@ export default function Lots() {
             console.error("Error fetching lots:", parkingLotError);
           } else {
             setParkingLots(parkingLotData || []);
+
+
+            if (parkingLotData && parkingLotData.length > 0) {
+              
+              const cameraCounts: Record<number, number> = {};
+              const cameraPromises = parkingLotData.map(async (lot) => {
+                const { count, error } = await supabase
+                  .from("Camera")
+                  .select("*", { count: 'exact', head: true })
+                  .eq("parkingLotId", lot.id);
+                  
+                if (error) {
+                  console.error(`Error fetching camera count for lot ${lot.id}:`, error);
+                  cameraCounts[lot.id] = 0;
+                } else {
+                  cameraCounts[lot.id] = count || 0;
+                }
+              });
+
+              const membershipCounts: Record<number, number> = {};
+              const membershipPromises = parkingLotData.map(async (lot) => {
+                const { count, error } = await supabase
+                  .from("Membership")
+                  .select("*", { count: 'exact', head: true })
+                  .eq("parkingLotId", lot.id);
+                  
+                if (error) {
+                  console.error(`Error fetching membership count for lot ${lot.id}:`, error);
+                  membershipCounts[lot.id] = 0;
+                } else {
+                  membershipCounts[lot.id] = count || 0;
+                }
+              });
+              
+              const occupancyCounts: Record<number, number> = {};
+              const occupancyPromises = parkingLotData.map(async (lot) => {
+                const { count, error } = await supabase
+                  .from("Occupancy")
+                  .select("*", { count: 'exact', head: true })
+                  .eq("facilityId", lot.id)  
+                  .eq("Status", "Active"); 
+                  
+                if (error) {
+                  console.error(`Error fetching occupancy count for lot ${lot.id}:`, error);
+                  occupancyCounts[lot.id] = 0;
+                } else {
+                  occupancyCounts[lot.id] = count || 0;
+                }
+              });
+              
+              await Promise.all([
+                ...cameraPromises,
+                ...membershipPromises, 
+                ...occupancyPromises
+              ]);
+              setCameraCounts(cameraCounts);
+              setMembershipCounts(membershipCounts);
+              setOccupancyCounts(occupancyCounts);
+            }
           }
         }
       } catch (err) {
@@ -242,18 +304,22 @@ export default function Lots() {
 
                 <p className="text-lg font-semibold">
                   Cameras Total:{" "}
-                  <span className="text-med font-normal">insert total</span>
+                  <span className="text-med font-normal">
+                    {cameraCounts[parkingLot.id] || 0}
+                  </span>
                 </p>
 
                 <p className="text-lg font-semibold">
                   Membership Total:{" "}
-                  <span className="text-med font-normal">insert total</span>
+                  <span className="text-med font-normal">
+                    {membershipCounts[parkingLot.id] || 0}
+                  </span>
                 </p>
 
                 <p className="text-lg font-semibold">
                   Current occupation:{" "}
                   <span className="text-med font-normal">
-                    {parkingLot.current_occupancy}/{parkingLot.capacity}
+                    {occupancyCounts[parkingLot.id] || 0}/{parkingLot.capacity}
                   </span>
                 </p>
               </div>
