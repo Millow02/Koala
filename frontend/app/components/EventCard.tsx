@@ -23,6 +23,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
   const [profileDetails, setProfileDetails] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [isFullscreenImage, setIsFullscreenImage] = useState(false);
   
   // Define fetchRecordAttributes outside the useEffect
   const fetchRecordAttributes = async () => {
@@ -188,6 +189,12 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
     }
   };
 
+  const toggleFullscreenImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFullscreenImage(!isFullscreenImage);
+  };
+
+
   if (!recordAttributes || !cameraDetails || !parkingLotDetails || !vehicleDetails || !profileDetails) {
     return null;
   }
@@ -257,6 +264,7 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
                     src={recordAttributes.image} 
                     alt="Vehicle capture"
                     className="h-full w-full object-cover"
+                    onClick={toggleFullscreenImage}
                     onError={(e) => {
                       const parent = e.currentTarget.parentElement;
                       if (parent) {
@@ -348,6 +356,25 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
                 Confirm
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      {isFullscreenImage && recordAttributes.image && (
+        <div 
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+          onClick={toggleFullscreenImage}
+        >
+          <div className="relative w-full h-full p-4 md:p-8 flex items-center justify-center">
+            <XMarkIcon 
+              className="absolute top-4 right-4 h-8 w-8 text-white hover:text-gray-300 cursor-pointer" 
+              onClick={toggleFullscreenImage} 
+            />
+            <img 
+              src={recordAttributes.image} 
+              alt="Vehicle capture fullscreen" 
+              className="max-h-[90vh] max-w-[90vw] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
         </div>
       )}
