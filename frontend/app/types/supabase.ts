@@ -41,21 +41,21 @@ export type Database = {
 
       Organization: {
         Row: {
-          id: string;
+          id: number;
           name: string;
-          owner: string;
+          owner: number;
           created_at: string;
         };
         Insert: {
-          id: string;
+          id: number;
           name: string;
-          owner: string;
+          owner: number;
           created_at: string;
         };
         Update: {
-          id: string;
+          id: number;
           name: string;
-          owner: string;
+          owner: number;
           created_at: string;
         };
         Relationships: [
@@ -114,29 +114,29 @@ export type Database = {
           name: string;
           description: string;
           address: string;
-          organizationId: string;
+          organizationId: number;
           capacity: string;
           current_occupancy: string;
           created_at: string; 
           picture: string;
         };
         Insert: {
-          id: string; 
+          id: number; 
           name: string;
           description: string;
           address: string;
-          organizationId: string;
+          organizationId: number;
           capacity: string;
           current_occupancy: string;
           created_at: string; 
           picture: string;
         };
         Update: {
-          id: string; 
+          id: number; 
           name: string;
           description: string;
           address: string;
-          organizationId: string;
+          organizationId: number;
           capacity: string;
           current_occupancy: string;
           created_at: string; 
