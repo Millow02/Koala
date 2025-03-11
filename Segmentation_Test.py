@@ -4,7 +4,7 @@ import os
 
 # Use the absolute path to the image file
 image_path = 'C:/Users/niraj/Desktop/Koala/img/plate5_out_processed.jpg'
-output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
+output_image_path = '{}_segmented.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
 print(f"Image path: {image_path}")

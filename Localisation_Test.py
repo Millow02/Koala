@@ -4,8 +4,8 @@ import os
 import numpy as np
 
 # Use the absolute path to the image files
-image_path = 'C:/Users/niraj/Desktop/Koala/img/plate5.jpg'
-output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
+image_path = 'C:/Users/niraj/Desktop/Koala/img/plate5_out.jpg'
+output_image_path = '{}.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
 print(f"Image path: {image_path}")
