@@ -3,7 +3,7 @@ import cv2
 import os
 
 # Use the absolute path to the image file
-image_path = 'C:/Users/niraj/Desktop/Koala/img/plate5_out_processed.jpg'
+image_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/img/plate10_processed.jpg'
 output_image_path = '{}_segmented.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -22,7 +22,7 @@ if image is None:
     exit()
 
 # Load a model
-model = YOLO('C:/Users/niraj/Desktop/Koala/improved_segmentation_model.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/OneDrive/Desktop/Koala/improved_segmentation_model.pt')  # load a custom model
 
 # Perform prediction
 results = model.predict(image)

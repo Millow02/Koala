@@ -1,9 +1,7 @@
 from ultralytics import YOLO
 
-# Load YOLOv11 model
-model = YOLO('C:/Users/niraj/Desktop/Koala/best_localisation.pt')
+# Load a YOLO11n PyTorch model
+model = YOLO("C:/Users/niraj/OneDrive/Desktop/Koala/localization_model.pt")
 
-model.export(format="ncnn")
-
-#Save model ncnn format
-model.save("C:/Users/niraj/OneDrive/Desktop/Koala/localisation_pi_model.ncnn")
+# Export the model to NCNN format
+model.export(format="ncnn")  
