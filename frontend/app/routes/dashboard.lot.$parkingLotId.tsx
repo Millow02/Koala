@@ -60,6 +60,7 @@ export default function ParkingLotDetails() {
   const [totalCapacity, setTotalCapacity] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedRecord, setSelectedRecord] = useState<any>(null);
+  const [cameras, setCameras] = useState<Array<any>>([]);
 
   const openVehicleDetailsModal = (record: any) => {
     setSelectedRecord(record);
@@ -104,6 +105,20 @@ export default function ParkingLotDetails() {
           setOccupancyRecords(occupancyData || []);
           console.log("Occupancy records:", occupancyData);
         }
+
+        const { data: cameraData, error: cameraError } = await supabase
+          .from("Camera")
+          .select("id, name, position, status")
+          .eq("parkingLotId", parkingLotId);
+
+        if (cameraError) {
+          console.error("Error fetching cameras:", cameraError);
+        } else {
+          setCameras(cameraData || []);
+          console.log("Camera data:", cameraData);
+        }
+
+
       }
     };
 
@@ -335,10 +350,47 @@ export default function ParkingLotDetails() {
               />
             </div>
             <div className="overflow-y-auto rounded-b-3xl custom-scrollbar scrollbar-padding-bottom" style={{ height: "600px" }}>
-              
-             
-              
-              
+              {cameras.length > 0 ? (
+                cameras.map((camera) => (
+                  <div key={camera.id} className="flex h-28 bg-slate-700 m-5 items-center text-xl rounded-lg">
+                    {/* Status indicator */}
+                    <div className={`h-12 w-12 ml-8 mr-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      camera.status === 'Active' ? 'bg-green-500/20' : 'bg-yellow-500/20'
+                    }`}>
+                      <div className={`h-6 w-6 rounded-full ${
+                        camera.status === 'Active' ? 'bg-green-500' : 'bg-yellow-500'
+                      }`}></div>
+                    </div>
+                    
+                    {/* Camera details */}
+                    <div className="flex flex-col">
+                      <div className="font-semibold">{camera.name || "Unnamed Camera"}</div>
+                      <div className="text-base text-gray-400">ID: {camera.id}</div>
+                    </div>
+                    
+                    <div className="flex-grow"></div>
+                    
+                    {/* Position */}
+                    <div className="mr-8 text-lg">
+                      <span className="text-gray-400">Position: </span>
+                      {camera.position || "Not specified"}
+                    </div>
+                    
+                    {/* Status */}
+                    <div className={`mr-8 py-2 px-6 rounded-lg font-medium ${
+                      camera.status === 'Active' ? 'bg-green-500/20 text-green-400' : 
+                      camera.status === 'Maintenance' ? 'bg-yellow-500/20 text-yellow-400' : 
+                      'bg-gray-500/20 text-gray-400'
+                    }`}>
+                      {camera.status || "Unknown"}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="flex h-28 justify-center items-center text-xl text-gray-400">
+                  No cameras registered for this parking lot
+                </div>
+              )}
             </div>
           </div>
         </div>
