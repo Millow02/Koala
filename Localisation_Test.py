@@ -1,9 +1,10 @@
 from ultralytics import YOLO
 import cv2
 import os
+import numpy as np
 
 # Use the absolute path to the image files
-image_path = 'C:/Users/niraj/Desktop/Koala/img/plate.jpg'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/plate5.jpg'
 output_image_path = '{}_out.jpg'.format(os.path.splitext(image_path)[0])
 
 # Debugging information
@@ -22,7 +23,7 @@ if image is None:
     exit()
 
 # Load a model
-model = YOLO('C:/Users/niraj/Desktop/Koala/best_localisation.pt')  # load a custom model
+model = YOLO('C:/Users/niraj/Desktop/Koala/localization_model.pt')  # load a custom model
 
 threshold = 0.5
 
@@ -35,29 +36,42 @@ for result in results.boxes.data.tolist():
 
     if score > threshold:
         # Draw bounding box
-        cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 4)
+        cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
         cv2.putText(image, results.names[int(class_id)].upper(), (int(x1), int(y1 - 10)),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 255, 0), 3, cv2.LINE_AA)
 
         # Crop the license plate
         cropped_plate = image[int(y1):int(y2), int(x1):int(x2)]
 
-        #Resize (zoom) and grayscale the cropped licensee
-        cropped_plate_zoomed = cv2.resize(cropped_plate,(640,480))
+        # Resize (zoom) and grayscale the cropped license plate
+        cropped_plate_zoomed = cv2.resize(cropped_plate, (640, 480))
         cropped_plate_zoomed = cv2.cvtColor(cropped_plate_zoomed, cv2.COLOR_BGR2GRAY)
 
-        #Add binarization to zoomed plate
+        # Add binarization to zoomed plate
         _, processed_plate = cv2.threshold(cropped_plate_zoomed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     
-        #Add gaussian blur
+        # Add gaussian blur
         processed_plate = cv2.GaussianBlur(processed_plate, (3, 3), 0)
 
         # Apply morphological operations to remove noise
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
         processed_plate = cv2.morphologyEx(processed_plate, cv2.MORPH_CLOSE, kernel)
 
+        # Detect skew angle
+        edges = cv2.Canny(processed_plate, 50, 150, apertureSize=3)
+        lines = cv2.HoughLines(edges, 1, np.pi / 180, 200)
+        if lines is not None:
+            angles = []
+            for rho, theta in lines[:, 0]:
+                angle = (theta - np.pi / 2) * 180 / np.pi
+                angles.append(angle)
+            median_angle = np.median(angles)
+            if abs(median_angle) > 1:  # Rotate only if the angle is significant
+                height, width = processed_plate.shape[:2]
+                rotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), 15, 1)  # Rotate by 15 degrees
+                processed_plate = cv2.warpAffine(processed_plate, rotation_matrix, (width, height))
+
         # Save the cropped and zoomed license plate
         cropped_plate_path = '{}_processed.jpg'.format(os.path.splitext(output_image_path)[0])
-        cv2.imwrite(cropped_plate_path,processed_plate)
+        cv2.imwrite(cropped_plate_path, processed_plate)
         print(f"Cropped and zoomed license plate saved to: {cropped_plate_path}")
-        print(result[0])
