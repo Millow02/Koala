@@ -243,7 +243,6 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
         <div className="flex">
 
           <div className="flex-1 my-2">
-            {/* License plate with status badge */}
             <div className="flex items-center">
               <h2 className="text-4xl font-semibold text-white">
                 <IdentificationIcon className="h-8 w-8 inline-block mr-2 mb-1 text-gray-400" />
@@ -278,7 +277,6 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
       </div>
 
       <div className="flex flex-col justify-between items-end py-4 pr-6" style={{ flex: "2" }}>
-        {/* Top section with X icon */}
         <div className="p-2 hover:bg-slate-700 rounded-full transition-colors">
           <XMarkIcon 
             className="h-6 w-6 text-neutral-400 hover:text-white cursor-pointer"
@@ -289,7 +287,6 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
           />
         </div>
         
-        {/* Bottom section with conditional button */}
         <div className="mt-auto mb-4">
           {recordAttributes.status === "Attention-Required" && (
             <button 
@@ -368,9 +365,15 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Status</p>
-                  <p className={`text-xl font-semibold ${recordAttributes.status === "Attention-Required" ? "text-red-500" : "text-green-500"}`}>
+                  <div className={`inline-flex items-center px-3 py-1 mt-1 rounded-full text-sm font-medium ${
+                    recordAttributes.status === "Attention-Required" 
+                      ? "bg-red-500/30 text-red-400 border border-red-500" 
+                      : recordAttributes.status === "Processed" 
+                      ? "bg-green-500/30 text-green-400 border border-green-500"
+                      : "bg-gray-500/30 text-gray-400 border border-gray-500"
+                  }`}>
                     {recordAttributes.status}
-                  </p>
+                  </div>
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Owner</p>
@@ -379,10 +382,6 @@ const EventCard: React.FC<EventCardProps> = ({ occupancyRecordId, onRecordUpdate
                 <div>
                   <p className="text-gray-400 text-sm">Camera</p>
                   <p className="text-xl">{cameraDetails.name}</p>
-                </div>
-                <div className="col-span-2">
-                  <p className="text-gray-400 text-sm">Occupancy</p>
-                  <p className="text-xl">{parkingLotDetails.current_occupancy} of {parkingLotDetails.capacity} spaces filled</p>
                 </div>
               </div>
               
