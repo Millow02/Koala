@@ -3,3 +3,5 @@ tensorflow
 opencv-contrib-python
 numpy 
 matplotlib
+supabase
+python-dotenv
