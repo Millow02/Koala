@@ -1,26 +1,15 @@
 from Localisation_Test import LicensePlateLocalization
 from Segmentation_Test import LicensePlateSegmentation
 import os
-from picamera2 import Picamera2
-from time import sleep
 
 # Paths to the models
-localization_model_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/localization_model_ncnn_model'
-segmentation_model_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/best_segment_model_ncnn_model'
+localization_model_path = './localization_model.pt'
+segmentation_model_path = './best_segment_model.pt'
 
-# Initialize PiCamera
-camera = Picamera2()
-
-# Capture image from PiCamera
-image_folder = 'C:/Users/niraj/OneDrive/Desktop/Koala/img'
+image_folder = './img'
 if not os.path.exists(image_folder):
     os.makedirs(image_folder)
 image_path = os.path.join(image_folder, 'captured_plate.jpg')
-
-camera.start_preview()
-sleep(5)  # Allow the camera to warm up and capture image after 5 seconds
-camera.capture(image_path)
-camera.stop_preview()
 
 output_image_path = '{}_segmented.jpg'.format(os.path.splitext(image_path)[0])
 
