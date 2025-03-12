@@ -36,18 +36,17 @@ class LicensePlateLocalization:
                 cropped_plate_zoomed = cv2.resize(cropped_plate_zoomed, (640, 480))
 
                 # Add binarization to zoomed plate
-                _, processed_plate = cv2.threshold(cropped_plate_zoomed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                #_, processed_plate = cv2.threshold(cropped_plate_zoomed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
                 # Add Gaussian blur
-                processed_plate = cv2.GaussianBlur(processed_plate, (3, 3), 0)
+                #processed_plate = cv2.GaussianBlur(processed_plate, (3, 3), 0)
 
                 # Apply morphological operations to remove noise
-                kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-                processed_plate = cv2.morphologyEx(processed_plate, cv2.MORPH_CLOSE, kernel)
+                #kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+                #processed_plate = cv2.morphologyEx(processed_plate, cv2.MORPH_CLOSE, kernel)
 
                 # Save the cropped and zoomed license plate
                 cropped_plate_path = '{}_processed.jpg'.format(os.path.splitext(output_image_path)[0])
-                cv2.imwrite(cropped_plate_path, processed_plate)
-
+                cv2.imwrite(cropped_plate_path, cropped_plate_zoomed)
                 return cropped_plate_path
         return None

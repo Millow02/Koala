@@ -35,4 +35,3 @@ class LicensePlateSegmentation:
 
         # Save the output image with bounding boxes
         cv2.imwrite(output_image_path, image)
-        
