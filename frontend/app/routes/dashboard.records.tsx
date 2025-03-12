@@ -171,7 +171,7 @@ export default function Records() {
             />
           </div>
           <div className="overflow-x-auto" >
-            <div className="overflow-y-auto rounded-lg" style={{ backgroundColor: "#333842" }}>
+            <div className="overflow-y-auto rounded-lg" style={{ backgroundColor: "#333842", height: "633px" }}>
               {loading ? (
                 <div className="flex justify-center items-center h-64">
                   <div className="loader"></div>
