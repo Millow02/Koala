@@ -87,6 +87,15 @@ export async function createNotification(
         await createNotification(organizationId, `Someone has requested to join: ${parkingLotName}`, "new_membership",`/dashboard/admin-memberships/${parkingLotId}` , supabase);
     }
 
+    export async function createIllegalVehicalNotification(
+        parkingLotName: string,
+        ownerId: number | null,
+        supabase: SupabaseClient,
+
+    ): Promise<void> {
+        await createNotification(ownerId, `A vehicle without a membership has entered parking lot: ${parkingLotName}`,"illegal_vehicle", "/dashboard/records", supabase);
+    }
+
 
     // realtime subscription
     export function subscribeToExternalEvents(

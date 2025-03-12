@@ -121,43 +121,6 @@ export default function Facilities() {
     closeSubscribeModalForm();
     setIsLoading(true);
     loadFacilities();
-
-    // if (user) {
-    //   try {
-    //     const { data: userMembershipsData } = await supabase
-    //       .from("Membership")
-    //       .select("parkingLotId")
-    //       .eq("clientId", user.id);
-
-    //     const subscribedLotIds =
-    //       userMembershipsData?.map((m) => m.parkingLotId) ?? [];
-
-    //     const { data: lotData, error: lotError } = await supabase.from(
-    //       "ParkingLot"
-    //     ).select(`
-    //       *,
-    //       Organization (
-    //         id,
-    //         name,
-    //         owner,
-    //         created_at
-    //       )
-    //     `);
-
-    //     setTimeout(() => {
-    //       setParkingLots(lotData ?? []);
-
-    //       if (lotData) {
-    //         animateParkingLotCards(lotData, setAnimatedCards);
-    //       }
-
-    //       setIsLoading(false);
-    //     }, 300);
-    //   } catch (err) {
-    //     console.error(err);
-    //     setIsLoading(false);
-    //   }
-    //  }
   };
 
   const subscribeToParkingLot = async (
