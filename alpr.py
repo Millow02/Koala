@@ -12,7 +12,7 @@ segmentation_model_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/best_segment_mo
 camera = PiCamera()
 
 # Capture image from PiCamera
-image_folder = 'C:/Users/niraj/OneDrive/Desktop/Koala/pi_image'
+image_folder = 'C:/Users/niraj/OneDrive/Desktop/Koala/img'
 if not os.path.exists(image_folder):
     os.makedirs(image_folder)
 image_path = os.path.join(image_folder, 'captured_plate.jpg')
