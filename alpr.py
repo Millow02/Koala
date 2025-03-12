@@ -1,7 +1,7 @@
 from Localisation_Test import LicensePlateLocalization
 from Segmentation_Test import LicensePlateSegmentation
 import os
-from picamera import PiCamera
+from picamera2 import Picamera2
 from time import sleep
 
 # Paths to the models
@@ -9,7 +9,7 @@ localization_model_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/localization_mo
 segmentation_model_path = 'C:/Users/niraj/OneDrive/Desktop/Koala/best_segment_model_ncnn_model'
 
 # Initialize PiCamera
-camera = PiCamera()
+camera = Picamera2()
 
 # Capture image from PiCamera
 image_folder = 'C:/Users/niraj/OneDrive/Desktop/Koala/img'
