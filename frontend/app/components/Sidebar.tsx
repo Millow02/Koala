@@ -5,9 +5,8 @@ import {
   useNavigate,
   useOutletContext,
 } from "@remix-run/react";
-import { SupabaseClient } from "@supabase/auth-helpers-remix";
+import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
-import { User } from "@supabase/supabase-js";
 import { UserIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import {
   Cog6ToothIcon,
@@ -20,10 +19,17 @@ import {
   MapIcon,
   ArrowLeftEndOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+import { subscribeToExternalEvents } from "~/models/notification";
+
+type ContextType = {
+  user: User;
+  supabase: SupabaseClient;
+};
 
 const Sidebar = () => {
-  const { supabase } = useOutletContext<{
+  const { supabase, user } = useOutletContext<{
     supabase: SupabaseClient<Database>;
+    user: User;
   }>();
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -32,7 +38,7 @@ const Sidebar = () => {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [parkingLots, setParkingLots] = useState<any[]>([]);
-  const [organizations, setOrganizations] = useState<any[]>([]);
+  const [notificationCount, setNotificationCount] = useState<any>(0);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchSidebarData = async () => {
@@ -63,22 +69,7 @@ const Sidebar = () => {
         setUserName(
           `${profileData?.first_name} ${profileData?.last_name}` || null
         );
-        // Print user role to the console
-        console.log("User role:", profileData?.role);
       }
-
-      const { data: organizationData, error: organizationError } =
-        await supabase
-          .from("Organization")
-          .select("id, name, owner")
-          .eq("owner", user.id);
-
-      if (organizationError) {
-        console.error("Error fetching organizations:", organizationError);
-        setError("Failed to load organizations");
-      }
-
-      setOrganizations(organizationData || []);
     } catch (err) {
       console.error("Unexpected error fetching sidebar data:", err);
       setError("An unexpected error occurred");
@@ -89,7 +80,37 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchSidebarData();
-  }, []);
+  }, [user, supabase]);
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    const fetchNotificationCount = async () => {
+      const { count, error } = await supabase
+        .from("notifications")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", currentUser.id)
+        .eq("is_read", false);
+
+      if (error) {
+        console.error("Error fetching notifications:", error);
+      } else {
+        setNotificationCount(count || 0);
+      }
+    };
+
+    fetchNotificationCount();
+
+    const subscription = subscribeToExternalEvents(
+      supabase,
+      currentUser.id,
+      fetchNotificationCount
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [currentUser, supabase]);
 
   const location = useLocation();
 
@@ -217,7 +238,7 @@ const Sidebar = () => {
                   `}
                   >
                     <BellIcon className="h-6 w-6 inline-block mr-2" />
-                    Notifications
+                    Notifications ({notificationCount})
                   </Link>
                 </div>
               </>

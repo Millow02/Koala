@@ -24,6 +24,7 @@ export async function createNotification(
     userId: number | null,
     content: string,
     type: string,
+    action_url: string,
     supabase: SupabaseClient,
 ): Promise<Notification> {
     const { data, error } = await supabase
@@ -33,6 +34,7 @@ export async function createNotification(
             user_id: userId,
             content,
             type,
+            action_url,
             is_read: false,
         },
     ])
@@ -47,7 +49,7 @@ export async function createNotification(
       return data;
     }
 
-    export async function markNotificationAsRead(supabase: SupabaseClient, notificationId: string): Promise<void> {
+    export async function markNotificationAsRead(supabase: SupabaseClient, notificationId: number): Promise<void> {
         const { error } = await supabase
         .from("notifications")
         .update({ is_read: true })
@@ -82,18 +84,29 @@ export async function createNotification(
         supabase: SupabaseClient,
 
     ): Promise<void> {
-        await createNotification(organizationId, `Someone has requested to join ${parkingLotName}`, "new_membership", supabase);
+        await createNotification(organizationId, `Someone has requested to join: ${parkingLotName}`, "new_membership",`/dashboard/admin-memberships/${parkingLotId}` , supabase);
     }
 
 
     // realtime subscription
-    export function subscribeToExternalEvents(supabase: SupabaseClient, userId: string, callback: () => void) {
+    export function subscribeToExternalEvents(
+        supabase: SupabaseClient, 
+        userId: string, 
+        callback: () => void
+      ) {
         return supabase
           .channel(`notifications:${userId}`)
           .on(
             "postgres_changes",
-            { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${userId}` },
-            callback
+            { 
+              event: "*", 
+              schema: "public", 
+              table: "notifications", 
+              filter: `user_id=eq.${userId}` 
+            },
+            (payload) => {
+              callback();
+            }
           )
           .subscribe();
       }
