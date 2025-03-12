@@ -3,6 +3,10 @@ import { LoaderFunction } from "@remix-run/server-runtime";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { CodeSquare, MapPinIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import {
+  createNotification,
+  createParkingRequestNotification,
+} from "~/models/notification";
 
 import { Database } from "~/types/supabase";
 
@@ -14,6 +18,9 @@ type ContextType = {
 type Profile = Database["public"]["Tables"]["Profile"]["Row"];
 type ParkingLot = Database["public"]["Tables"]["ParkingLot"]["Row"];
 type Vehicle = Database["public"]["Tables"]["Vehicle"]["Row"];
+type ParkingLotWithOwner = Database["public"]["Tables"]["ParkingLot"]["Row"] & {
+  Organization: Database["public"]["Tables"]["Organization"]["Row"];
+};
 type AnimatedCardsState = Record<number, boolean>;
 
 export const loader: LoaderFunction = async ({ params, request }) => {
@@ -26,41 +33,59 @@ export default function Facilities() {
     user: User;
   }>();
 
-  const [parkingLots, setParkingLots] = useState<ParkingLot[]>([]);
+  const [parkingLots, setParkingLots] = useState<ParkingLotWithOwner[]>([]);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [userVehicles, setUserVehicles] = useState<Vehicle[]>([]);
   const [parkingLotId, setParkingLotId] = useState<number | null>(null);
+  const [parkingLotName, setParkingLotName] = useState<string>("");
+  const [parkingLotOwner, setParkingLotOwner] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [animatedCards, setAnimatedCards] = useState<AnimatedCardsState>({});
   const [selectedVehicleId, setSelectedVehicleId] = useState<number | null>(
     null
   );
 
-  useEffect(() => {
-    const loadFacilities = async () => {
-      if (!user) return;
+  const loadFacilities = async () => {
+    if (!user) return;
 
-      try {
-        const { data: userMembershipsData } = await supabase
-          .from("Membership")
-          .select("parkingLotId")
-          .eq("clientId", user.id);
+    try {
+      const { data: userMembershipsData } = await supabase
+        .from("Membership")
+        .select("parkingLotId")
+        .eq("clientId", user.id);
 
-        const subscribedLotIds =
-          userMembershipsData?.map((m) => m.parkingLotId) ?? [];
+      const subscribedLotIds =
+        userMembershipsData?.map((m) => m.parkingLotId) ?? [];
 
-        const { data: lotData, error: lotError } = await supabase
-          .from("ParkingLot")
-          .select("*")
-          .not("id", "in", `(${subscribedLotIds.join(",")})`);
+      const query = supabase.from("ParkingLot").select(`
+          *,
+          Organization (
+            id,
+            name,
+            owner,
+            created_at
+          )
+        `);
 
-        setParkingLots(lotData ?? []);
-      } catch (err) {
-        console.error(err);
+      if (subscribedLotIds.length > 0) {
+        query.not("id", "in", `(${subscribedLotIds.join(",")})`);
       }
-    };
+
+      const { data: lotData, error: lotError } = await query;
+
+      if (lotError) {
+        console.error("Error fetching parking lots:", lotError);
+        return;
+      }
+
+      setParkingLots((lotData || []) as unknown as ParkingLotWithOwner[]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
     loadFacilities();
   }, [supabase, user]);
 
@@ -95,45 +120,13 @@ export default function Facilities() {
   const handleSuccessfulSubscription = async (): Promise<void> => {
     closeSubscribeModalForm();
     setIsLoading(true);
-
-    if (user) {
-      try {
-        const { data: userMembershipsData } = await supabase
-          .from("Membership")
-          .select("parkingLotId")
-          .eq("clientId", user.id);
-
-        const subscribedLotIds =
-          userMembershipsData?.map((m) => m.parkingLotId) ?? [];
-
-        const { data: lotData, error: lotError } = await supabase
-          .from("ParkingLot")
-          .select("*")
-          .not(
-            "id",
-            "in",
-            `(${subscribedLotIds.length > 0 ? subscribedLotIds.join(",") : 0})`
-          );
-
-        setTimeout(() => {
-          setParkingLots(lotData ?? []);
-
-          if (lotData) {
-            animateParkingLotCards(lotData, setAnimatedCards);
-          }
-
-          setIsLoading(false);
-        }, 300);
-      } catch (err) {
-        console.error(err);
-        setIsLoading(false);
-      }
-    }
+    loadFacilities();
   };
 
   const subscribeToParkingLot = async (
     parkingLotId: number | null,
-    vehicleId: number | null
+    vehicleId: number | null,
+    owner: number | null
   ) => {
     try {
       setIsSubscribing(true);
@@ -146,18 +139,32 @@ export default function Facilities() {
           clientId: user.id,
           parkingLotId: parkingLotId,
           vehicle_id: vehicleId,
+          status: "Pending",
         });
 
       if (subscribeError) throw subscribeError;
 
       await handleSuccessfulSubscription();
+      createParkingRequestNotification(
+        user.id,
+        parkingLotId,
+        parkingLotName,
+        owner,
+        supabase
+      );
     } catch (subscribeError) {
       console.error("Error subscribing:", subscribeError);
     }
   };
 
-  const openSubscribeModal = (parkingLotId: number | null) => {
+  const openSubscribeModal = (
+    parkingLotId: number,
+    parkingLotName: string,
+    owner: number
+  ) => {
     setParkingLotId(parkingLotId);
+    setParkingLotName(parkingLotName);
+    setParkingLotOwner(owner);
     setIsModalOpen(true);
     setTimeout(() => setIsAnimating(true), 50);
   };
@@ -167,6 +174,7 @@ export default function Facilities() {
     setTimeout(() => {
       setIsModalOpen(false);
       setParkingLotId(null);
+      setParkingLotOwner(null);
       setSelectedVehicleId(null);
     }, 300);
   };
@@ -233,7 +241,13 @@ export default function Facilities() {
                 <div className="w-full max-w-64 flex flex-col gap-2 mr-8">
                   <button
                     className="w-full max-w-64 min-h-12 text-lg font-semibold bg-pink-500 rounded-lg mr-8 px-4 py-2 hover:bg-pink-600 transition-colors"
-                    onClick={() => openSubscribeModal(parkingLot.id)}
+                    onClick={() =>
+                      openSubscribeModal(
+                        parkingLot.id,
+                        parkingLot.name,
+                        parkingLot.Organization?.owner
+                      )
+                    }
                   >
                     Subscribe a vehicle
                   </button>
@@ -283,7 +297,11 @@ export default function Facilities() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  subscribeToParkingLot(parkingLotId, selectedVehicleId);
+                  subscribeToParkingLot(
+                    parkingLotId,
+                    selectedVehicleId,
+                    parkingLotOwner
+                  );
                 }}
               >
                 <div className="flex flex-col gap-2">

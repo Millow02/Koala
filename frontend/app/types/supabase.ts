@@ -41,21 +41,21 @@ export type Database = {
 
       Organization: {
         Row: {
-          id: string;
+          id: number;
           name: string;
-          owner: string;
+          owner: number;
           created_at: string;
         };
         Insert: {
-          id: string;
+          id: number;
           name: string;
-          owner: string;
+          owner: number;
           created_at: string;
         };
         Update: {
-          id: string;
+          id: number;
           name: string;
-          owner: string;
+          owner: number;
           created_at: string;
         };
         Relationships: [
@@ -114,29 +114,29 @@ export type Database = {
           name: string;
           description: string;
           address: string;
-          organizationId: string;
+          organizationId: number;
           capacity: string;
           current_occupancy: string;
           created_at: string; 
           picture: string;
         };
         Insert: {
-          id: string; 
+          id: number; 
           name: string;
           description: string;
           address: string;
-          organizationId: string;
+          organizationId: number;
           capacity: string;
           current_occupancy: string;
           created_at: string; 
           picture: string;
         };
         Update: {
-          id: string; 
+          id: number; 
           name: string;
           description: string;
           address: string;
-          organizationId: string;
+          organizationId: number;
           capacity: string;
           current_occupancy: string;
           created_at: string; 
@@ -245,6 +245,7 @@ export type Database = {
         content: string;
         type: string;
         is_read: boolean;
+        action_url: string;
         created_at?: string;
       };
       Insert: {
@@ -253,6 +254,7 @@ export type Database = {
         content: string;
         type: string;
         is_read: boolean;
+        action_url: string;
         created_at?: string;
       }; 
       Update: {
@@ -261,6 +263,7 @@ export type Database = {
         content: string;
         type: string;
         is_read: boolean;
+        action_url: string;
         created_at?: string;
       };
       Relationships: [
