@@ -48,7 +48,6 @@ class LicensePlateLocalization:
                 # Save the cropped and zoomed license plate
                 cropped_plate_path = '{}_processed.jpg'.format(os.path.splitext(output_image_path)[0])
                 cv2.imwrite(cropped_plate_path, processed_plate)
-                print(f"Cropped and zoomed license plate saved to: {cropped_plate_path}")
 
                 return cropped_plate_path
         return None

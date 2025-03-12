@@ -7,7 +7,7 @@ localization_model_path = 'C:/Users/niraj/Desktop/Koala/localization_model.pt'
 segmentation_model_path = 'C:/Users/niraj/Desktop/Koala/improved_segmentation_model.pt'
 
 # Paths to the images
-image_path = 'C:/Users/niraj/Desktop/Koala/img/plate10.jpg'
+image_path = 'C:/Users/niraj/Desktop/Koala/img/images.jpg'
 output_image_path = '{}_segmented.jpg'.format(os.path.splitext(image_path)[0])
 
 # Create instances of the classes
