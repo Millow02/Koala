@@ -1,6 +1,0 @@
-ultralytics
-tensorflow
-opencv-contrib-python
-numpy 
-matplotlib
-
