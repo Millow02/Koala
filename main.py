@@ -4,7 +4,7 @@ import os
 
 # Paths to the models
 localization_model_path = 'C:/Users/niraj/Desktop/Koala/localization_model.pt'
-segmentation_model_path = 'C:/Users/niraj/Desktop/Koala/improved_segmentation_model.pt'
+segmentation_model_path = 'C:/Users/niraj/Desktop/Koala/best.pt'
 
 # Paths to the images
 image_path = 'C:/Users/niraj/Desktop/Koala/img/images.jpg'
