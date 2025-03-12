@@ -188,6 +188,92 @@ export default function ParkingLotDetails() {
     },
   };
 
+  const handleAuthorizeVehicle = async () => {
+    if (!selectedRecord) return;
+    
+    try {
+      // Update the Occupancy record
+      const { error: occupancyError } = await supabase
+        .from("Occupancy")
+        .update({ isPermitted: true })
+        .eq("id", selectedRecord.id);
+        
+      if (occupancyError) {
+        console.error("Error updating vehicle permit status:", occupancyError);
+        return;
+      }
+      
+      // If the vehicle exists, also update its status in the Vehicle table
+      if (selectedRecord.vehicleId) {
+        const { error: vehicleError } = await supabase
+          .from("Vehicle")
+          .update({ isPermitted: true })
+          .eq("id", selectedRecord.vehicleId);
+          
+        if (vehicleError) {
+          console.error("Error updating vehicle record:", vehicleError);
+        }
+      }
+      
+      // Update the local state to reflect the change
+      setSelectedRecord({
+        ...selectedRecord,
+        isPermitted: true
+      });
+      
+      // Refresh the occupancy records list
+      refreshOccupancyRecords();
+      console.log("Vehicle successfully authorized");
+      
+    } catch (err) {
+      console.error("Unexpected error authorizing vehicle:", err);
+    }
+  };
+
+
+  const handleArchiveVehicle = async () => {
+    if (!selectedRecord) return;
+    
+    try {
+      const { error } = await supabase
+        .from("Occupancy")
+        .update({ Status: "Archived" })
+        .eq("id", selectedRecord.id);
+        
+      if (error) {
+        console.error("Error archiving vehicle:", error);
+        return;
+      }
+      
+      // Refresh the occupancy records
+      refreshOccupancyRecords();
+      
+      // Close the modal
+      closeVehicleDetailsModal();
+      
+      console.log("Vehicle archived successfully");
+      
+    } catch (err) {
+      console.error("Unexpected error archiving vehicle:", err);
+    }
+  };
+
+  const refreshOccupancyRecords = async () => {
+    if (!parkingLotId) return;
+    
+    const { data: occupancyData, error: occupancyError } = await supabase
+      .from("Occupancy")
+      .select("id, vehicleId, vehicleOwner, LicensePlate, isPermitted, entryTime")
+      .eq("facilityId", parkingLotId)
+      .eq("Status", "Active");
+      
+    if (occupancyError) {
+      console.error("Error refreshing occupancy records:", occupancyError);
+    } else {
+      setOccupancyRecords(occupancyData || []);
+    }
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -314,14 +400,22 @@ export default function ParkingLotDetails() {
               <div className="h-48 relative mb-4">
                 <Doughnut data={chartData} options={chartOptions} />
               </div>
-              <div className="flex justify-between text-center mt-6 mx-5">
-                <div>
-                  <p className="text-gray-400 text-lg">Available</p>
+              <div className="flex justify-evenly text-center mt-6">
+                <div className="px-2">
+                  <p className="text-gray-400 text-sm">Available</p>
                   <p className="text-2xl font-bold">{currentAvailability}</p>
                 </div>
-                <div>
-                  <p className="text-gray-400 text-lg">Capacity</p>
+                
+                <div className="flex-1 mx-4">
+                  <p className="text-gray-400 text-sm">Capacity</p>
                   <p className="text-2xl font-bold">{totalCapacity}</p>
+                </div>
+                
+                <div className="px-2">
+                  <p className="text-gray-400 text-sm">Unauthorized</p>
+                  <p className="text-2xl font-bold text-red-400">
+                    {occupancyRecords.filter(record => !record.isPermitted).length}
+                  </p>
                 </div>
               </div>
             </div>
@@ -453,22 +547,40 @@ export default function ParkingLotDetails() {
               
               <div className="mt-8 space-y-4">
                 <h3 className="text-xl font-semibold">Actions</h3>
-                <div className="flex gap-4">
-                  <button className="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
-                    Contact Owner
-                  </button>
-                  {!selectedRecord.isPermitted && (
-                    <button className="flex-1 py-3 bg-pink-500 rounded-lg hover:bg-pink-600 transition-colors">
-                      Set to Authorized
+                <div className="flex flex-col space-y-4">
+                  {/* First row: Contact Owner / Set to Authorized buttons side by side */}
+                  <div className="flex space-x-4">
+                    <button className="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors">
+                      Contact Owner
                     </button>
-                  )}
+                    {!selectedRecord.isPermitted && (
+                      <button 
+                        className="flex-1 py-3 bg-pink-500 rounded-lg hover:bg-pink-600 transition-colors"
+                        onClick={handleAuthorizeVehicle}
+                      >
+                        Set to Authorized
+                      </button>
+                    )}
+                    {/* If the vehicle is already authorized, display a disabled or confirmation button */}
+                    {selectedRecord.isPermitted && (
+                      <button 
+                        className="flex-1 py-3 bg-green-500/20 text-green-400 rounded-lg cursor-not-allowed"
+                        disabled
+                      >
+                        Already Authorized
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Second row: Archive button full width */}
+                  <button 
+                    className="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors flex items-center justify-center"
+                    onClick={handleArchiveVehicle}
+                  >
+                    <ArchiveBoxIcon className="h-5 w-5 mr-2" />
+                    <span>Set Status to Archived</span>
+                  </button>
                 </div>
-                
-                
-                <button className="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors flex items-center justify-center mt-4">
-                  <ArchiveBoxIcon className="h-5 w-5 mr-2" />
-                  <span>Set Status to Archived</span>
-                </button>
               </div>
             </div>
           </div>
