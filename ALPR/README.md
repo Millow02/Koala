@@ -1,14 +1,3 @@
-
-1. Create .venv
-2. run pip install -r requirements.txt
-
-There is an issue where the program does not detect the alpr header.
-Before running register ALPR as the root dir:
-=======
-Below is an example of a **README.md** you can place inside your ALPR directory. It provides clear setup instructions, environment details, and usage guidelines, while also giving a brief overview of the ALPR system’s purpose and functionality.
-
----
-
 # ALPR (Automatic License Plate Recognition)
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
