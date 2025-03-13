@@ -5,6 +5,8 @@
 
 > **Koala** is a license plate tracking system that allows parking administrators to monitor incoming and outgoing vehicles using an advanced license plate recognition system. It is a web-based application built with [Remix](https://remix.run/) and [React](https://reactjs.org/).
 
+
+
 <div align="center">
   <img src="https://github.com/user-attachments/assets/2adc4731-0b49-4098-8298-c744e3fed6ed" alt="Logo 1" width="35%" style="display:inline-block; margin-right:10px;">
   <img src="https://github.com/user-attachments/assets/c0dee2be-74b7-4a03-89a4-954bb5dae2a8" alt="Logo 2" width="35%" style="display:inline-block;">
