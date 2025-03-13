@@ -218,7 +218,7 @@ def process_images_continuously(
     pics_folder="./pics",
     input_folder="./input",
     localisation_model="./models/localisation_model.pt",
-    segmentation_model="./models/segmentation_model.pt",
+    segmentation_model="./models/best_segment_model.pt",
     sr_model="./models/LapSRN_x2.pb",
     ocr_model="./models/ocr_model.h5",
 ):
