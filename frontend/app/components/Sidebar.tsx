@@ -210,7 +210,7 @@ const Sidebar = () => {
                   `}
                   >
                     <CalendarIcon className="h-6 w-6 inline-block mr-2" />
-                    Records
+                    Events
                   </Link>
                   <Link
                     to={`/dashboard/analytics`}
