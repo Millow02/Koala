@@ -1,4 +1,4 @@
-./input/*
-./output/*
-./pics/*
+**/input/
+**/output/
+**/pics/
 
