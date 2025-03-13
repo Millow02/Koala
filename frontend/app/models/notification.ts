@@ -10,7 +10,8 @@ export async function getUserNotifications(supabase: SupabaseClient, userId: str
         .from("notifications")
         .select("*")
         .eq("user_id", userId)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .limit(40);
 
     if (error) {
         console.error('Error fetching notifications:', error);
@@ -87,6 +88,8 @@ export async function createNotification(
         await createNotification(organizationId, `Someone has requested to join: ${parkingLotName}`, "new_membership",`/dashboard/admin-memberships/${parkingLotId}` , supabase);
     }
 
+
+    // this isn't used, a trigger is used to update it
     export async function createIllegalVehicalNotification(
         parkingLotName: string,
         ownerId: number | null,
