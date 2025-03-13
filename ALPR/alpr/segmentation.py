@@ -10,8 +10,8 @@ class Segmentation:
         model_path,
         upscaler,
         padding_levels=[-5, -2, 0, 5, 10, 20],
-        input_height=400,
-        input_width=794,
+        input_height=480,
+        input_width=640,
     ):
         self.model = YOLO(model_path)
         self.padding_levels = padding_levels

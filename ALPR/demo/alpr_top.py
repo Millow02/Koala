@@ -217,10 +217,10 @@ def process_images(
 def process_images_continuously(
     pics_folder="./pics",
     input_folder="./input",
-    localisation_model="./models/localisation_model.pt",
-    segmentation_model="./models/segmentation_model.pt",
-    sr_model="./models/LapSRN_x2.pb",
-    ocr_model="./models/ocr_model.h5",
+    localisation_model="../models/localisation_model.pt",
+    segmentation_model="../models/segmentation_model.pt",
+    sr_model="../models/LapSRN_x2.pb",
+    ocr_model="../models/ocr_model.h5",
 ):
     """
     Continuously monitors the pics folder and processes new images.
