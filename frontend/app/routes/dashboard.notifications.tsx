@@ -1,4 +1,4 @@
-import { useOutletContext, useRouteLoaderData } from "@remix-run/react";
+import { Link, useOutletContext, useRouteLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs } from "@remix-run/server-runtime";
 import {
   createServerClient,
@@ -8,6 +8,8 @@ import {
 import React, { useEffect, useState } from "react";
 import {
   getUserNotifications,
+  markAllNotificationsAsRead,
+  markNotificationAsRead,
   subscribeToExternalEvents,
 } from "~/models/notification";
 
@@ -25,29 +27,34 @@ export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchNotifications() {
-      if (!user) return;
+  const fetchNotifications = async () => {
+    if (!user) return;
 
-      setIsLoading(true);
+    setIsLoading(true);
 
-      try {
-        const notificationData = await getUserNotifications(supabase, user.id);
-        setNotifications(notificationData);
-      } catch (error) {
-        console.error("Error fetching notifications", error);
-      } finally {
-        setIsLoading(false);
-      }
+    try {
+      const notificationData = await getUserNotifications(supabase, user.id);
+      setNotifications(notificationData);
+    } catch (error) {
+      console.error("Error fetching notifications", error);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const handleMarkAllAsRead = async () => {
+    await markAllNotificationsAsRead(supabase, user.id);
     fetchNotifications();
-  }, [user]);
+  };
+
+  const handleMarkAsRead = async (notificationId: number) => {
+    await markNotificationAsRead(supabase, notificationId);
+  };
 
   useEffect(() => {
     if (!user) return;
 
     const refreshNotifications = async () => {
-      console.log("refreshing notifications");
       try {
         const data = await getUserNotifications(supabase, user.id);
         setNotifications(data);
@@ -70,15 +77,39 @@ export default function Notifications() {
   }, [user, supabase]);
 
   return (
-    <div>
-      <h1>Notifications</h1>
-      <ul>
+    <div className="px-32">
+      <h1 className="text-3xl">Notifications</h1>
+      <hr className="border-pink-500 border-1 mt-6 mb-12" />
+      <div className="flex justify-end mb-2">
+        <button
+          type="submit"
+          className="bg-transparent text-neutral-400 hover:text-neutral-200 transition-colors"
+          onClick={() => handleMarkAllAsRead()}
+        >
+          Mark all as read
+        </button>
+      </div>
+      <div className="flex flex-col items-center gap-3">
         {notifications.map((notification) => (
-          <li key={notification.id} className="p-2">
-            {notification.content}
-          </li>
+          <div
+            key={notification.id}
+            className={`w-full px-4 py-8 rounded-lg ${
+              notification.is_read ? "bg-neutral-700" : "bg-neutral-500"
+            }`}
+          >
+            <div className="flex justify-between items-center align-middle">
+              <p className="text-xl">{notification.content}</p>
+              <Link
+                to={notification.action_url}
+                className="text-lg text-blue-400 mr-4 underline"
+                onClick={() => handleMarkAsRead(notification.id)}
+              >
+                View Action
+              </Link>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import { LoaderFunctionArgs } from "@remix-run/server-runtime";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { useEffect, useState } from "react";
 import { Database } from "~/types/supabase";
-import { MapPinIcon } from "@heroicons/react/24/outline";
+import { MapPinIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { LoaderPinwheel } from "lucide-react";
 
 type ContextType = {
@@ -29,6 +29,9 @@ export default function Lots() {
   const [organizationName, setOrganizationName] = useState<string | null>(null);
   const [animatedCards, setAnimatedCards] = useState<AnimatedCardsState>({});
   const [isLoading, setIsLoading] = useState(false);
+  const [membershipCounts, setMembershipCounts] = useState<Record<number, number>>({});
+  const [cameraCounts, setCameraCounts] = useState<Record<number, number>>({});
+  const [occupancyCounts, setOccupancyCounts] = useState<Record<number, number>>({});
 
   useEffect(() => {
     const loadLots = async () => {
@@ -77,6 +80,65 @@ export default function Lots() {
             console.error("Error fetching lots:", parkingLotError);
           } else {
             setParkingLots(parkingLotData || []);
+
+
+            if (parkingLotData && parkingLotData.length > 0) {
+              
+              const cameraCounts: Record<number, number> = {};
+              const cameraPromises = parkingLotData.map(async (lot) => {
+                const { count, error } = await supabase
+                  .from("Camera")
+                  .select("*", { count: 'exact', head: true })
+                  .eq("parkingLotId", lot.id);
+                  
+                if (error) {
+                  console.error(`Error fetching camera count for lot ${lot.id}:`, error);
+                  cameraCounts[lot.id] = 0;
+                } else {
+                  cameraCounts[lot.id] = count || 0;
+                }
+              });
+
+              const membershipCounts: Record<number, number> = {};
+              const membershipPromises = parkingLotData.map(async (lot) => {
+                const { count, error } = await supabase
+                  .from("Membership")
+                  .select("*", { count: 'exact', head: true })
+                  .eq("parkingLotId", lot.id);
+                  
+                if (error) {
+                  console.error(`Error fetching membership count for lot ${lot.id}:`, error);
+                  membershipCounts[lot.id] = 0;
+                } else {
+                  membershipCounts[lot.id] = count || 0;
+                }
+              });
+              
+              const occupancyCounts: Record<number, number> = {};
+              const occupancyPromises = parkingLotData.map(async (lot) => {
+                const { count, error } = await supabase
+                  .from("Occupancy")
+                  .select("*", { count: 'exact', head: true })
+                  .eq("facilityId", lot.id)  
+                  .eq("Status", "Active"); 
+                  
+                if (error) {
+                  console.error(`Error fetching occupancy count for lot ${lot.id}:`, error);
+                  occupancyCounts[lot.id] = 0;
+                } else {
+                  occupancyCounts[lot.id] = count || 0;
+                }
+              });
+              
+              await Promise.all([
+                ...cameraPromises,
+                ...membershipPromises, 
+                ...occupancyPromises
+              ]);
+              setCameraCounts(cameraCounts);
+              setMembershipCounts(membershipCounts);
+              setOccupancyCounts(occupancyCounts);
+            }
           }
         }
       } catch (err) {
@@ -119,35 +181,37 @@ export default function Lots() {
   return (
     <div className="px-32">
       <div className="flex justify-between">
-        <h1 className="text-3xl">Parking Lots</h1>
+        <h1 className="text-3xl font-bold">Parking Lots</h1>
         <h1 className="text-3xl">Organization: {organizationName}</h1>
       </div>
       <hr className="border-pink-500 border-1 mt-6 mb-12" />
 
-      <div className="flex justify-start">
+      <div className="flex justify-between">
         {isLoading ? (
           <div></div>
         ) : (
-          <div className="flex justify-start">
+          <div className="flex justify-between items-center mb-4 w-full">
+          {/* Left side - Action buttons */}
+          <div className="flex gap-x-4">
             {organizationId ? (
-              <div className="flex gap-x-4 mb-4">
+              <>
                 <Link
                   to={`/dashboard/new-lot/${organizationId}`}
                   key={`new-lot-${organizationId}`}
-                  className="flex justify-center items-center text-center px-8 bg-pink-500 rounded-lg transition-colors hover:bg-pink-600"
+                  className="flex justify-center items-center text-center px-8 py-3 bg-pink-500 rounded-lg transition-colors hover:bg-pink-600"
                 >
                   New Parking Lot
                 </Link>
                 <Link
                   to={`/dashboard/organization/${organizationId}`}
                   key={`view-org-${organizationId}`}
-                  className="flex justify-center items-center text-center text-lg bg-transparent border border-white rounded-lg mr-8 px-4 py-2 hover:bg-neutral-100/10 transition-colors"
+                  className="flex justify-center items-center text-center text-lg bg-transparent border border-white rounded-lg px-4 py-2 hover:bg-neutral-100/10 transition-colors"
                 >
                   View Organization
                 </Link>
-              </div>
+              </>
             ) : (
-              <div className="flex gap-x-4 mb-4">
+              <>
                 <Link
                   to={`/dashboard/new-organization/`}
                   key="new-org"
@@ -161,9 +225,24 @@ export default function Lots() {
                 >
                   Join Organization
                 </Link>
-              </div>
+              </>
             )}
           </div>
+
+          {/* Right side - Search box */}
+          {organizationId && (
+            <div className="relative w-96">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search Parking Lot"
+                className="block w-full bg-slate-700 border-none rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-white"
+              />
+            </div>
+          )}
+        </div>
         )}
       </div>
 
@@ -225,18 +304,22 @@ export default function Lots() {
 
                 <p className="text-lg font-semibold">
                   Cameras Total:{" "}
-                  <span className="text-med font-normal">insert total</span>
+                  <span className="text-med font-normal">
+                    {cameraCounts[parkingLot.id] || 0}
+                  </span>
                 </p>
 
                 <p className="text-lg font-semibold">
                   Membership Total:{" "}
-                  <span className="text-med font-normal">insert total</span>
+                  <span className="text-med font-normal">
+                    {membershipCounts[parkingLot.id] || 0}
+                  </span>
                 </p>
 
                 <p className="text-lg font-semibold">
                   Current occupation:{" "}
                   <span className="text-med font-normal">
-                    {parkingLot.current_occupancy}/{parkingLot.capacity}
+                    {occupancyCounts[parkingLot.id] || 0}/{parkingLot.capacity}
                   </span>
                 </p>
               </div>
