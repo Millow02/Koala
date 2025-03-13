@@ -10,7 +10,8 @@ export async function getUserNotifications(supabase: SupabaseClient, userId: str
         .from("notifications")
         .select("*")
         .eq("user_id", userId)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .limit(40);
 
     if (error) {
         console.error('Error fetching notifications:', error);
@@ -24,6 +25,7 @@ export async function createNotification(
     userId: number | null,
     content: string,
     type: string,
+    action_url: string,
     supabase: SupabaseClient,
 ): Promise<Notification> {
     const { data, error } = await supabase
@@ -33,6 +35,7 @@ export async function createNotification(
             user_id: userId,
             content,
             type,
+            action_url,
             is_read: false,
         },
     ])
@@ -47,7 +50,7 @@ export async function createNotification(
       return data;
     }
 
-    export async function markNotificationAsRead(supabase: SupabaseClient, notificationId: string): Promise<void> {
+    export async function markNotificationAsRead(supabase: SupabaseClient, notificationId: number): Promise<void> {
         const { error } = await supabase
         .from("notifications")
         .update({ is_read: true })
@@ -82,18 +85,40 @@ export async function createNotification(
         supabase: SupabaseClient,
 
     ): Promise<void> {
-        await createNotification(organizationId, `Someone has requested to join ${parkingLotName}`, "new_membership", supabase);
+        await createNotification(organizationId, `Someone has requested to join: ${parkingLotName}`, "new_membership",`/dashboard/admin-memberships/${parkingLotId}` , supabase);
+    }
+
+
+    // this isn't used, a trigger is used to update it
+    export async function createIllegalVehicalNotification(
+        parkingLotName: string,
+        ownerId: number | null,
+        supabase: SupabaseClient,
+
+    ): Promise<void> {
+        await createNotification(ownerId, `A vehicle without a membership has entered parking lot: ${parkingLotName}`,"illegal_vehicle", "/dashboard/records", supabase);
     }
 
 
     // realtime subscription
-    export function subscribeToExternalEvents(supabase: SupabaseClient, userId: string, callback: () => void) {
+    export function subscribeToExternalEvents(
+        supabase: SupabaseClient, 
+        userId: string, 
+        callback: () => void
+      ) {
         return supabase
           .channel(`notifications:${userId}`)
           .on(
             "postgres_changes",
-            { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${userId}` },
-            callback
+            { 
+              event: "*", 
+              schema: "public", 
+              table: "notifications", 
+              filter: `user_id=eq.${userId}` 
+            },
+            (payload) => {
+              callback();
+            }
           )
           .subscribe();
       }

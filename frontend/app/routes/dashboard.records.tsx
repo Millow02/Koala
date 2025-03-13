@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import EventCard from "~/components/EventCard";
 import { SupabaseClient, User } from "@supabase/supabase-js";
 import { useOutletContext } from "@remix-run/react";
-import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsVerticalIcon, ArrowPathIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 type ContextType = {
   user: User;
@@ -148,26 +148,47 @@ export default function Records() {
     <div className="relative">
       <div className="w-full px-12 py-4">
         <h1 className="text-3xl font-bold">Event Record</h1>
-        <hr className="border-pink-500 border-1 my-6" />
+        <hr className="border-pink-500 border-1 mt-6" />
       </div>
-      <div className="flex justify-center" style={{width: "1400px"}}>
-        <div className="overflow-x-auto rounded-lg m-6 ml-16 border-neutral-600" style={{ height: "900px", width: "1100px", borderWidth: "2px", backgroundColor: "#333842" }}>
-          <div className="overflow-y-auto rounded-lg" style={{ backgroundColor: "#333842" }}>
-            {loading ? (
-              <div className="flex justify-center items-center h-64">
-                <div className="loader"></div>
-              </div>
-            ) : (
-              occupancyRecordIds.map((record) => (
-                <EventCard 
-                  key={record} 
-                  occupancyRecordId={record}
-                  onRecordUpdate={updateEventRecordIds} 
-                />
-              ))
-            )}
+      <div className="flex justify-center" style={{minWidth: "1200px"}}>
+        <div className="rounded-lg m-6 border-neutral-600" style={{ height: "800px", width: "1000px", borderWidth: "2px", backgroundColor: "#333842" }}>
+          <div className="flex items-center py-4 px-6 relative">
+            <h2 className="text-2xl font-semibold absolute left-1/2 transform -translate-x-1/2">All Facility Events</h2>
+            <div className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors">
+              <span className="mr-1">Refresh</span>
+              <ArrowPathIcon className="h-5 w-5" />
+            </div>
+          </div>
+          <hr className="border-neutral-600 border-2" />
+          <div className="relative mx-10 my-4">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search Event"
+              className="block w-full bg-slate-600 border-none rounded-xl py-4 pl-12 pr-4 text-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-white"
+            />
+          </div>
+          <div className="overflow-x-auto" >
+            <div className="overflow-y-auto rounded-lg" style={{ backgroundColor: "#333842", height: "633px" }}>
+              {loading ? (
+                <div className="flex justify-center items-center h-64">
+                  <div className="loader"></div>
+                </div>
+              ) : (
+                occupancyRecordIds.map((record) => (
+                  <EventCard 
+                    key={record} 
+                    occupancyRecordId={record}
+                    onRecordUpdate={updateEventRecordIds} 
+                  />
+                ))
+              )}
+            </div>
           </div>
         </div>
+        
 
         <div className="rounded-lg border-2 border-neutral-600 mt-6 p-4" style={{height: "450px", width: "250px", backgroundColor: "#333842" }}>
           <div className="flex mb-6">

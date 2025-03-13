@@ -47,46 +47,45 @@ export default function Facilities() {
     null
   );
 
-  useEffect(() => {
-    const loadFacilities = async () => {
-      if (!user) return;
+  const loadFacilities = async () => {
+    if (!user) return;
 
-      try {
-        const { data: userMembershipsData } = await supabase
-          .from("Membership")
-          .select("parkingLotId")
-          .eq("clientId", user.id);
+    try {
+      const { data: userMembershipsData } = await supabase
+        .from("Membership")
+        .select("parkingLotId")
+        .eq("clientId", user.id);
 
-        const subscribedLotIds =
-          userMembershipsData?.map((m) => m.parkingLotId) ?? [];
+      const subscribedLotIds =
+        userMembershipsData?.map((m) => m.parkingLotId) ?? [];
 
-        const query = supabase.from("ParkingLot").select(`
-            *,
-            Organization (
-              id,
-              name,
-              owner,
-              created_at
-            )
-          `);
+      const query = supabase.from("ParkingLot").select(`
+          *,
+          Organization (
+            id,
+            name,
+            owner,
+            created_at
+          )
+        `);
 
-        if (subscribedLotIds.length > 0) {
-          query.not("id", "in", `(${subscribedLotIds.join(",")})`);
-        }
-
-        const { data: lotData, error: lotError } = await query;
-
-        if (lotError) {
-          console.error("Error fetching parking lots:", lotError);
-          return;
-        }
-
-        setParkingLots((lotData || []) as unknown as ParkingLotWithOwner[]);
-      } catch (err) {
-        console.error(err);
+      if (subscribedLotIds.length > 0) {
+        query.not("id", "in", `(${subscribedLotIds.join(",")})`);
       }
-    };
 
+      const { data: lotData, error: lotError } = await query;
+
+      if (lotError) {
+        console.error("Error fetching parking lots:", lotError);
+        return;
+      }
+
+      setParkingLots((lotData || []) as unknown as ParkingLotWithOwner[]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
     loadFacilities();
   }, [supabase, user]);
 
@@ -121,43 +120,7 @@ export default function Facilities() {
   const handleSuccessfulSubscription = async (): Promise<void> => {
     closeSubscribeModalForm();
     setIsLoading(true);
-
-    if (user) {
-      try {
-        const { data: userMembershipsData } = await supabase
-          .from("Membership")
-          .select("parkingLotId")
-          .eq("clientId", user.id);
-
-        const subscribedLotIds =
-          userMembershipsData?.map((m) => m.parkingLotId) ?? [];
-
-        const { data: lotData, error: lotError } = await supabase.from(
-          "ParkingLot"
-        ).select(`
-          *,
-          Organization (
-            id,
-            name,
-            owner,
-            created_at
-          )
-        `);
-
-        setTimeout(() => {
-          setParkingLots(lotData ?? []);
-
-          if (lotData) {
-            animateParkingLotCards(lotData, setAnimatedCards);
-          }
-
-          setIsLoading(false);
-        }, 300);
-      } catch (err) {
-        console.error(err);
-        setIsLoading(false);
-      }
-    }
+    loadFacilities();
   };
 
   const subscribeToParkingLot = async (
@@ -176,6 +139,7 @@ export default function Facilities() {
           clientId: user.id,
           parkingLotId: parkingLotId,
           vehicle_id: vehicleId,
+          status: "Pending",
         });
 
       if (subscribeError) throw subscribeError;

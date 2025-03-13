@@ -245,6 +245,7 @@ export type Database = {
         content: string;
         type: string;
         is_read: boolean;
+        action_url: string;
         created_at?: string;
       };
       Insert: {
@@ -253,6 +254,7 @@ export type Database = {
         content: string;
         type: string;
         is_read: boolean;
+        action_url: string;
         created_at?: string;
       }; 
       Update: {
@@ -261,6 +263,7 @@ export type Database = {
         content: string;
         type: string;
         is_read: boolean;
+        action_url: string;
         created_at?: string;
       };
       Relationships: [
