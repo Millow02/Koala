@@ -87,7 +87,7 @@ BEGIN
       -- Only process exit for known vehicles
       UPDATE "Occupancy"
       SET "exitTime" = NEW."created_at",
-          "Status" = 'Archive'
+          "Status" = 'Archived'
       WHERE "LicensePlate" = NEW."license_plate"
         AND "facilityId" = parkingLot_id
         AND "Status" = 'Active'
