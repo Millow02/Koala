@@ -73,27 +73,6 @@ Before running the ALPR scripts, ensure the `ALPR` folder is recognized as the r
 export PYTHONPATH="/home/z4hed/COEN490/Koala/ALPR:$PYTHONPATH"
 ```
 
-# FROM MINH
-
-# Testing
-
-- make sure you at this git branch `pi2supabase`
-- open a terminal, `cd` into the `firmware/pic_capture`
-- run the python script with `python3 src.py`
-
-- open another terminal: `cd` into `ALPR`
-- open a new python virtual environment or reuse an old one, should use python version 3.8.20
-- make sure you installed all the python dependencies with `pip3 install -r requirements.txt`
-- run the script with `python3 demo/alpr_top.py` and just let it run, you can manually putting images into the `Koala/ALPR/pics` folder or just trigger the sensor to get new images (these new images will be put into the `pics` folder automatically.
-
-# Load supabase URL and SERVICE_KEY
-
-Make sure you put the `.env` file at the root of ALPR (aka this folder)
-
-# How to stop
-
-Please press `Ctrl + C` to stop the service
-=======
 
 ### 4. Usage
 
@@ -127,4 +106,27 @@ If you have questions or feedback, feel free to reach out to any of the team mem
 ---
 
 *Happy coding and plate tracking!*
+
+
+# FROM MINH
+
+### Testing
+
+- make sure you at this git branch `pi2supabase`
+- open a terminal, `cd` into the `firmware/pic_capture`
+- run the python script with `python3 src.py`
+
+- open another terminal: `cd` into `ALPR`
+- open a new python virtual environment or reuse an old one, should use python version 3.8.20
+- make sure you installed all the python dependencies with `pip3 install -r requirements.txt`
+- run the script with `python3 demo/alpr_top.py` and just let it run, you can manually putting images into the `Koala/ALPR/pics` folder or just trigger the sensor to get new images (these new images will be put into the `pics` folder automatically.
+
+### Load supabase URL and SERVICE_KEY
+
+Make sure you put the `.env` file at the root of ALPR (aka this folder)
+
+### How to stop
+
+Please press `Ctrl + C` to stop the service
+=======
 
