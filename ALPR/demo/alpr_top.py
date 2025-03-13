@@ -136,7 +136,7 @@ def process_images(
     sr_model,
     ocr_model,
     session_number=0,
-    cropped_paddings=[-5, -10, 0, 10, 20],
+    cropped_paddings=[ -5, 20],
 ):
     """
     Processes images using the ALPR pipeline by performing:

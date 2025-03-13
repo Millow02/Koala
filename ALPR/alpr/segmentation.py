@@ -9,7 +9,7 @@ class Segmentation:
         self,
         model_path,
         upscaler,
-        padding_levels=[-5, -2, 0, 5, 10, 20],
+        padding_levels=[0],
         input_height=480,
         input_width=640,
     ):

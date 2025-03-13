@@ -4,3 +4,8 @@ node_modules
 /build
 .env
 .DS_Store
+**/__pycache__/
+img/
+**/input/
+**/output/
+**/.venv/
