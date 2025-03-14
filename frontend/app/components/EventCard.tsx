@@ -103,41 +103,49 @@ const EventCard: React.FC<EventCardProps> = ({
       }
       setParkingLotDetails(parkingLotData);
 
-      // Fetch vehicle details and profile details only if status is "Processed"
+      // Fetch vehicle details and profile details
       if (recordData.status === "Processed") {
-        // Fetch vehicle details using vehicleId
-        const { data: vehicleData, error: vehicleError } = await supabase
-          .from("Vehicle")
-          .select("profile_id")
-          .eq("id", recordData.vehicleId)
-          .single();
-
-        if (vehicleError) {
-          console.error("Error fetching vehicle details:", vehicleError);
-          return;
+        if (recordData.vehicleId) {
+          // Fetch vehicle details using vehicleId
+          const { data: vehicleData, error: vehicleError } = await supabase
+            .from("Vehicle")
+            .select("profile_id")
+            .eq("id", recordData.vehicleId)
+            .single();
+        
+          if (vehicleError) {
+            console.error("Error fetching vehicle details:", vehicleError);
+            // If there's an error, set to Unknown Driver
+            setVehicleDetails({ profile_id: null });
+            setProfileDetails({ first_name: "Unknown", last_name: "Driver" });
+            return;
+          }
+          setVehicleDetails(vehicleData);
+          
+          // Fetch profile details using profile_id
+          const { data: profileData, error: profileError } = await supabase
+            .from("Profile")
+            .select(" first_name, last_name")
+            .eq("id", vehicleData.profile_id)
+            .single();
+        
+          if (profileError) {
+            console.error("Error fetching profile details:", profileError);
+            // If there's an error, set to Unknown Driver
+            setProfileDetails({ first_name: "Unknown", last_name: "Driver" });
+            return;
+          }
+          setProfileDetails(profileData);
+        } else {
+          // If Processed but no vehicleId, set to Unknown Driver
+          setVehicleDetails({ profile_id: null });
+          setProfileDetails({ first_name: "Unknown", last_name: "Driver" });
         }
-        setVehicleDetails(vehicleData);
-
-        // Fetch profile details using profile_id
-        const { data: profileData, error: profileError } = await supabase
-          .from("Profile")
-          .select(" first_name, last_name")
-          .eq("id", vehicleData.profile_id)
-          .single();
-
-        if (profileError) {
-          console.error("Error fetching profile details:", profileError);
-          return;
-        }
-        setProfileDetails(profileData);
       } else if (recordData.status === "Attention-Required") {
         // For Attention-Required status, set default values
         setVehicleDetails({ profile_id: null });
         setProfileDetails({ first_name: "Unknown", last_name: "Driver" });
-        console.log(
-          "Attention required for license plate:",
-          recordData.license_plate
-        );
+        console.log("Attention required for license plate:", recordData.license_plate);
       }
     } catch (err) {
       console.error(
