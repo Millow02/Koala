@@ -79,7 +79,8 @@ export default function Records() {
         .from("OccupancyEvent")
         .select("id")
         .in("cameraId", cameraIds)
-        .in("status", ["Processed", "Attention-Required"]);
+        .in("status", ["Processed", "Attention-Required"])
+        .order('created_at', { ascending: false });
       if (occupancyError) {
         console.error("Error fetching occupancy records:", occupancyError);
         return [];
@@ -117,27 +118,68 @@ export default function Records() {
 
 
   useEffect(() => {
-    updateEventRecordIds();
-
-    const interval = setInterval( async () => {
-      console.log("Checking for new occupancy records");
-      const newOccupancyRecordIds =  await queryEventRecordIds();
-      if (!arraysEqual(newOccupancyRecordIds, occupancyRecordIds)) {
-        setOccupancyRecordIds(newOccupancyRecordIds);
-      } else {
-        console.log("No new occupancy records found.");
+    updateEventRecordIds(); // Initial load
+    
+    console.log("Setting up realtime subscription...");
+    
+    // Set up WebSocket subscription with better error handling
+    const channel = supabase.channel('occupancy-events');
+    
+    // Set up broadcast channel for testing
+    const broadcastChannel = supabase.channel('test-channel');
+    
+    console.log("Channels created");
+    
+    // PostgreSQL subscription
+    channel.on('postgres_changes', 
+      {
+        event: '*',
+        schema: 'public',
+        table: 'OccupancyEvent'
+      }, 
+      (payload) => {
+        console.log('Real-time update received:', payload);
+        // Refresh the data when changes occur
+        updateEventRecordIds();
       }
+    ).subscribe((status, err) => {
+      console.log('DB subscription status changed:', status, err);
       
-
-
-    }, 5000);
-
-
-    return () => clearInterval(interval);
+      if (status === 'SUBSCRIBED') {
+        console.log('Successfully subscribed to real-time updates');
+      } else if (status === 'CHANNEL_ERROR') {
+        console.error('Error connecting to real-time channel:', err);
+        setTimeout(() => {
+          console.log('Attempting to reconnect...');
+          channel.subscribe();
+        }, 5000);
+      }
+    });
+    
+    // Broadcast channel subscription
+    broadcastChannel.on('broadcast', { event: 'test' }, (payload) => {
+      console.log('Received broadcast:', payload);
+    }).subscribe((status) => {
+      console.log('Broadcast subscription status:', status);
+      
+      if (status === 'SUBSCRIBED') {
+        console.log('Successfully subscribed to broadcast channel');
+        // Send a test message
+        broadcastChannel.send({
+          type: 'broadcast',
+          event: 'test',
+          payload: { message: 'Hello from client' }
+        });
+      }
+    });
+    
+    // Clean up both subscriptions when component unmounts
+    return () => {
+      console.log('Cleaning up subscriptions');
+      supabase.removeChannel(channel);
+      supabase.removeChannel(broadcastChannel);
+    };
   }, [supabase, user]);
-
-
-  
 
 
 
