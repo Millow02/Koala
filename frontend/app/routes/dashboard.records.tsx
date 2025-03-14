@@ -16,6 +16,7 @@ export default function Records() {
   const [cameraIds, setCameraIds] = useState<string[]>([]);
   const [occupancyRecordIds, setOccupancyRecordIds] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const arraysEqual = (a: any[], b: any[]) => {
     if (a.length !== b.length) return false;
@@ -182,7 +183,12 @@ export default function Records() {
   }, [supabase, user]);
 
 
-
+  const handleRefresh = async () => {
+    console.log("Manual refresh clicked");
+    setIsRefreshing(true);
+    await updateEventRecordIds();
+    setIsRefreshing(false);
+  };
 
 
 
@@ -196,9 +202,12 @@ export default function Records() {
         <div className="rounded-lg m-6 border-neutral-600" style={{ height: "800px", width: "1000px", borderWidth: "2px", backgroundColor: "#333842" }}>
           <div className="flex items-center py-4 px-6 relative">
             <h2 className="text-2xl font-semibold absolute left-1/2 transform -translate-x-1/2">All Facility Events</h2>
-            <div className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors">
+            <div 
+              className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors"
+              onClick={handleRefresh}
+            >
               <span className="mr-1">Refresh</span>
-              <ArrowPathIcon className="h-5 w-5" />
+              <ArrowPathIcon className={`h-5 w-5 ${isRefreshing ? 'animate-spin' : ''}`} />
             </div>
           </div>
           <hr className="border-neutral-600 border-2" />

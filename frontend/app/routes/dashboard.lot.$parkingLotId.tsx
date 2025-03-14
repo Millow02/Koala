@@ -61,6 +61,8 @@ export default function ParkingLotDetails() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedRecord, setSelectedRecord] = useState<any>(null);
   const [cameras, setCameras] = useState<Array<any>>([]);
+  const [isVehicleRefreshing, setIsVehicleRefreshing] = useState<boolean>(false);
+  const [isCameraRefreshing, setIsCameraRefreshing] = useState<boolean>(false);
 
   const openVehicleDetailsModal = (record: any) => {
     setSelectedRecord(record);
@@ -261,18 +263,51 @@ export default function ParkingLotDetails() {
   const refreshOccupancyRecords = async () => {
     if (!parkingLotId) return;
     
-    const { data: occupancyData, error: occupancyError } = await supabase
-      .from("Occupancy")
-      .select("id, vehicleId, vehicleOwner, LicensePlate, isPermitted, entryTime")
-      .eq("facilityId", parkingLotId)
-      .eq("Status", "Active");
-      
-    if (occupancyError) {
-      console.error("Error refreshing occupancy records:", occupancyError);
-    } else {
-      setOccupancyRecords(occupancyData || []);
+    setIsVehicleRefreshing(true);
+    
+    try {
+      const { data: occupancyData, error: occupancyError } = await supabase
+        .from("Occupancy")
+        .select("id, vehicleId, vehicleOwner, LicensePlate, isPermitted, entryTime")
+        .eq("facilityId", parkingLotId)
+        .eq("Status", "Active");
+        
+      if (occupancyError) {
+        console.error("Error refreshing occupancy records:", occupancyError);
+      } else {
+        setOccupancyRecords(occupancyData || []);
+      }
+    } catch (err) {
+      console.error("Unexpected error refreshing data:", err);
+    } finally {
+      setIsVehicleRefreshing(false);
     }
   };
+
+  const refreshCameras = async () => {
+    if (!parkingLotId) return;
+    
+    setIsCameraRefreshing(true);
+    
+    try {
+      const { data: cameraData, error: cameraError } = await supabase
+        .from("Camera")
+        .select("id, name, position, status")
+        .eq("parkingLotId", parkingLotId);
+  
+      if (cameraError) {
+        console.error("Error fetching cameras:", cameraError);
+      } else {
+        setCameras(cameraData || []);
+      }
+    } catch (err) {
+      console.error("Unexpected error refreshing cameras:", err);
+    } finally {
+      setIsCameraRefreshing(false);
+    }
+  };
+
+
 
   if (error) {
     return <div>{error}</div>;
@@ -299,9 +334,12 @@ export default function ParkingLotDetails() {
           <div className="border-neutral-600 border-2 rounded-3xl width" style={{ backgroundColor: "#333842", width: "900px" }}>
             <div className="flex items-center py-4 px-6 relative">
               <h2 className="text-2xl font-semibold absolute left-1/2 transform -translate-x-1/2">Vehicles on Premise</h2>
-              <div className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors">
+              <div 
+                className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors"
+                onClick={refreshOccupancyRecords}
+              >
                 <span className="mr-1">Refresh</span>
-                <ArrowPathIcon className="h-5 w-5" />
+                <ArrowPathIcon className={`h-5 w-5 ${isVehicleRefreshing ? 'animate-spin' : ''}`} />
               </div>
             </div>
             <hr className="border-neutral-600 border-2" />
@@ -427,9 +465,12 @@ export default function ParkingLotDetails() {
         <div className="border-neutral-600 border-2 rounded-3xl width" style={{ backgroundColor: "#333842", width: "900px" }}>
             <div className="flex items-center py-4 px-6 relative">
               <h2 className="text-2xl font-semibold absolute left-1/2 transform -translate-x-1/2">Camera Statuses</h2>
-              <div className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors">
+              <div 
+                className="ml-auto flex items-center text-gray-400 cursor-pointer p-1 rounded-lg hover:text-pink-400 hover:bg-gray-500 transition-colors"
+                onClick={refreshCameras}
+              >
                 <span className="mr-1">Refresh</span>
-                <ArrowPathIcon className="h-5 w-5" />
+                <ArrowPathIcon className={`h-5 w-5 ${isCameraRefreshing ? 'animate-spin' : ''}`} />
               </div>
             </div>
             <hr className="border-neutral-600 border-2" />
