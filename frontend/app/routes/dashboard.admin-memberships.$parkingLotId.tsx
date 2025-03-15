@@ -2,7 +2,7 @@ import { useParams, Link, useOutletContext } from "@remix-run/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
-import { MapPinIcon } from "@heroicons/react/24/outline";
+import { MapPinIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { EllipsisIcon } from "lucide-react";
 
 type ContextType = {
@@ -225,8 +225,16 @@ export default function AdminMemberships() {
     <div className="px-12 py-4">
       {parkingLot ? (
         <div>
-          <div className="flex justify-between">
-            <h1 className="text-3xl font-bold">Members</h1>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <Link 
+                to="/dashboard/lots" 
+                className="flex items-center mr-4 text-white hover:text-pink-400 transition-colors bg-gray-700 hover:bg-gray-600 py-2 px-2 rounded-full"
+              >
+                <ChevronLeftIcon className="h-5 w-5 mr-1" />
+              </Link>
+              <h1 className="text-3xl font-bold">Members</h1>
+            </div>
             <h1 className="text-3xl font-bold">{parkingLot.name}</h1>
           </div>
           <hr className="border-pink-500 border-1 my-6" />
