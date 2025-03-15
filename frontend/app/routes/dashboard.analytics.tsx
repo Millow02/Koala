@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { useParams, Link, useOutletContext } from "@remix-run/react";
 import { Chart, Doughnut, Bar, Line } from 'react-chartjs-2';
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
-import { ArrowPathIcon, ChevronDownIcon} from "@heroicons/react/24/outline";
+import { ArrowPathIcon, ChevronDownIcon, BuildingOffice2Icon, BellIcon, CalendarIcon, ChevronRightIcon} from "@heroicons/react/24/outline";
 import { 
   Chart as ChartJS, 
   ArcElement, 
@@ -516,11 +516,11 @@ export default function Analytics() {
   // Add this function to render the expected occupancy chart
   const renderExpectedOccupancyChart = () => {
     if (isExpectedLoading) {
-      return <div className="flex justify-center items-center h-64 text-gray-400">Loading data...</div>;
+      return <div className="flex justify-center items-center h-80 text-gray-400">Loading data...</div>;
     }
     
     if (!expectedOccupancyData || !expectedOccupancyData.labels || expectedOccupancyData.counts.every((count: number) => count === 0)) {
-      return <div className="flex justify-center items-center h-64 text-gray-400">No historical data available</div>;
+      return <div className="flex justify-center items-center h-80 text-gray-400">No historical data available</div>;
     }
     
     const chartData = {
@@ -1251,8 +1251,47 @@ export default function Analytics() {
             <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Links</h2>
           </div>
           <hr className="border-neutral-600 border-2" />
-          <div className="p-6">
-            
+          <div className="">
+            <ul className="">
+            <li className="hover:bg-gray-500 py-4 px-2 border-b border-neutral-600">
+              <Link 
+                to="/dashboard/lots" 
+                className="flex items-center text-lg text-white hover:text-pink-400 transition-colors group"
+              >
+                <BuildingOffice2Icon className="h-6 w-6 mr-3" />
+                <span className="flex-grow">Parking Lots</span>
+                <div className="h-7 w-7 rounded-full border border-gray-400 group-hover:border-pink-400 flex items-center justify-center">
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              </Link>
+            </li>
+              
+              <li className="hover:bg-gray-500 py-4 px-2 border-b border-neutral-600">
+                <Link 
+                  to="/dashboard/records" 
+                  className="flex items-center text-lg text-white hover:text-pink-400 transition-colors group"
+                >
+                  <CalendarIcon className="h-6 w-6 mr-3" />
+                  <span className="flex-grow">Records</span>
+                  <div className="h-7 w-7 rounded-full border border-gray-400 group-hover:border-pink-400 flex items-center justify-center">
+                    <ChevronRightIcon className="h-4 w-4" />
+                  </div>
+                </Link>
+              </li>
+              <li className="hover:bg-gray-500 py-4 px-2 border-b border-neutral-600">
+                <Link 
+                  to="/dashboard/notifications" 
+                  className="flex items-center text-lg text-white hover:text-pink-400 transition-colors group"
+                >
+                  <BellIcon className="h-6 w-6 mr-3" />
+                  <span className="flex-grow">Notifications</span>
+                  <div className="h-7 w-7 rounded-full border border-gray-400 group-hover:border-pink-400 flex items-center justify-center">
+                    <ChevronRightIcon className="h-4 w-4" />
+                  </div>
+                </Link>
+              </li>
+
+            </ul>
           </div>
         </div>
 
