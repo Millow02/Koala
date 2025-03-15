@@ -886,21 +886,34 @@ export default function Analytics() {
     }
   };
   
-
+  useEffect(() => {
+    if (supabase && organizationId) {
+      fetchDashboardStats();
+    }
+  }, [supabase, organizationId]);
 
   const renderOccupancyDoughnut = () => {
+
+    console.log("Chart rendering with stats:", {
+    statsTotal: stats.totalOccupancy,
+    capacity: totalCapacity,
+    availableCalc: Math.max(0, totalCapacity - stats.totalOccupancy)
+    });
+  
+
+    if (totalCapacity === 0 && stats.totalOccupancy === 0) {
+      return <div className="flex justify-center items-center h-48 text-gray-400">Loading data...</div>;
+    }
+  
     // Calculate available capacity
     const availableCapacity = Math.max(0, totalCapacity - stats.totalOccupancy);
+    const permittedVehicles = Math.max(0, stats.totalOccupancy - stats.totalIntruders);
     
     const chartData = {
       labels: ['Permitted Vehicles', 'Intruders', 'Available Capacity'],
       datasets: [
         {
-          data: [
-            stats.totalOccupancy - stats.totalIntruders, 
-            stats.totalIntruders,
-            availableCapacity
-          ],
+          data: [permittedVehicles, stats.totalIntruders, availableCapacity],
           backgroundColor: [
             '#10B981', // Green for permitted vehicles
             '#EF4444', // Red for intruders
@@ -950,20 +963,25 @@ export default function Analytics() {
     };
     
     // Center text plugin
-    const textCenter = {
-      id: 'textCenter',
+    const textCenterOccupancy = {
+      id: 'textCenterOccupancy',
       beforeDraw: function(chart: any) {
         const width = chart.width;
         const height = chart.height;
         const ctx = chart.ctx;
         
         ctx.restore();
-        const fontSize = (height / 180).toFixed(2);
-        ctx.font = `${fontSize}em sans-serif`;
+        const fontSize = (height / 120).toFixed(2);
+        ctx.font = `bold ${fontSize}em sans-serif`;
         ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
         
-        const text = `${stats.totalOccupancy}/${totalCapacity}`;
-        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+        const dataValues = chart.data.datasets[0].data;
+        const totalOccupied = dataValues[0] + dataValues[1]; // Permitted + Intruders
+        const totalCapacity = totalOccupied + dataValues[2]; // + Available Capacity
+        
+        const text = `${totalOccupied}/${totalCapacity}`;
+        const textX = width / 2;
         const textY = height / 2;
         
         ctx.fillStyle = 'white';
@@ -974,12 +992,17 @@ export default function Analytics() {
     
     return (
       <div className="h-48">
-        <Doughnut data={chartData} options={options} plugins={[textCenter]} />
+        <Doughnut data={chartData} options={options} plugins={[textCenterOccupancy]} />
       </div>
     );
   };
   
   const renderCamerasDoughnut = () => {
+
+    if (stats.totalCameras === 0) {
+      return <div className="flex justify-center items-center h-48 text-gray-400">Loading data...</div>;
+    }
+  
     const onlineCameras = stats.totalCameras - stats.offlineCameras;
     
     const chartData = {
@@ -1034,20 +1057,21 @@ export default function Analytics() {
     };
     
     // Center text plugin
-    const textCenter = {
-      id: 'textCenter',
+    const textCenterCameras = {
+      id: 'textCenterCameras',
       beforeDraw: function(chart: any) {
         const width = chart.width;
         const height = chart.height;
         const ctx = chart.ctx;
         
         ctx.restore();
-        const fontSize = (height / 180).toFixed(2);
-        ctx.font = `${fontSize}em sans-serif`;
+        const fontSize = (height / 120).toFixed(2);
+        ctx.font = `bold ${fontSize}em sans-serif`;
         ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
         
         const text = `${onlineCameras}/${stats.totalCameras}`;
-        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+        const textX = width / 2;
         const textY = height / 2;
         
         ctx.fillStyle = 'white';
@@ -1058,7 +1082,7 @@ export default function Analytics() {
     
     return (
       <div className="h-48">
-        <Doughnut data={chartData} options={options} plugins={[textCenter]} />
+        <Doughnut data={chartData} options={options} plugins={[textCenterCameras]} />
       </div>
     );
   };
