@@ -1093,7 +1093,7 @@ export default function Analytics() {
 
 
   return (
-    <div className="relative" style={{minHeight:"1200px"}}>
+    <div className="relative" style={{minWidth:"1200px"}}>
       <div className="w-full px-32" >
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">Analytics</h1>
