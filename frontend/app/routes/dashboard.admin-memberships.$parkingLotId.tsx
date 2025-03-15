@@ -236,9 +236,10 @@ export default function AdminMemberships() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-800">
-                  <th className="text-left p-2 w-1/4">Name</th>
-                  <th className="text-left p-2 w-1/4">Email</th>
-                  <th className="text-left p-2 w-1/4">Status</th>
+                  <th className="text-left p-2 w-1/5">Name</th>
+                  <th className="text-left p-2 w-1/5">Email</th>
+                  <th className="text-left p-2 w-1/5">License plate</th>
+                  <th className="text-left p-2 w-1/5">Status</th>
                   <th className="text-left p-2 w-1/6">Actions</th>
                 </tr>
               </thead>
@@ -255,6 +256,9 @@ export default function AdminMemberships() {
                       {membership.Profile?.last_name}
                     </td>
                     <td className="p-2">{membership.Profile?.email}</td>
+                    <td className="p-2">
+                      {membership.Vehicle?.license_plate_number}
+                    </td>
                     <td className="p-2">{membership.status}</td>
                     <td className="p-2">
                       <button
@@ -330,9 +334,10 @@ export default function AdminMemberships() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-800">
-                  <th className="text-left p-2 w-1/4">Name</th>
-                  <th className="text-left p-2 w-1/4">Email</th>
-                  <th className="text-left p-2 w-1/4">Status</th>
+                  <th className="text-left p-2 w-1/5">Name</th>
+                  <th className="text-left p-2 w-1/5">Email</th>
+                  <th className="text-left p-2 w-1/5">License plate</th>
+                  <th className="text-left p-2 w-1/5">Status</th>
                   <th className="text-left p-2 w-1/6">Actions</th>
                 </tr>
               </thead>
@@ -349,6 +354,9 @@ export default function AdminMemberships() {
                       {membership.Profile?.last_name}
                     </td>
                     <td className="p-2">{membership.Profile?.email}</td>
+                    <td className="p-2">
+                      {membership.Vehicle?.license_plate_number}
+                    </td>
                     <td className="p-2">{membership.status}</td>
                     <td className="p-2">
                       <div className="flex space-x-4">
@@ -388,9 +396,10 @@ export default function AdminMemberships() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-800">
-                  <th className="text-left p-2 w-1/4">Name</th>
-                  <th className="text-left p-2 w-1/4">Email</th>
-                  <th className="text-left p-2 w-1/4">Status</th>
+                  <th className="text-left p-2 w-1/5">Name</th>
+                  <th className="text-left p-2 w-1/5">Email</th>
+                  <th className="text-left p-2 w-1/5">License plate</th>
+                  <th className="text-left p-2 w-1/5">Status</th>
                   <th className="text-left p-2 w-1/6">Actions</th>
                 </tr>
               </thead>
@@ -407,6 +416,9 @@ export default function AdminMemberships() {
                       {membership.Profile?.last_name}
                     </td>
                     <td className="p-2">{membership.Profile?.email}</td>
+                    <td className="p-2">
+                      {membership.Vehicle?.license_plate_number}
+                    </td>
                     <td className="p-2">{membership.status}</td>
                     <td className="p-2">
                       <div className="flex space-x-4">
