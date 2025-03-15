@@ -2,7 +2,7 @@ import { useParams, Link, useOutletContext } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { Database } from "~/types/supabase";
-import { MagnifyingGlassIcon, XCircleIcon, CheckCircleIcon, AdjustmentsVerticalIcon, PresentationChartBarIcon, ArrowPathIcon, ArchiveBoxIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, XCircleIcon, CheckCircleIcon, AdjustmentsVerticalIcon, PresentationChartBarIcon, ArrowPathIcon, ArchiveBoxIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Chart, Doughnut } from "react-chartjs-2";
@@ -321,7 +321,16 @@ export default function ParkingLotDetails() {
     <div className="relative">
       <div className="w-full px-12 py-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold">{parkingLot.name}</h1>
+        <div className="flex items-center">
+            <Link 
+              to="/dashboard/lots" 
+              className="flex items-center mr-4 text-white hover:text-pink-400 transition-colors bg-gray-700 hover:bg-gray-600 py-2 px-2 rounded-full"
+            >
+              <ChevronLeftIcon className="h-5 w-5 mr-1" />
+              
+            </Link>
+            <h1 className="text-3xl font-bold">{parkingLot.name}</h1>
+          </div>
           <div className="flex items-center">
             <span className="h-3 w-3 rounded-full bg-green-500 mr-2"></span>
             <span className="text-green-500 font-medium">Active</span>
