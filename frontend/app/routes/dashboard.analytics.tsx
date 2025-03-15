@@ -777,8 +777,8 @@ export default function Analytics() {
         <hr className="border-pink-500 border-1 mt-6" />
       </div>
       
-      <div className="flex flex-wrap px-8">
-        <div className="w-1/2 pr-3">
+      <div className="flex flex-wrap justify-center max-w-[2000px] mx-auto">
+        <div className="pr-6" style={{width: "700px"}}>
           {/* Left side charts */}
           <div className="mt-12">
             <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
@@ -875,10 +875,10 @@ export default function Analytics() {
           </div>
         </div>
         
-        <div className="w-1/3 pl-3 mt-12">
+        <div className="" style={{width: "500px"}}>
           {/* Right side charts */}
           
-          <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
+          <div className="border-neutral-600 border-2 rounded-3xl mt-12" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
             <div className="flex items-center py-4 px-6 relative">
               <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Membership Growth</h2>
             </div>
