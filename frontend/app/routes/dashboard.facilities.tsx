@@ -2,6 +2,7 @@ import { Link, useOutletContext } from "@remix-run/react";
 import { LoaderFunction } from "@remix-run/server-runtime";
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { CodeSquare, MapPinIcon } from "lucide-react";
+import { ClockIcon } from "@heroicons/react/24/outline"
 import React, { useEffect, useState } from "react";
 import {
   createNotification,
@@ -20,6 +21,7 @@ type ParkingLot = Database["public"]["Tables"]["ParkingLot"]["Row"];
 type Vehicle = Database["public"]["Tables"]["Vehicle"]["Row"];
 type ParkingLotWithOwner = Database["public"]["Tables"]["ParkingLot"]["Row"] & {
   Organization: Database["public"]["Tables"]["Organization"]["Row"];
+  hours?: string;
 };
 type AnimatedCardsState = Record<number, boolean>;
 
@@ -46,6 +48,40 @@ export default function Facilities() {
   const [selectedVehicleId, setSelectedVehicleId] = useState<number | null>(
     null
   );
+  const [isHoursModalOpen, setIsHoursModalOpen] = useState(false);
+  const [currentLotHours, setCurrentLotHours] = useState<string>("");
+  const [isHoursAnimating, setIsHoursAnimating] = useState(false);
+
+
+
+  const formatTodayHours = (hoursString?: string): string => {
+    if (!hoursString) return "Hours not available";
+    
+    const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+    const today = days[new Date().getDay()];
+    
+    // Split the hours string into lines
+    const lines = hoursString.split('\n');
+    
+    // Find the line for today
+    const todayLine = lines.find(line => line.trim().startsWith(today));
+    
+    if (!todayLine) return "Closed today";
+    
+    // Extract just the hours part (remove the day prefix)
+    return todayLine.substring(todayLine.indexOf(' ') + 1).trim();
+  };
+  
+  const openHoursModal = (hours: string) => {
+    setCurrentLotHours(hours);
+    setIsHoursModalOpen(true);
+    setTimeout(() => setIsHoursAnimating(true), 50);
+  };
+  
+  const closeHoursModal = () => {
+    setIsHoursAnimating(false);
+    setTimeout(() => setIsHoursModalOpen(false), 300);
+  };
 
   const loadFacilities = async () => {
     if (!user) return;
@@ -238,6 +274,24 @@ export default function Facilities() {
                     <MapPinIcon className="h-6 w-6 inline-block mr-1" />
                     <p>{parkingLot.address}</p>
                   </div>
+                  <div className="flex">
+                    <ClockIcon className="h-6 w-6 inline-block mr-1 flex-shrink-0" />
+                    <div className="flex flex-col">
+                      <p className="text-sm text-gray-300 font-medium">Today's Hours:</p>
+                      <p>{formatTodayHours(parkingLot.hours)}</p>
+                      
+                      {/* Add view all hours button */}
+                      <button 
+                        className="text-sm text-pink-400 hover:text-pink-300 mt-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openHoursModal(parkingLot.hours || "Hours not available");
+                        }}
+                      >
+                        View all hours
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div className="w-full max-w-64 flex flex-col gap-2 mr-8">
                   <button
@@ -332,6 +386,40 @@ export default function Facilities() {
                   Subscribe
                 </button>
               </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {isHoursModalOpen && (
+        <div
+          className={`fixed inset-0 bg-gray-800 bg-opacity-80 flex items-center justify-center z-50 transition-opacity duration-300 ${
+            isHoursAnimating ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={closeHoursModal}
+        >
+          <div
+            className={`bg-neutral-800 rounded-lg shadow-xl w-1/4 transition-transform duration-300 ${
+              isHoursAnimating ? "scale-100" : "scale-95"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 mt-4">
+              <h2 className="text-white text-xl font-bold">Operating Hours</h2>
+              <button
+                className="flex items-center justify-center rounded-full p-2 hover:bg-neutral-900 transition-opacity duration-300"
+                onClick={closeHoursModal}
+              >
+                <img src="/x.svg" alt="Close" className="w-6 h-6 text-white" />
+              </button>
+            </div>
+            <hr className="bg-neutral-600 h-px border-0 my-2" />
+            <div className="px-6 py-4 text-white">
+              {currentLotHours.split('\n').map((line, index) => (
+                <div key={index} className="flex justify-between py-1">
+                  <span className="font-medium w-16">{line.split(' ')[0]}</span>
+                  <span>{line.substring(line.indexOf(' ') + 1)}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
