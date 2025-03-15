@@ -161,7 +161,7 @@ export default function Analytics() {
         return;
       }
       
-      console.log(`Found ${data?.length || 0} occupancy events for the selected week`);
+      //console.log(`Found ${data?.length || 0} occupancy events for the selected week`);
       
       // Process the data for the chart
       const dailyCounts = processOccupancyData(data || [], startDate);
@@ -235,10 +235,10 @@ export default function Analytics() {
 
   // Fetch data when selectedWeek or parkingLotId changes
   useEffect(() => {
-    if (selectedWeek && supabase) {
+    if (selectedWeek && supabase && organizationId) {
       fetchWeeklyOccupancy(selectedWeek);
     }
-  }, [selectedWeek, parkingLotId, supabase]);
+  }, [selectedWeek, parkingLotId, supabase, organizationId]);
 
   const renderWeeklyChart = () => {
     if (isLoading) {
@@ -376,7 +376,7 @@ export default function Analytics() {
         return;
       }
       
-      console.log(`Received ${data?.length || 0} records for expected occupancy chart`);
+      //console.log(`Received ${data?.length || 0} records for expected occupancy chart`);
       
       // Process the data to get averages per day of week
       const avgByDay = processExpectedOccupancy(data || []);
@@ -508,10 +508,10 @@ export default function Analytics() {
   
   // Add this effect to fetch the expected occupancy
   useEffect(() => {
-    if (supabase) {
+    if (supabase && organizationId) {
       fetchExpectedOccupancy();
     }
-  }, [parkingLotId, supabase]);
+  }, [parkingLotId, supabase, organizationId]);
   
   // Add this function to render the expected occupancy chart
   const renderExpectedOccupancyChart = () => {
@@ -694,10 +694,10 @@ export default function Analytics() {
   };
 
   useEffect(() => {
-    if (supabase) {
+    if (supabase && organizationId) {
       fetchMembershipGrowth();
     }
-  }, [supabase]);
+  }, [supabase, organizationId]);
 
   const renderMembershipChart = () => {
     if (isMembershipLoading) {
