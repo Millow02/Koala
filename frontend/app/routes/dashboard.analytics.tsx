@@ -49,6 +49,7 @@ export default function Analytics() {
   const [membershipData, setMembershipData] = useState<any>(null);
   const [isMembershipLoading, setIsMembershipLoading] = useState(true);
   const [organizationId, setOrganizationId] = useState<string | null>(null);
+  const [totalCapacity, setTotalCapacity] = useState(0);
 
   useEffect(() => {
     const fetchUserOrganization = async () => {
@@ -831,14 +832,20 @@ export default function Analytics() {
       const offlineCamerasCount = cameras?.filter(camera => camera.status !== "Active").length || 0;
       
       // Get facilities count
+      let totalCapacityValue = 0;
       const { data: facilities, error: facilityError } = await supabase
         .from("ParkingLot")
-        .select("id")
+        .select("id, capacity")
         .eq("organizationId", organizationId);
       
       if (facilityError) {
         console.error("Error fetching facilities:", facilityError);
+      } else if (facilities) {
+        // Sum up the capacity of all facilities
+        totalCapacityValue = facilities.reduce((sum, lot) => sum + (lot.capacity || 0), 0);
       }
+
+      setTotalCapacity(totalCapacityValue);
       
       // Get current active occupancy from Occupancy table
       const facilityIds = facilities?.map(f => f.id) || [];
@@ -881,6 +888,185 @@ export default function Analytics() {
   
 
 
+  const renderOccupancyDoughnut = () => {
+    // Calculate available capacity
+    const availableCapacity = Math.max(0, totalCapacity - stats.totalOccupancy);
+    
+    const chartData = {
+      labels: ['Permitted Vehicles', 'Intruders', 'Available Capacity'],
+      datasets: [
+        {
+          data: [
+            stats.totalOccupancy - stats.totalIntruders, 
+            stats.totalIntruders,
+            availableCapacity
+          ],
+          backgroundColor: [
+            '#10B981', // Green for permitted vehicles
+            '#EF4444', // Red for intruders
+            '#6B7280'  // Gray for available capacity
+          ],
+          borderColor: [
+            '#059669',
+            '#B91C1C',
+            '#4B5563'
+          ],
+          borderWidth: 1,
+          hoverOffset: 4
+        }
+      ]
+    };
+    
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          display: false,
+          position: 'bottom' as const, // Changed from 'right' to 'bottom'
+          labels: {
+            color: 'white',
+            padding: 10,
+            usePointStyle: true,
+            font: {
+              size: 11
+            },
+            boxWidth: 8
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context: any) {
+              const label = context.label || '';
+              const value = context.raw || 0;
+              const total = context.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+              const percentage = Math.round((value / total) * 100);
+              return `${label}: ${value} (${percentage}%)`;
+            }
+          }
+        }
+      }
+    };
+    
+    // Center text plugin
+    const textCenter = {
+      id: 'textCenter',
+      beforeDraw: function(chart: any) {
+        const width = chart.width;
+        const height = chart.height;
+        const ctx = chart.ctx;
+        
+        ctx.restore();
+        const fontSize = (height / 180).toFixed(2);
+        ctx.font = `${fontSize}em sans-serif`;
+        ctx.textBaseline = 'middle';
+        
+        const text = `${stats.totalOccupancy}/${totalCapacity}`;
+        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+        const textY = height / 2;
+        
+        ctx.fillStyle = 'white';
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+      }
+    };
+    
+    return (
+      <div className="h-48">
+        <Doughnut data={chartData} options={options} plugins={[textCenter]} />
+      </div>
+    );
+  };
+  
+  const renderCamerasDoughnut = () => {
+    const onlineCameras = stats.totalCameras - stats.offlineCameras;
+    
+    const chartData = {
+      labels: ['Online Cameras', 'Offline Cameras'],
+      datasets: [
+        {
+          data: [onlineCameras, stats.offlineCameras],
+          backgroundColor: [
+            '#3B82F6', // Blue for online cameras
+            '#9CA3AF'  // Gray for offline cameras
+          ],
+          borderColor: [
+            '#2563EB',
+            '#6B7280'
+          ],
+          borderWidth: 1,
+          hoverOffset: 4
+        }
+      ]
+    };
+    
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          display: false,
+          position: 'bottom' as const, // Change from 'bottom' to 'right'
+          labels: {
+            color: 'white',
+            padding: 10,
+            usePointStyle: true, // Use point style for a cleaner look
+            font: {
+              size: 11
+            },
+            boxWidth: 8 // Make legend items more compact
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context: any) {
+              const label = context.label || '';
+              const value = context.raw || 0;
+              const total = context.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+              const percentage = Math.round((value / total) * 100);
+              return `${label}: ${value} (${percentage}%)`;
+            }
+          }
+        }
+      }
+    };
+    
+    // Center text plugin
+    const textCenter = {
+      id: 'textCenter',
+      beforeDraw: function(chart: any) {
+        const width = chart.width;
+        const height = chart.height;
+        const ctx = chart.ctx;
+        
+        ctx.restore();
+        const fontSize = (height / 180).toFixed(2);
+        ctx.font = `${fontSize}em sans-serif`;
+        ctx.textBaseline = 'middle';
+        
+        const text = `${onlineCameras}/${stats.totalCameras}`;
+        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+        const textY = height / 2;
+        
+        ctx.fillStyle = 'white';
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+      }
+    };
+    
+    return (
+      <div className="h-48">
+        <Doughnut data={chartData} options={options} plugins={[textCenter]} />
+      </div>
+    );
+  };
+
+
+
+
+
 
   return (
     <div className="relative" style={{minHeight:"1200px"}}>
@@ -898,120 +1084,116 @@ export default function Analytics() {
         <hr className="border-pink-500 border-1 mt-6" />
       </div>
       
-      <div className="flex flex-wrap justify-center max-w-[2000px] mx-auto">
+      <div className="flex flex-wrap justify-center mt-12 max-w-[2000px] mx-auto">
         <div className="pr-6" style={{width: "700px"}}>
           {/* Left side charts */}
-          <div className="mt-12">
-            <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
-              <div className="flex items-center py-4 px-6 relative">
-                <h2 className="text-2xl font-semibold">Weekly Occupancy</h2>
-                
-                <div className="ml-auto flex items-center space-x-4">
-                  {/*Parking lot selector
-                  <div className="relative">
-                    <select 
-                      className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
-                      value={parkingLotId}
-                      onChange={(e) => setParkingLotId(e.target.value)}
-                    >
-                      <option value="">All Facilities</option>
-                      {parkingLots.map((lot) => (
-                        <option key={lot.id} value={lot.id}>
-                          {lot.name}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                      <ChevronDownIcon className="h-4 w-4 text-white" />
-                    </div>
-                  </div>
-                  */}
-                  
-                  {/* Week selector */}
-                  <div className="relative">
-                    <select 
-                      className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
-                      value={selectedWeek.toISOString()}
-                      onChange={(e) => {
-                        setSelectedWeek(new Date(e.target.value));
-                      }}
-                    >
-                      {previousWeeks.map((week, index) => (
-                        <option 
-                          key={week.toISOString()} 
-                          value={week.toISOString()}
-                        >
-                          {index === 0 ? 'Current Week' : `Week of ${week.toLocaleDateString()}`}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                      <ChevronDownIcon className="h-4 w-4 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <hr className="border-neutral-600 border-2" />
-              
-              <div className="p-6">
-                {renderWeeklyChart()}
-              </div>
-            </div>
-          </div>
           
-          <div className="mt-6">
-            <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
-              <div className="flex items-center py-4 px-6 relative">
-                <h2 className="text-2xl font-semibold">Expected Occupancy</h2>
-                
-                <div className="ml-auto flex items-center space-x-4">
-                  {/* Parking lot selector - reuse the same one as above 
-                  <div className="relative">
-                    <select 
-                      className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
-                      value={parkingLotId}
-                      onChange={(e) => setParkingLotId(e.target.value)}
-                    >
-                      <option value="">All Facilities</option>
-                      {parkingLots.map((lot) => (
-                        <option key={lot.id} value={lot.id}>
-                          {lot.name}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                      <ChevronDownIcon className="h-4 w-4 text-white" />
-                    </div>
-                  </div>*/}
-                </div>
-              </div>
-              
-              <hr className="border-neutral-600 border-2" />
-              
-              <div className="p-6">
-                {renderExpectedOccupancyChart()}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="" style={{width: "500px"}}>
-          {/* Right side charts */}
-          
-          <div className="border-neutral-600 border-2 rounded-3xl mt-12" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
+          <div className="border-neutral-600 border-2 rounded-3xl mb-6" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
             <div className="flex items-center py-4 px-6 relative">
-              <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Membership Growth</h2>
+              <h2 className="text-2xl font-semibold">Weekly Occupancy</h2>
+              
+              <div className="ml-auto flex items-center space-x-4">
+                {/*Parking lot selector
+                <div className="relative">
+                  <select 
+                    className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
+                    value={parkingLotId}
+                    onChange={(e) => setParkingLotId(e.target.value)}
+                  >
+                    <option value="">All Facilities</option>
+                    {parkingLots.map((lot) => (
+                      <option key={lot.id} value={lot.id}>
+                        {lot.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <ChevronDownIcon className="h-4 w-4 text-white" />
+                  </div>
+                </div>
+                */}
+                
+                {/* Week selector */}
+                <div className="relative">
+                  <select 
+                    className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
+                    value={selectedWeek.toISOString()}
+                    onChange={(e) => {
+                      setSelectedWeek(new Date(e.target.value));
+                    }}
+                  >
+                    {previousWeeks.map((week, index) => (
+                      <option 
+                        key={week.toISOString()} 
+                        value={week.toISOString()}
+                      >
+                        {index === 0 ? 'Current Week' : `Week of ${week.toLocaleDateString()}`}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <ChevronDownIcon className="h-4 w-4 text-white" />
+                  </div>
+                </div>
+              </div>
             </div>
             
             <hr className="border-neutral-600 border-2" />
             
             <div className="p-6">
+              {renderWeeklyChart()}
+            </div>
+          </div>
+          
+          <div className="border-neutral-600 border-2 rounded-3xl mb-6" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
+            <div className="flex items-center py-4 px-6 relative">
+              <h2 className="text-2xl font-semibold">Expected Occupancy</h2>
+              
+              <div className="ml-auto flex items-center space-x-4">
+                {/* Parking lot selector - reuse the same one as above 
+                <div className="relative">
+                  <select 
+                    className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
+                    value={parkingLotId}
+                    onChange={(e) => setParkingLotId(e.target.value)}
+                  >
+                    <option value="">All Facilities</option>
+                    {parkingLots.map((lot) => (
+                      <option key={lot.id} value={lot.id}>
+                        {lot.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <ChevronDownIcon className="h-4 w-4 text-white" />
+                  </div>
+                </div>*/}
+              </div>
+            </div>
+            
+            <hr className="border-neutral-600 border-2" />
+            
+            <div className="p-6">
+              {renderExpectedOccupancyChart()}
+            </div>
+          </div>
+          
+        </div>
+        
+        <div className="" style={{width: "500px"}}>
+          {/* Right side charts */}
+          
+          <div className="border-neutral-600 border-2 rounded-3xl mb-6" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
+            <div className="flex items-center py-4 px-6 relative">
+              <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Membership Growth</h2>
+            </div>
+            <hr className="border-neutral-600 border-2" />
+            <div className="p-6">
               {renderMembershipChart()}
             </div>
           </div>
           
-          <div className="border-neutral-600 border-2 rounded-3xl mt-6" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
+          <div className="border-neutral-600 border-2 rounded-3xl mb-6" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
             <div className="flex items-center py-4 px-6 relative">
               <h2 className="text-2xl font-semibold">Current Status</h2>
             </div>
@@ -1020,9 +1202,9 @@ export default function Analytics() {
             
             <div className="p-6" style={{height: "368px"}}>
               {/* Create two distinct columns */}
-              <div className="flex">
+              <div className="flex h-full">
                 {/* Left column */}
-                <div className="w-1/2 pr-4">
+                <div className="w-1/2 pr-4 flex flex-col justify-center">
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Members</h3>
                     <p className="text-3xl font-bold text-pink-400">{stats.totalMembers}</p>
@@ -1038,7 +1220,7 @@ export default function Analytics() {
                 </div>
                 
                 {/* Right column */}
-                <div className="w-1/2 pl-4">
+                <div className="w-1/2 pl-4 flex flex-col justify-center">
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Facilities</h3>
                     <p className="text-3xl font-bold text-pink-400">{stats.totalFacilities}</p>
@@ -1060,6 +1242,42 @@ export default function Analytics() {
 
 
       </div>
+        
+      <div className="flex flex-wrap justify-center max-w-[2000px] mx-auto">
+
+
+        <div className="border-neutral-600 border-2 rounded-3xl mb-6 mr-6" style={{ backgroundColor: "#333842", width: "350px", minWidth: "300px" }}>
+          <div className="flex items-center py-4 px-6 relative">
+            <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Links</h2>
+          </div>
+          <hr className="border-neutral-600 border-2" />
+          <div className="p-6">
+            
+          </div>
+        </div>
+
+        <div className="border-neutral-600 border-2 rounded-3xl mb-6" style={{ backgroundColor: "#333842", width: "825px", minWidth: "300px" }}>
+          <div className="flex items-center py-4 px-6 relative">
+            <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Detailed Current Status</h2>
+          </div>
+          <hr className="border-neutral-600 border-2" />
+          <div className="p-6">
+            <div className="flex flex-row gap-8">
+              <div className="w-1/2">
+                <h3 className="text-lg font-semibold mb-2 text-center">Occupancy</h3>
+                {renderOccupancyDoughnut()}
+              </div>
+              
+              <div className="w-1/2">
+                <h3 className="text-lg font-semibold mb-2 text-center">Cameras</h3>
+                {renderCamerasDoughnut()}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   );
 }
