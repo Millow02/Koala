@@ -71,7 +71,6 @@ export default function Index() {
 
   return (
     <div className="h-screen flex items-center pb-40 justify-center bg-gradient-to-br from-[#0f0f1e] via-[#1a1a2e] to-[#232342] relative overflow-hidden icy-pink-overlay">
-      {/* <Navbar isSignedIn={isSignedIn} user={user} /> */}
       <div className="flex gap-x-96 items-center">
         <div className="flex flex-col items-start">
           <h1 className="leading text-9xl font-bold text-white">Koala</h1>
@@ -80,9 +79,18 @@ export default function Index() {
           </h3>
         </div>
         <div className="border-2 rounded-xl p-4 hover:bg-neutral-400/10 transition-colors">
-          <Link to="sign-in" className="text-white text-4xl flex gap-x-4">
-            Get started <ArrowRight className="h-10 w-10"></ArrowRight>
-          </Link>
+          {isSignedIn ? (
+            <Link
+              to="/dashboard/lots"
+              className="text-white text-4xl flex gap-x-4"
+            >
+              Get started <ArrowRight className="h-10 w-10"></ArrowRight>
+            </Link>
+          ) : (
+            <Link to="sign-in" className="text-white text-4xl flex gap-x-4">
+              Get started <ArrowRight className="h-10 w-10"></ArrowRight>
+            </Link>
+          )}
         </div>
       </div>
     </div>

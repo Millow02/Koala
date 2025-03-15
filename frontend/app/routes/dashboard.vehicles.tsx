@@ -52,7 +52,7 @@ export default function Vehicles() {
     };
 
     loadVehicles();
-  }, [supabase, user]);
+  }, [supabase, user, vehicles]);
 
   const openCreateVehicleForm = () => {
     setIsModalOpen(true);
@@ -73,23 +73,27 @@ export default function Vehicles() {
       setMessage("All fields are required");
       return;
     }
+
+    let trimmedLicensePlate = licensePlate.replace(/\s+/g, "").toUpperCase();
+
     try {
       const { error } = await supabase.from("Vehicle").insert([
         {
           profile_id: user.id,
           name: vehicleName,
           model,
-          license_plate_number: licensePlate,
+          license_plate_number: trimmedLicensePlate,
         },
       ]);
 
       if (error) {
         setMessage("Error creating vehicle: " + error.message);
       } else {
-        setMessage("Vehicle created successfully!");
+        setMessage("");
         setVehicleName("");
         setModel("");
         setLicensePlate("");
+        closeCreateVehicleForm();
       }
     } catch (error) {
       setMessage("Unexpected error has occured");
@@ -163,11 +167,12 @@ export default function Vehicles() {
 
   return (
     <div className="relative">
-      <div className="w-full px-12 py-4">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold ">My Vehicles</h1>
+      <div className="w-full px-32">
+        <h1 className="text-3xl font-bold">Vehicles</h1>
+        <hr className="border-pink-500 border-1 mt-6 mb-8" />
+        <div className="flex justify-end mb-4">
           <button
-            className="text-base bg-pink-500 rounded-lg p-2 hover:text-gray-600 hover:scale-105 transition-transform duration-300 active:bg-pink-600 active:text-gray-600"
+            className="text-base bg-pink-500 rounded-lg p-2 hover:bg-pink-600 active:bg-pink-600 transition-colors"
             onClick={openCreateVehicleForm}
           >
             Add Vehicle
@@ -198,7 +203,7 @@ export default function Vehicles() {
                   key={vehicle.id}
                   className={`
                   ${index % 2 === 0 ? "bg-slate-600" : "bg-neutral-800"}
-                  text-white hover:bg-neutral-600 transition-colors duration-200
+                  text-white
                 `}
                 >
                   <td className="px-6 py-4 text-sm whitespace-nowrap">

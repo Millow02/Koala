@@ -64,10 +64,11 @@ export default function Preferences() {
     loadPreferences();
   }, [supabase, user]);
 
-    const handleSave = async () => {
+  const handleSave = async () => {
     try {
-      const { error } = await supabase.from("Profile").update(
-        {
+      const { error } = await supabase
+        .from("Profile")
+        .update({
           first_name: firstName,
           last_name: lastName,
           email: email,
@@ -86,9 +87,9 @@ export default function Preferences() {
         setPopupVisible(true);
         setTimeout(() => setPopupVisible(false), 3000);
         console.log("Profile updated successfully");
-        console.log("user id: " , user.id);
-        console.log("user: " , user);
-        console.log("first name: " , firstName);
+        console.log("user id: ", user.id);
+        console.log("user: ", user);
+        console.log("first name: ", firstName);
       }
     } catch (err) {
       console.error("Unexpected error:", err);
@@ -104,72 +105,90 @@ export default function Preferences() {
   };
 
   //check if fields have been modified
-  const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>, value: string) => {
+  const handleChange = (
+    setter: React.Dispatch<React.SetStateAction<string>>,
+    value: string
+  ) => {
     setter(value);
     setIsModified(
       value !== originalFirstName ||
-      value !== originalLastName ||
-      value !== originalEmail ||
-      value !== originalPhoneNumber
+        value !== originalLastName ||
+        value !== originalEmail ||
+        value !== originalPhoneNumber
     );
   };
-  
+
   return (
     <div className="relative">
-      <div className="w-full px-12 py-4">
-        <div className=" items-center mb-8">
+      <div className="w-full px-32">
+        <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Preferences</h1>
           <hr className="border-pink-500 border-1 my-6" />
 
           <div className="mb-14">
-            <h2 className="text-2xl font-semibold text-white">Profile Picture</h2>
-              <div className="flex flex-col w-3/5 pl-6 mt-5 p-6 rounded-lg border-neutral-600 border-2" style={{ backgroundColor: "#333842" }}>
-                <div className="flex">
-                  <UserIcon className="h-20 w-20 text-white border rounded-full bg-slate-600" />
-                  <button className="flex items-center text-white bg-pink-500 px-4 rounded-lg my-4 mx-8 font-semibold hover:scale-105 transition-transform duration-300 hover:text-gray-600">
-                    Upload Picture
-                    <Pen className="h-6 w-6 ml-4" />
-                  </button>
-                  <div className="mt-7 ml-20">Must be JPEG or PNG and cannot exceed 10MB.</div>
+            <h2 className="text-2xl font-semibold text-white">
+              Profile Picture
+            </h2>
+            <div
+              className="flex flex-col w-3/5 pl-6 mt-5 p-6 rounded-lg border-neutral-600 border-2"
+              style={{ backgroundColor: "#333842" }}
+            >
+              <div className="flex">
+                <UserIcon className="h-20 w-20 text-white border rounded-full bg-slate-600" />
+                <button className="flex items-center text-white bg-pink-500 px-4 rounded-lg my-4 mx-8 font-semibold hover:scale-105 transition-transform duration-300 hover:text-gray-600">
+                  Upload Picture
+                  <Pen className="h-6 w-6 ml-4" />
+                </button>
+                <div className="mt-7 ml-20">
+                  Must be JPEG or PNG and cannot exceed 10MB.
                 </div>
               </div>
-          </div>
-
-          <div className="mb-14"> 
-            <h2 className="text-2xl font-semibold text-white">Profile Settings</h2>
-            <div className="flex flex-col w-3/5 pl-6 mt-5 p-6 rounded-lg border-neutral-600 border-2" style={{ backgroundColor: "#333842" }}>
-              <div className="mb-10 flex">
-                  <label className="min-w-40 text-lg font-medium text-white mt-2">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => handleChange(setFirstName, e.target.value)}
-                    className="w-full rounded-lg px-3 py-2  bg-slate-600 font-medium"
-                    placeholder="Enter first name"
-                  />
-                </div>
-                <div className="flex">
-                  <label className="min-w-40 text-lg font-medium text-white mt-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => handleChange(setLastName, e.target.value)}
-                    className="w-full rounded-lg px-3 py-2 bg-slate-600 font-medium"
-                    placeholder="Enter last name"
-                  />
-                </div>
             </div>
           </div>
 
-
+          <div className="mb-14">
+            <h2 className="text-2xl font-semibold text-white">
+              Profile Settings
+            </h2>
+            <div
+              className="flex flex-col w-3/5 pl-6 mt-5 p-6 rounded-lg border-neutral-600 border-2"
+              style={{ backgroundColor: "#333842" }}
+            >
+              <div className="mb-10 flex">
+                <label className="min-w-40 text-lg font-medium text-white mt-2">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => handleChange(setFirstName, e.target.value)}
+                  className="w-full rounded-lg px-3 py-2  bg-slate-600 font-medium"
+                  placeholder="Enter first name"
+                />
+              </div>
+              <div className="flex">
+                <label className="min-w-40 text-lg font-medium text-white mt-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => handleChange(setLastName, e.target.value)}
+                  className="w-full rounded-lg px-3 py-2 bg-slate-600 font-medium"
+                  placeholder="Enter last name"
+                />
+              </div>
+            </div>
+          </div>
 
           <div className="mb-14">
-            <h2 className="text-2xl font-semibold text-white">Contact Information</h2>
-            <div className="flex flex-col w-3/5 pl-6 mt-5 p-6 rounded-lg border-neutral-600 border-2" style={{ backgroundColor: "#333842" }}>
+            <h2 className="text-2xl font-semibold text-white">
+              Contact Information
+            </h2>
+            <div
+              className="flex flex-col w-3/5 pl-6 mt-5 p-6 rounded-lg border-neutral-600 border-2"
+              style={{ backgroundColor: "#333842" }}
+            >
               <div className="mb-10 flex">
                 <label className="min-w-40 text-lg font-medium text-white mt-2">
                   Email
@@ -224,12 +243,17 @@ export default function Preferences() {
               Save
             </button>
           </div>
+        </div>
       </div>
-    </div>
-    {popupVisible && (
+      {popupVisible && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="p-8 rounded-lg shadow-lg border-neutral-600 border-2" style={{ backgroundColor: "#333842" }}>
-            <p className="text-white font-semibold text-lg">Profile updated successfully!</p>
+          <div
+            className="p-8 rounded-lg shadow-lg border-neutral-600 border-2"
+            style={{ backgroundColor: "#333842" }}
+          >
+            <p className="text-white font-semibold text-lg">
+              Profile updated successfully!
+            </p>
             <div className="flex justify-end mt-8">
               <button
                 className="bg-pink-500 text-white px-4 py-2 rounded-lg"
@@ -241,6 +265,6 @@ export default function Preferences() {
           </div>
         </div>
       )}
-  </div>
+    </div>
   );
 }

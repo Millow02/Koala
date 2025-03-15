@@ -263,20 +263,6 @@ const Sidebar = () => {
                     <BuildingOffice2Icon className="h-6 w-6 inline-block mr-2" />
                     All Facilities
                   </Link>
-                  <Link
-                    to={`/dashboard/map`}
-                    className={`
-                    block transition duration-300 mr-5 rounded hover:bg-neutral-500 px-1 py-2
-                    ${
-                      isMapActive
-                        ? "text-white border-l-4 border-pink-500 hover:rounded"
-                        : "text-neutral-400 hover:text-white"
-                    }
-                  `}
-                  >
-                    <MapIcon className="h-6 w-6 inline-block mr-2" />
-                    Map
-                  </Link>
                 </div>
               </>
             )}

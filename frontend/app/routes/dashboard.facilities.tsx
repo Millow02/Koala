@@ -202,7 +202,8 @@ export default function Facilities() {
 
   return (
     <div className="px-32">
-      <h1 className="text-3xl mb-16 mt-8">Facilities</h1>
+      <h1 className="text-3xl font-bold">Facilities</h1>
+      <hr className="border-pink-500 border-1 mt-6 mb-12" />
       <div className="flex flex-col items-center gap-8">
         {parkingLots.map((parkingLot) => (
           <div

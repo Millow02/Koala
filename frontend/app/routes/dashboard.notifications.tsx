@@ -78,7 +78,7 @@ export default function Notifications() {
 
   return (
     <div className="px-32">
-      <h1 className="text-3xl">Notifications</h1>
+      <h1 className="text-3xl font-bold">Notifications</h1>
       <hr className="border-pink-500 border-1 mt-6 mb-12" />
       <div className="flex justify-end mb-2">
         <button
