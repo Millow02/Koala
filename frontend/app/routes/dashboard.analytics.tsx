@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import { useParams, Link, useOutletContext } from "@remix-run/react";
-import { Chart, Doughnut, Bar } from 'react-chartjs-2';
+import { Chart, Doughnut, Bar, Line } from 'react-chartjs-2';
 import { SupabaseClient, User } from "@supabase/auth-helpers-remix";
 import { ArrowPathIcon, ChevronDownIcon} from "@heroicons/react/24/outline";
 import { 
@@ -11,7 +11,9 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  Title
+  Title,
+  LineElement,
+  PointElement
 } from 'chart.js';
 
 // Update your registration
@@ -22,7 +24,9 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
-  Title
+  Title,
+  LineElement,
+  PointElement
 );
 
 type ContextType = {
@@ -42,6 +46,38 @@ export default function Analytics() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [expectedOccupancyData, setExpectedOccupancyData] = useState<any>(null);
   const [isExpectedLoading, setIsExpectedLoading] = useState(true);
+  const [membershipData, setMembershipData] = useState<any>(null);
+  const [isMembershipLoading, setIsMembershipLoading] = useState(true);
+  const [organizationId, setOrganizationId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserOrganization = async () => {
+      if (!supabase || !user) return;
+      
+      try {
+        // Get the user's organization
+        const { data, error } = await supabase
+          .from("Profile")
+          .select("organizationId")
+          .eq("id", user.id)
+          .single();
+        
+        if (error) {
+          console.error("Error fetching user organization:", error);
+          return;
+        }
+        
+        if (data?.organizationId) {
+          setOrganizationId(data.organizationId);
+          console.log("User belongs to organization:", data.organizationId);
+        }
+      } catch (err) {
+        console.error("Unexpected error fetching user organization:", err);
+      }
+    };
+    
+    fetchUserOrganization();
+  }, [supabase, user]);
 
   const processOccupancyData = (data: any[], weekStart: Date) => {
     // Initialize array for the 7 days of the week
@@ -67,15 +103,18 @@ export default function Analytics() {
     
     setIsLoading(true);
     
-    // Calculate start and end dates for the week
-    const startDate = new Date(weekStartDate);
-    startDate.setHours(0, 0, 0, 0);
-    
-    const endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 6);
-    endDate.setHours(23, 59, 59, 999);
-    
     try {
+      // Use the selected week date, not a hard-coded date
+      const startDate = new Date(weekStartDate);
+      startDate.setHours(0, 0, 0, 0);
+      
+      const endDate = new Date(startDate);
+      endDate.setDate(endDate.getDate() + 6);
+      endDate.setHours(23, 59, 59, 999);
+      
+      console.log(`Fetching weekly data from ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`);
+      console.log(`Using parking lot filter: ${parkingLotId || 'None (all facilities)'}`);
+      
       // Convert dates to ISO strings for Supabase query
       const startIso = startDate.toISOString();
       const endIso = endDate.toISOString();
@@ -83,14 +122,28 @@ export default function Analytics() {
       // Build query based on whether a specific parking lot is selected
       let query = supabase
         .from("OccupancyEvent")
-        .select("created_at")  // This is correct, keep using created_at
-        .gte("created_at", startIso)  // Using created_at instead of entryTime
-        .lte("created_at", endIso);  // Using created_at instead of entryTime
+        .select("created_at, Camera(id, ParkingLot(id, name, organizationId))")
+        .gte("created_at", startIso)
+        .lte("created_at", endIso);
       
-      // Add facility filter if a specific lot is selected
-      if (parkingLotId) {
-        // Check the correct field name for the parking lot ID in your database
-        query = query.eq("cameraId", parkingLotId);  // Or this might be parkingLotId, facilityId, etc.
+      // First add the organization filter using where clause
+      if (organizationId) {
+        // Add a more explicit organization filter
+        query = query.filter('Camera.ParkingLot.organizationId', 'eq', organizationId);
+      }
+      
+      // Then add the parking lot filter if needed
+      if (parkingLotId && parkingLotId !== "") {
+        console.log(`Filtering by parking lot ID: ${parkingLotId}`);
+        
+        // Check if we're filtering by camera or parking lot
+        if (parkingLotId.startsWith('cam_')) {
+          // It's a camera ID
+          query = query.eq("cameraId", parkingLotId);
+        } else {
+          // It's a parking lot ID
+          query = query.filter('Camera.ParkingLot.id', 'eq', parkingLotId);
+        }
       }
       
       const { data, error } = await query;
@@ -99,6 +152,8 @@ export default function Analytics() {
         console.error("Error fetching weekly occupancy data:", error);
         return;
       }
+      
+      console.log(`Received ${data?.length || 0} records for weekly chart`);
       
       // Process the data for the chart
       const dailyCounts = processOccupancyData(data || [], startDate);
@@ -115,7 +170,8 @@ export default function Analytics() {
     setIsRefreshing(true);
     await Promise.all([
       fetchWeeklyOccupancy(selectedWeek),
-      fetchExpectedOccupancy()
+      fetchExpectedOccupancy(),
+      fetchMembershipGrowth()
     ]);
     setIsRefreshing(false);
   };
@@ -124,7 +180,7 @@ export default function Analytics() {
   useEffect(() => {
     // Generate the last 4 weeks for the dropdown
     const today = new Date();
-    const weeks = [];
+    const weeks: Date[] = [];
     
     // Start with the beginning of the current week (Sunday)
     const currentWeek = new Date(today);
@@ -148,7 +204,8 @@ export default function Analytics() {
       try {
         const { data, error } = await supabase
           .from("ParkingLot")
-          .select("id, name");
+          .select("id, name")
+          .eq("organizationId", organizationId);
           
         if (error) {
           console.error("Error fetching parking lots:", error);
@@ -161,8 +218,10 @@ export default function Analytics() {
       }
     };
     
-    fetchParkingLots();
-  }, [supabase]); // Only depends on supabase
+    if (organizationId) {
+      fetchParkingLots();
+    }
+  }, [supabase, organizationId]);
 
   // Fetch data when selectedWeek or parkingLotId changes
   useEffect(() => {
@@ -268,9 +327,13 @@ export default function Analytics() {
       // Build query for historical data
       let query = supabase
         .from("OccupancyEvent")
-        .select("created_at")
+        .select("created_at, Camera!inner(id, ParkingLot!inner(id, organizationId))")
         .gte("created_at", fourWeeksAgo.toISOString());
       
+      if (organizationId) {
+        query = query.eq("Camera.ParkingLot.organizationId", organizationId);
+      }
+
       // Add facility filter if a specific lot is selected
       if (parkingLotId) {
         query = query.eq("cameraId", parkingLotId);
@@ -502,7 +565,203 @@ export default function Analytics() {
     );
   };
   
-  return (
+  const fetchMembershipGrowth = async () => {
+    if (!supabase) return;
+    
+    setIsMembershipLoading(true);
+    
+    try {
+      // Use February 9, 2025 as the start date
+      const startDate = new Date(2025, 1, 9); // Month is 0-indexed, so 1 = February
+      
+      console.log(`Fetching membership data since ${startDate.toLocaleDateString()}`);
+      
+      // Build query for membership growth
+      const { data, error } = await supabase
+        .from("Membership")
+        .select("created_at, ParkingLot!inner(id, organizationId)")
+        .gte("created_at", startDate.toISOString())
+        .order("created_at", { ascending: true });
+      
+      if (error) {
+        console.error("Error fetching membership data:", error);
+        return;
+      }
+      
+      console.log("Membership data received:", data?.length || 0, "users");
+      
+      // Process the data to show growth
+      const processedData = processMembershipData(data || [], startDate);
+      setMembershipData(processedData);
+      
+    } catch (err) {
+      console.error("Unexpected error fetching membership data:", err);
+    } finally {
+      setIsMembershipLoading(false);
+    }
+  };
+
+  const processMembershipData = (data: any[], startDate: Date) => {
+    // Get the weeks from start date to now
+    const weeks: Date[] = [];
+    const now = new Date();
+    
+    // Start with the beginning of the specified week
+    const firstWeekStart = new Date(startDate);
+    firstWeekStart.setDate(startDate.getDate() - startDate.getDay()); // Move to Sunday
+    firstWeekStart.setHours(0, 0, 0, 0);
+    
+    let currentWeek = new Date(firstWeekStart);
+    
+    // Generate weekly points until current date
+    while (currentWeek <= now) {
+      weeks.push(new Date(currentWeek));
+      currentWeek.setDate(currentWeek.getDate() + 7);
+    }
+    
+    // Format week labels
+    const labels = weeks.map(week => {
+      return `${week.getMonth() + 1}/${week.getDate()}`;
+    });
+    
+    // Sort users by creation date
+    const sortedData = [...data].sort((a, b) => {
+      return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+    });
+    
+    // Calculate cumulative users per week
+    const cumulativeCounts = Array(weeks.length).fill(0);
+    let totalUsers = 0;
+    
+    sortedData.forEach(user => {
+      const creationDate = new Date(user.created_at);
+      
+      // Find which week this user joined
+      for (let i = 0; i < weeks.length; i++) {
+        const weekStart = weeks[i];
+        const weekEnd = i < weeks.length - 1 ? weeks[i + 1] : new Date(now);
+        weekEnd.setHours(23, 59, 59, 999);
+        
+        if (creationDate >= weekStart && creationDate < weekEnd) {
+          totalUsers++;
+          cumulativeCounts[i] = totalUsers;
+          
+          // Fill the remaining weeks with this count
+          for (let j = i + 1; j < weeks.length; j++) {
+            cumulativeCounts[j] = totalUsers;
+          }
+          
+          break;
+        }
+      }
+    });
+    
+    return {
+      labels,
+      counts: cumulativeCounts
+    };
+  };
+
+  useEffect(() => {
+    if (supabase) {
+      fetchMembershipGrowth();
+    }
+  }, [supabase]);
+
+  const renderMembershipChart = () => {
+    if (isMembershipLoading) {
+      return <div className="flex justify-center items-center h-64 text-gray-400">Loading data...</div>;
+    }
+    
+    if (!membershipData || !membershipData.labels || membershipData.counts.every((count: number) => count === 0)) {
+      return <div className="flex justify-center items-center h-64 text-gray-400">No membership data available</div>;
+    }
+    
+    const chartData = {
+      labels: membershipData.labels,
+      datasets: [
+        {
+          label: 'Total Members',
+          data: membershipData.counts,
+          fill: false,
+          backgroundColor: '#3B82F6',
+          borderColor: '#60A5FA',
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+        }
+      ]
+    };
+    
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 0,
+          max: 20,
+          ticks: {
+            color: 'white',
+            precision: 0
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+          }
+        },
+               x: {
+          ticks: {
+            color: 'white',
+            font: {
+              size: 9  // Reduced from 10 to allow more space
+            },
+            maxRotation: 45,
+            minRotation: 45,
+            autoSkip: false,  // Don't automatically skip labels
+            callback: function(value: number, index: number, ticks: any) {
+              // Log to see what we're getting
+              
+              // If there are more than 8 labels, only show every other one
+              if (ticks.length > 8) {
+                return index % 2 === 0 ? value : '';
+              }
+              return this.getLabelForValue(value);
+            }
+          },
+          grid: {
+            display: false,
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false,
+          position: 'top' as const,
+          labels: {
+            color: 'white',
+          }
+        },
+        title: {
+          display: false,
+          text: 'Membership Growth',
+          color: 'white',
+          font: {
+            size: 16
+          }
+        }
+      }
+    };
+    
+    return (
+      <div className="h-80">
+        <Line data={chartData} options={options} />
+      </div>
+    );
+  };
+
+
+
+    return (
     <div className="relative" style={{minHeight:"1200px"}}>
       <div className="w-full px-32" >
         <div className="flex items-center justify-between">
@@ -518,96 +777,167 @@ export default function Analytics() {
         <hr className="border-pink-500 border-1 mt-6" />
       </div>
       
-      <div className="mt-12">
-        <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "650px", minWidth: "650px" }}>
-          <div className="flex items-center py-4 px-6 relative">
-            <h2 className="text-2xl font-semibold">Weekly Occupancy</h2>
-            
-            <div className="ml-auto flex items-center space-x-4">
-              {/* Parking lot selector */}
-              <div className="relative">
-                <select 
-                  className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
-                  value={parkingLotId}
-                  onChange={(e) => setParkingLotId(e.target.value)}
-                >
-                  <option value="">All Facilities</option>
-                  {parkingLots.map((lot) => (
-                    <option key={lot.id} value={lot.id}>
-                      {lot.name}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <ChevronDownIcon className="h-4 w-4 text-white" />
+      <div className="flex flex-wrap px-8">
+        <div className="w-1/2 pr-3">
+          {/* Left side charts */}
+          <div className="mt-12">
+            <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
+              <div className="flex items-center py-4 px-6 relative">
+                <h2 className="text-2xl font-semibold">Weekly Occupancy</h2>
+                
+                <div className="ml-auto flex items-center space-x-4">
+                  {/*Parking lot selector
+                  <div className="relative">
+                    <select 
+                      className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
+                      value={parkingLotId}
+                      onChange={(e) => setParkingLotId(e.target.value)}
+                    >
+                      <option value="">All Facilities</option>
+                      {parkingLots.map((lot) => (
+                        <option key={lot.id} value={lot.id}>
+                          {lot.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                      <ChevronDownIcon className="h-4 w-4 text-white" />
+                    </div>
+                  </div>
+                  */}
+                  
+                  {/* Week selector */}
+                  <div className="relative">
+                    <select 
+                      className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
+                      value={selectedWeek.toISOString()}
+                      onChange={(e) => {
+                        setSelectedWeek(new Date(e.target.value));
+                      }}
+                    >
+                      {previousWeeks.map((week, index) => (
+                        <option 
+                          key={week.toISOString()} 
+                          value={week.toISOString()}
+                        >
+                          {index === 0 ? 'Current Week' : `Week of ${week.toLocaleDateString()}`}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                      <ChevronDownIcon className="h-4 w-4 text-white" />
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Week selector */}
-              <div className="relative">
-                <select 
-                  className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
-                  value={selectedWeek.toISOString()}
-                  onChange={(e) => {
-                    setSelectedWeek(new Date(e.target.value));
-                  }}
-                >
-                  {previousWeeks.map((week, index) => (
-                    <option 
-                      key={week.toISOString()} 
-                      value={week.toISOString()}
+              <hr className="border-neutral-600 border-2" />
+              
+              <div className="p-6">
+                {renderWeeklyChart()}
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6">
+            <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "100%", minWidth: "450px" }}>
+              <div className="flex items-center py-4 px-6 relative">
+                <h2 className="text-2xl font-semibold">Expected Occupancy</h2>
+                
+                <div className="ml-auto flex items-center space-x-4">
+                  {/* Parking lot selector - reuse the same one as above 
+                  <div className="relative">
+                    <select 
+                      className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
+                      value={parkingLotId}
+                      onChange={(e) => setParkingLotId(e.target.value)}
                     >
-                      {index === 0 ? 'Current Week' : `Week of ${week.toLocaleDateString()}`}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <ChevronDownIcon className="h-4 w-4 text-white" />
+                      <option value="">All Facilities</option>
+                      {parkingLots.map((lot) => (
+                        <option key={lot.id} value={lot.id}>
+                          {lot.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                      <ChevronDownIcon className="h-4 w-4 text-white" />
+                    </div>
+                  </div>*/}
                 </div>
+              </div>
+              
+              <hr className="border-neutral-600 border-2" />
+              
+              <div className="p-6">
+                {renderExpectedOccupancyChart()}
               </div>
             </div>
           </div>
-          
-          <hr className="border-neutral-600 border-2" />
-          
-          <div className="p-6">
-            {renderWeeklyChart()}
-          </div>
         </div>
-      </div>
-      <div className="mt-6">
-        <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "650px", minWidth: "650px" }}>
-          <div className="flex items-center py-4 px-6 relative">
-            <h2 className="text-2xl font-semibold">Expected Occupancy</h2>
+        
+        <div className="w-1/3 pl-3 mt-12">
+          {/* Right side charts */}
+          
+          <div className="border-neutral-600 border-2 rounded-3xl" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
+            <div className="flex items-center py-4 px-6 relative">
+              <h2 className="text-2xl font-semibold" style={{paddingBottom: 4, paddingTop:4}}>Membership Growth</h2>
+            </div>
             
-            <div className="ml-auto flex items-center space-x-4">
-              {/* Parking lot selector - reuse the same one as above */}
-              <div className="relative">
-                <select 
-                  className="bg-slate-600 border-none rounded-lg py-2 px-4 text-white appearance-none pr-10 focus:outline-none focus:ring-1 focus:ring-white"
-                  value={parkingLotId}
-                  onChange={(e) => setParkingLotId(e.target.value)}
-                >
-                  <option value="">All Facilities</option>
-                  {parkingLots.map((lot) => (
-                    <option key={lot.id} value={lot.id}>
-                      {lot.name}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <ChevronDownIcon className="h-4 w-4 text-white" />
+            <hr className="border-neutral-600 border-2" />
+            
+            <div className="p-6">
+              {renderMembershipChart()}
+            </div>
+          </div>
+          
+          <div className="border-neutral-600 border-2 rounded-3xl mt-6" style={{ backgroundColor: "#333842", width: "500px", minWidth: "500px" }}>
+            <div className="flex items-center py-4 px-6 relative">
+              <h2 className="text-2xl font-semibold">Current Status</h2>
+            </div>
+            
+            <hr className="border-neutral-600 border-2" />
+            
+            <div className="p-6" style={{height: "368px"}}>
+              {/* Create two distinct columns */}
+              <div className="flex">
+                {/* Left column */}
+                <div className="w-1/2 pr-4">
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold">Total Members</h3>
+                    <p className="text-3xl font-bold text-pink-400">8</p>
+                  </div>
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold">Total Occupancy</h3>
+                    <p className="text-3xl font-bold text-pink-400">12</p>
+                  </div>
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold">Total Cameras</h3>
+                    <p className="text-3xl font-bold text-pink-400">20</p>
+                  </div>
+                </div>
+                
+                {/* Right column */}
+                <div className="w-1/2 pl-4">
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold">Total Facilities</h3>
+                    <p className="text-3xl font-bold text-pink-400">3</p>
+                  </div>
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold">Total Intruders</h3>
+                    <p className="text-3xl font-bold text-pink-400">3</p>
+                  </div>
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold">Offline Cameras</h3>
+                    <p className="text-3xl font-bold text-pink-400">0</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           
-          <hr className="border-neutral-600 border-2" />
-          
-          <div className="p-6">
-            {renderExpectedOccupancyChart()}
-          </div>
         </div>
+
+
       </div>
     </div>
   );
