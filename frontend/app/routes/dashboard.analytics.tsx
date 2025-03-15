@@ -69,7 +69,7 @@ export default function Analytics() {
         
         if (data?.organizationId) {
           setOrganizationId(data.organizationId);
-          console.log("User belongs to organization:", data.organizationId);
+          //console.log("User belongs to organization:", data.organizationId);
         }
       } catch (err) {
         console.error("Unexpected error fetching user organization:", err);
@@ -97,14 +97,15 @@ export default function Analytics() {
     };
   };
 
-    // Update your fetchWeeklyOccupancy function
+    
+    
   const fetchWeeklyOccupancy = async (weekStartDate: Date) => {
-    if (!supabase) return;
+    if (!supabase || !organizationId) return;
     
     setIsLoading(true);
     
     try {
-      // Use the selected week date, not a hard-coded date
+      // Use the selected week date
       const startDate = new Date(weekStartDate);
       startDate.setHours(0, 0, 0, 0);
       
@@ -112,48 +113,54 @@ export default function Analytics() {
       endDate.setDate(endDate.getDate() + 6);
       endDate.setHours(23, 59, 59, 999);
       
-      console.log(`Fetching weekly data from ${startDate.toLocaleDateString()} to ${endDate.toLocaleDateString()}`);
-      console.log(`Using parking lot filter: ${parkingLotId || 'None (all facilities)'}`);
-      
       // Convert dates to ISO strings for Supabase query
       const startIso = startDate.toISOString();
       const endIso = endDate.toISOString();
       
-      // Build query based on whether a specific parking lot is selected
+      // First get the parking lots for this organization
+      const { data: orgParkingLots, error: parkingLotError } = await supabase
+        .from("ParkingLot")
+        .select("id")
+        .eq("organizationId", organizationId);
+      
+      if (parkingLotError) {
+        console.error("Error fetching organization parking lots:", parkingLotError);
+        setIsLoading(false);
+        return;
+      }
+      
+      // Extract parking lot IDs
+      const parkingLotIds = orgParkingLots.map(lot => lot.id);
+      
+      if (parkingLotIds.length === 0) {
+        console.log("No parking lots found for this organization");
+        setWeeklyData({ labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], counts: [0, 0, 0, 0, 0, 0, 0] });
+        setIsLoading(false);
+        return;
+      }
+      
+      // Query Occupancy table directly, filtering by facilityId
       let query = supabase
-        .from("OccupancyEvent")
-        .select("created_at, Camera(id, ParkingLot(id, name, organizationId))")
+        .from("Occupancy")
+        .select("created_at, facilityId")
+        .in("facilityId", parkingLotIds)
         .gte("created_at", startIso)
         .lte("created_at", endIso);
       
-      // First add the organization filter using where clause
-      if (organizationId) {
-        // Add a more explicit organization filter
-        query = query.filter('Camera.ParkingLot.organizationId', 'eq', organizationId);
-      }
-      
-      // Then add the parking lot filter if needed
+      // Apply specific facility filter if selected
       if (parkingLotId && parkingLotId !== "") {
-        console.log(`Filtering by parking lot ID: ${parkingLotId}`);
-        
-        // Check if we're filtering by camera or parking lot
-        if (parkingLotId.startsWith('cam_')) {
-          // It's a camera ID
-          query = query.eq("cameraId", parkingLotId);
-        } else {
-          // It's a parking lot ID
-          query = query.filter('Camera.ParkingLot.id', 'eq', parkingLotId);
-        }
+        query = query.eq("facilityId", parkingLotId);
       }
       
       const { data, error } = await query;
       
       if (error) {
         console.error("Error fetching weekly occupancy data:", error);
+        setIsLoading(false);
         return;
       }
       
-      console.log(`Received ${data?.length || 0} records for weekly chart`);
+      console.log(`Found ${data?.length || 0} occupancy events for the selected week`);
       
       // Process the data for the chart
       const dailyCounts = processOccupancyData(data || [], startDate);
@@ -171,7 +178,8 @@ export default function Analytics() {
     await Promise.all([
       fetchWeeklyOccupancy(selectedWeek),
       fetchExpectedOccupancy(),
-      fetchMembershipGrowth()
+      fetchMembershipGrowth(),
+      fetchDashboardStats()
     ]);
     setIsRefreshing(false);
   };
@@ -220,6 +228,7 @@ export default function Analytics() {
     
     if (organizationId) {
       fetchParkingLots();
+      fetchDashboardStats();
     }
   }, [supabase, organizationId]);
 
@@ -315,7 +324,7 @@ export default function Analytics() {
   
   // Add this function to fetch expected occupancy
   const fetchExpectedOccupancy = async () => {
-    if (!supabase) return;
+    if (!supabase || !organizationId) return;
     
     setIsExpectedLoading(true);
     
@@ -324,31 +333,50 @@ export default function Analytics() {
       const fourWeeksAgo = new Date();
       fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
       
-      // Build query for historical data
+      // First get the parking lots for this organization
+      const { data: orgParkingLots, error: parkingLotError } = await supabase
+        .from("ParkingLot")
+        .select("id")
+        .eq("organizationId", organizationId);
+      
+      if (parkingLotError) {
+        console.error("Error fetching organization parking lots:", parkingLotError);
+        setIsExpectedLoading(false);
+        return;
+      }
+      
+      // Extract parking lot IDs
+      const parkingLotIds = orgParkingLots.map(lot => lot.id);
+      
+      if (parkingLotIds.length === 0) {
+        console.log("No parking lots found for this organization");
+        setExpectedOccupancyData({ labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], counts: [0, 0, 0, 0, 0, 0, 0] });
+        setIsExpectedLoading(false);
+        return;
+      }
+      
+      // Query Occupancy table directly, filtering by facilityId
       let query = supabase
-        .from("OccupancyEvent")
-        .select("created_at, Camera!inner(id, ParkingLot!inner(id, organizationId))")
+        .from("Occupancy")
+        .select("created_at, facilityId")
+        .in("facilityId", parkingLotIds)
         .gte("created_at", fourWeeksAgo.toISOString());
       
-      if (organizationId) {
-        query = query.eq("Camera.ParkingLot.organizationId", organizationId);
-      }
-
-      // Add facility filter if a specific lot is selected
-      if (parkingLotId) {
-        query = query.eq("cameraId", parkingLotId);
+      // Apply specific facility filter if selected
+      if (parkingLotId && parkingLotId !== "") {
+        query = query.eq("facilityId", parkingLotId);
       }
       
       const { data, error } = await query;
       
       if (error) {
         console.error("Error fetching expected occupancy data:", error);
+        setIsExpectedLoading(false);
         return;
       }
       
       console.log(`Received ${data?.length || 0} records for expected occupancy chart`);
-
-
+      
       // Process the data to get averages per day of week
       const avgByDay = processExpectedOccupancy(data || []);
       setExpectedOccupancyData(avgByDay);
@@ -362,7 +390,7 @@ export default function Analytics() {
   
   // Process data to get expected occupancy
   const processExpectedOccupancy = (data: any[]) => {
-    console.log('Expected occupancy data being processed:', data);
+    //console.log('Expected occupancy data being processed:', data);
     // Initialize array for the 7 days of the week
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     
@@ -431,7 +459,7 @@ export default function Analytics() {
     });
   
     Object.entries(dailyEntries).forEach(([dayIndex, entries]) => {
-      console.log(`Day ${days[parseInt(dayIndex)]}: ${entries.length} total entries`);
+      //console.log(`Day ${days[parseInt(dayIndex)]}: ${entries.length} total entries`);
     });
     
     // Calculate average entries per day
@@ -455,6 +483,7 @@ export default function Analytics() {
     });
     
     // Log the results
+    /*
     console.log('Weeks with data:', {
       weeks: weekStarts.map(d => d.toLocaleDateString()),
       weekCounts
@@ -465,6 +494,7 @@ export default function Analytics() {
       averages,
       totalRecords: data.length
     });
+    */
   
     // Round the averages to 1 decimal place for display
     const roundedAverages = averages.map(avg => Math.round(avg * 10) / 10);
@@ -574,7 +604,7 @@ export default function Analytics() {
       // Use February 9, 2025 as the start date
       const startDate = new Date(2025, 1, 9); // Month is 0-indexed, so 1 = February
       
-      console.log(`Fetching membership data since ${startDate.toLocaleDateString()}`);
+      //console.log(`Fetching membership data since ${startDate.toLocaleDateString()}`);
       
       // Build query for membership growth
       const { data, error } = await supabase
@@ -588,7 +618,7 @@ export default function Analytics() {
         return;
       }
       
-      console.log("Membership data received:", data?.length || 0, "users");
+      //console.log("Membership data received:", data?.length || 0, "users");
       
       // Process the data to show growth
       const processedData = processMembershipData(data || [], startDate);
@@ -761,7 +791,98 @@ export default function Analytics() {
 
 
 
-    return (
+    // Add these state variables
+  const [stats, setStats] = useState({
+    totalMembers: 0,
+    totalOccupancy: 0,
+    totalCameras: 0,
+    totalFacilities: 0,
+    totalIntruders: 0,
+    offlineCameras: 0
+  });
+  
+
+  
+  const fetchDashboardStats = async () => {
+    if (!supabase || !organizationId) return;
+    
+    try {
+      // Get member count
+      const { count: memberCount, error: memberError } = await supabase
+        .from("Membership")
+        .select("id, ParkingLot!inner(id, organizationId)", { count: "exact" })
+        .eq("ParkingLot.organizationId", organizationId);
+      
+      if (memberError) {
+        console.error("Error fetching members:", memberError);
+      }
+      
+      // Get camera count and their status
+      const { data: cameras, error: cameraError } = await supabase
+        .from("Camera")
+        .select("id, status, ParkingLot!inner(organizationId)")
+        .eq("ParkingLot.organizationId", organizationId);
+      
+      if (cameraError) {
+        console.error("Error fetching cameras:", cameraError);
+      }
+      
+      // Count offline cameras (those with status other than "Active")
+      const offlineCamerasCount = cameras?.filter(camera => camera.status !== "Active").length || 0;
+      
+      // Get facilities count
+      const { data: facilities, error: facilityError } = await supabase
+        .from("ParkingLot")
+        .select("id")
+        .eq("organizationId", organizationId);
+      
+      if (facilityError) {
+        console.error("Error fetching facilities:", facilityError);
+      }
+      
+      // Get current active occupancy from Occupancy table
+      const facilityIds = facilities?.map(f => f.id) || [];
+      
+      let occupancyCount = 0;
+      let intrudersCount = 0;
+      if (facilityIds.length > 0) {
+        // Query Occupancy table for active occupancies
+        const { data, error: occupancyError } = await supabase
+          .from("Occupancy")
+          .select("id, isPermitted")
+          .in("facilityId", facilityIds)
+          .eq("Status", "Active");
+        
+        if (occupancyError) {
+          console.error("Error fetching active occupancy count:", occupancyError);
+        } else if (data) {
+          // Count total occupancies manually from the data array
+          occupancyCount = data.length;
+          
+          // Count intruders (where isPermitted is false)
+          intrudersCount = data.filter(occ => occ.isPermitted === false).length;
+        }
+      }
+      
+      // Update stats state
+      setStats({
+        totalMembers: memberCount || 0,
+        totalOccupancy: occupancyCount,
+        totalCameras: cameras?.length || 0,
+        totalFacilities: facilities?.length || 0,
+        totalIntruders: intrudersCount,
+        offlineCameras: offlineCamerasCount 
+      });
+      
+    } catch (err) {
+      console.error("Unexpected error fetching dashboard stats:", err);
+    }
+  };
+  
+
+
+
+  return (
     <div className="relative" style={{minHeight:"1200px"}}>
       <div className="w-full px-32" >
         <div className="flex items-center justify-between">
@@ -904,15 +1025,15 @@ export default function Analytics() {
                 <div className="w-1/2 pr-4">
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Members</h3>
-                    <p className="text-3xl font-bold text-pink-400">8</p>
+                    <p className="text-3xl font-bold text-pink-400">{stats.totalMembers}</p>
                   </div>
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Occupancy</h3>
-                    <p className="text-3xl font-bold text-pink-400">12</p>
+                    <p className="text-3xl font-bold text-pink-400">{stats.totalOccupancy}</p>
                   </div>
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Cameras</h3>
-                    <p className="text-3xl font-bold text-pink-400">20</p>
+                    <p className="text-3xl font-bold text-pink-400">{stats.totalCameras}</p>
                   </div>
                 </div>
                 
@@ -920,15 +1041,15 @@ export default function Analytics() {
                 <div className="w-1/2 pl-4">
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Facilities</h3>
-                    <p className="text-3xl font-bold text-pink-400">3</p>
+                    <p className="text-3xl font-bold text-pink-400">{stats.totalFacilities}</p>
                   </div>
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Total Intruders</h3>
-                    <p className="text-3xl font-bold text-pink-400">3</p>
+                    <p className="text-3xl font-bold text-pink-400">{stats.totalIntruders}</p>
                   </div>
                   <div className="mb-8">
                     <h3 className="text-lg font-semibold">Offline Cameras</h3>
-                    <p className="text-3xl font-bold text-pink-400">0</p>
+                    <p className="text-3xl font-bold text-pink-400">{stats.offlineCameras}</p>
                   </div>
                 </div>
               </div>
