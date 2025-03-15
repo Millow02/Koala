@@ -242,11 +242,11 @@ export default function Analytics() {
 
   const renderWeeklyChart = () => {
     if (isLoading) {
-      return <div className="flex justify-center items-center h-64 text-gray-400">Loading data...</div>;
+      return <div className="flex justify-center items-center h-80 text-gray-400">Loading data...</div>;
     }
     
     if (!weeklyData || !weeklyData.labels || weeklyData.counts.every((count: number) => count === 0)) {
-      return <div className="flex justify-center items-center h-64 text-gray-400">No data available for this week</div>;
+      return <div className="flex justify-center items-center h-80 text-gray-400">No data available for this week</div>;
     }
     
     const chartData = {
