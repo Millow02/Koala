@@ -134,7 +134,6 @@ def process_images(
     localisation_model,
     segmentation_model,
     sr_model,
-    ocr_model,
     session_number=0,
     cropped_paddings=[ -5, 20],
 ):
@@ -163,7 +162,6 @@ def process_images(
         localiser = Localisation(localisation_model)
         rectifier = Rectification(upscaler_, tm)
         segmenter = Segmentation(segmentation_model, upscaler_)
-        # ocr_engine = OCR(ocr_model)
 
         # Directories for intermediate outputs
         cropped_dir = f"./output/cropped/session_{session_number}"
@@ -199,6 +197,7 @@ def process_images(
         )
         license_plate = segmenter.segment()
 
+
         # Optionally clear intermediate folders after processing
         for crop_dir in cropped_directories:
             ensure_and_clear_folder(crop_dir)
@@ -220,7 +219,6 @@ def process_images_continuously(
     localisation_model="./models/localisation_model.pt",
     segmentation_model="./models/best_segment_model.pt",
     sr_model="./models/LapSRN_x2.pb",
-    ocr_model="./models/ocr_model.h5",
 ):
     """
     Continuously monitors the pics folder and processes new images.
