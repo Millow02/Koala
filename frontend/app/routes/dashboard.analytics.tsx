@@ -87,7 +87,7 @@ export default function Analytics() {
     
     // Count vehicles that entered on each day
     data.forEach(record => {
-      const entryDate = new Date(record.created_at);
+      const entryDate = new Date(record.entryTime);
       const dayIndex = entryDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
       dailyCounts[dayIndex]++;
     });
@@ -143,10 +143,10 @@ export default function Analytics() {
       // Query Occupancy table directly, filtering by facilityId
       let query = supabase
         .from("Occupancy")
-        .select("created_at, facilityId")
+        .select("entryTime, facilityId")
         .in("facilityId", parkingLotIds)
-        .gte("created_at", startIso)
-        .lte("created_at", endIso);
+        .gte("entryTime", startIso)
+        .lte("entryTime", endIso);
       
       // Apply specific facility filter if selected
       if (parkingLotId && parkingLotId !== "") {
@@ -359,9 +359,9 @@ export default function Analytics() {
       // Query Occupancy table directly, filtering by facilityId
       let query = supabase
         .from("Occupancy")
-        .select("created_at, facilityId")
+        .select("entryTime, facilityId")
         .in("facilityId", parkingLotIds)
-        .gte("created_at", fourWeeksAgo.toISOString());
+        .gte("entryTime", fourWeeksAgo.toISOString());
       
       // Apply specific facility filter if selected
       if (parkingLotId && parkingLotId !== "") {
@@ -391,18 +391,31 @@ export default function Analytics() {
   
   // Process data to get expected occupancy
   const processExpectedOccupancy = (data: any[]) => {
-    //console.log('Expected occupancy data being processed:', data);
+    console.log('Expected occupancy data being processed:', data.length, 'records');
+    
     // Initialize array for the 7 days of the week
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     
-    // Create counters for each day
+    // Create counters for each day and week
+    // Using a number array to count entries per week instead of a Set
+    const weekCounts: { [key: number]: number[] } = {
+      0: [0, 0, 0, 0], // Initialize counts for each of the 4 weeks
+      1: [0, 0, 0, 0],
+      2: [0, 0, 0, 0],
+      3: [0, 0, 0, 0],
+      4: [0, 0, 0, 0],
+      5: [0, 0, 0, 0],
+      6: [0, 0, 0, 0]
+    };
+    
+    // Create arrays to group entries by day of week
     const dailyEntries: { [key: number]: number[] } = {
       0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []
     };
     
     // Group entries by day of week
     data.forEach(record => {
-      const entryDate = new Date(record.created_at);
+      const entryDate = new Date(record.entryTime);
       const dayIndex = entryDate.getDay();
       
       // Add this entry to the appropriate day's array
@@ -413,17 +426,22 @@ export default function Analytics() {
       dailyEntries[dayIndex].push(entryDate.getTime());
     });
   
-    // Group by week for each day
-    const weekCounts: { [key: number]: Set<string>[] } = {
-      0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []
-    };
-    
-    // Initialize the week sets for each day (for the past 4 weeks)
-    for (let dayIdx = 0; dayIdx < 7; dayIdx++) {
-      for (let weekIdx = 0; weekIdx < 4; weekIdx++) {
-        weekCounts[dayIdx][weekIdx] = new Set<string>();
+    // Log initial grouping
+    console.log('Initial grouping by day of week:');
+    days.forEach((day, i) => {
+      console.log(`${day}: ${dailyEntries[i].length} total entries`);
+      if (day === 'Sun') {
+        // Convert timestamps to readable date format for Sunday entries
+        const formattedDates = dailyEntries[i].map(timestamp => {
+          const date = new Date(timestamp);
+          return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+        });
+        console.log(`  All entries for ${day}:`);
+        formattedDates.forEach((date, index) => {
+          console.log(`    ${index+1}. ${date}`);
+        });
       }
-    }
+    });
     
     // Calculate the start of each of the past 4 weeks
     const now = new Date();
@@ -435,67 +453,89 @@ export default function Analytics() {
       weekStarts.push(weekStart);
     }
     
-    // Assign entries to the appropriate week
+    console.log('Week start dates:');
+    weekStarts.forEach((date, i) => {
+      console.log(`Week ${i+1}: ${date.toISOString()} to ${new Date(date.getTime() + 7*24*60*60*1000).toISOString()}`);
+    });
+  
+    // Assign entries to weeks and count them
     Object.entries(dailyEntries).forEach(([dayIdxStr, entries]) => {
       const dayIdx = parseInt(dayIdxStr);
       
-      entries.forEach(dateStr => {
-        const date = new Date(dateStr);
+      console.log(`Processing ${entries.length} entries for ${days[dayIdx]}`);
+    
+      entries.forEach(timestamp => {
+        const date = new Date(timestamp);
         
         // Find which week this date belongs to
+        let foundWeek = false;
         for (let weekIdx = 0; weekIdx < weekStarts.length; weekIdx++) {
           const weekStart = weekStarts[weekIdx];
           const weekEnd = new Date(weekStart);
           weekEnd.setDate(weekStart.getDate() + 7);
           
           if (date >= weekStart && date < weekEnd) {
-            // Add to the set of dates for this day and week
-            // We use an ISO string of the date without time to count each day only once
-            const dayKey = date.toISOString().split('T')[0];
-            weekCounts[dayIdx][weekIdx].add(dayKey);
+            // Increment the counter for this day and week
+            weekCounts[dayIdx][weekIdx]++;
+            foundWeek = true;
+            
+            // Only log Sunday entries
+            if (date.getDay() === 0) {
+              console.log(`  ✅ Entry fits in week ${weekIdx+1}! Count now: ${weekCounts[dayIdx][weekIdx]}`);
+            }
             break;
+          }
+        }
+        
+        if (!foundWeek) {
+          // Only log errors for Sunday entries
+          if (date.getDay() === 0) {
+            console.log(`❌ Entry from date ${date.toISOString()} (Sunday) didn't fit in any week`);
+            console.log(`  Available weeks:`, weekStarts.map(ws => `${ws.toISOString()} (${ws.getTime()})`));
           }
         }
       });
     });
   
-    Object.entries(dailyEntries).forEach(([dayIndex, entries]) => {
-      //console.log(`Day ${days[parseInt(dayIndex)]}: ${entries.length} total entries`);
+    // Log the counts after processing
+    console.log('Week counts after processing:');
+    days.forEach((day, dayIdx) => {
+      console.log(`${day}:`);
+      weekStarts.forEach((_, weekIdx) => {
+        console.log(`  Week ${weekIdx+1}: ${weekCounts[dayIdx][weekIdx]} entries`);
+      });
     });
     
-    // Calculate average entries per day
+    // Calculate average entries per day - this is the main change from before
     const averages = days.map((day, index) => {
       // Calculate how many of the past 4 weeks had this day
       let weeksWithData = 0;
-      let totalDaysWithEntries = 0;
+      let totalEntries = 0;
       
       for (let weekIdx = 0; weekIdx < 4; weekIdx++) {
-        if (weekCounts[index][weekIdx]) {
+        if (weekCounts[index][weekIdx] > 0) {
           weeksWithData++;
-          totalDaysWithEntries += weekCounts[index][weekIdx].size;
+          totalEntries += weekCounts[index][weekIdx];
         }
       }
       
+      console.log(`${day}: ${totalEntries} total entries across ${weeksWithData} weeks`);
+  
       // Calculate the average - if there are no weeks with data, return 0
       if (weeksWithData === 0) return 0;
       
-      // Calculate average events per day
-      return totalDaysWithEntries / weeksWithData;
+      // Calculate average events per day - this gives you what you want
+      const average = totalEntries / weeksWithData;
+      console.log(`${day}: Average = ${totalEntries} / ${weeksWithData} = ${average}`);
+      return average;
     });
-    
-    // Log the results
-    /*
-    console.log('Weeks with data:', {
-      weeks: weekStarts.map(d => d.toLocaleDateString()),
-      weekCounts
-    });
-    
+  
+    // Log the final results
     console.log('Processed expected occupancy data:', {
       days,
       averages,
       totalRecords: data.length
     });
-    */
   
     // Round the averages to 1 decimal place for display
     const roundedAverages = averages.map(avg => Math.round(avg * 10) / 10);
@@ -894,11 +934,11 @@ export default function Analytics() {
 
   const renderOccupancyDoughnut = () => {
 
-    console.log("Chart rendering with stats:", {
-    statsTotal: stats.totalOccupancy,
-    capacity: totalCapacity,
-    availableCalc: Math.max(0, totalCapacity - stats.totalOccupancy)
-    });
+    // console.log("Chart rendering with stats:", {
+    // statsTotal: stats.totalOccupancy,
+    // capacity: totalCapacity,
+    // availableCalc: Math.max(0, totalCapacity - stats.totalOccupancy)
+    // });
   
 
     if (totalCapacity === 0 && stats.totalOccupancy === 0) {

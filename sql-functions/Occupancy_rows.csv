@@ -1,0 +1,9 @@
+id,created_at,vehicleId,facilityId,entryTime,exitTime,vehicleOwner,Status,LicensePlate,isPermitted
+340,2025-03-16 09:25:15+00,,9,2025-03-16 09:25:15,2025-03-16 18:25:15,John Smith,Archived,BOBOBO,true
+341,2025-03-16 10:10:30+00,,9,2025-03-16 10:10:30,2025-03-16 19:10:30,John Smith,Archived,BOBOBO,true
+342,2025-03-16 10:55:45+00,,9,2025-03-16 10:55:45,2025-03-16 19:55:45,John Smith,Archived,BOBOBO,true
+343,2025-03-16 11:40:20+00,,9,2025-03-16 11:40:20,2025-03-16 20:40:20,John Smith,Archived,BOBOBO,true
+344,2025-03-16 12:25:35+00,,9,2025-03-16 12:25:35,2025-03-16 21:25:35,John Smith,Archived,BOBOBO,true
+345,2025-03-16 13:45:50+00,,9,2025-03-16 13:45:50,2025-03-16 22:45:50,John Smith,Archived,BOBOBO,true
+346,2025-03-16 14:30:15+00,,9,2025-03-16 14:30:15,2025-03-16 23:30:15,John Smith,Archived,BOBOBO,true
+347,2025-03-16 15:15:30+00,,9,2025-03-16 15:15:30,2025-03-17 00:15:30,John Smith,Archived,BOBOBO,true
