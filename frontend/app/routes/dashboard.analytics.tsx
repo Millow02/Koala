@@ -741,11 +741,11 @@ export default function Analytics() {
 
   const renderMembershipChart = () => {
     if (isMembershipLoading) {
-      return <div className="flex justify-center items-center h-64 text-gray-400">Loading data...</div>;
+      return <div className="flex justify-center items-center h-80 text-gray-400">Loading data...</div>;
     }
     
     if (!membershipData || !membershipData.labels || membershipData.counts.every((count: number) => count === 0)) {
-      return <div className="flex justify-center items-center h-64 text-gray-400">No membership data available</div>;
+      return <div className="flex justify-center items-center h-80 text-gray-400">No membership data available</div>;
     }
     
     const chartData = {
