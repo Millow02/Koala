@@ -15,7 +15,7 @@ class Localisation:
         self.image_path = input_
         self.output_dir = output_dir
 
-    def crop_license_plate(self, padding_levels=[20], confidence=0.25, iou=0.45):
+    def crop_license_plate(self, padding_levels=[-5, 10], confidence=0.25, iou=0.45):
         """
         The licence plate detection can be filtered using two variables:
             confidence & iou
