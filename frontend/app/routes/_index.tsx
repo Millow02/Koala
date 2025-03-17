@@ -80,10 +80,7 @@ export default function Index() {
         </div>
         <div className="border-2 rounded-xl p-4 hover:bg-neutral-400/10 transition-colors">
           {isSignedIn ? (
-            <Link
-              to="/dashboard/lots"
-              className="text-white text-4xl flex gap-x-4"
-            >
+            <Link to="sign-in" className="text-white text-4xl flex gap-x-4">
               Get started <ArrowRight className="h-10 w-10"></ArrowRight>
             </Link>
           ) : (
