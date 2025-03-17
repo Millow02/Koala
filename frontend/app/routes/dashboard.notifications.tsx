@@ -98,7 +98,13 @@ export default function Notifications() {
             }`}
           >
             <div className="flex justify-between items-center align-middle">
-              <p className="text-xl">{notification.content}</p>
+              <div className="flex flex-col">
+                <p className="text-xl">{notification.content}</p>
+                <p className="text-xl">
+  {notification.created_at ? new Date(String(notification.created_at)).toLocaleString() : "No date available"}
+</p>
+              </div>
+
               <Link
                 to={notification.action_url}
                 className="text-lg text-blue-400 mr-4 underline"
