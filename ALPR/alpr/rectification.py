@@ -286,7 +286,7 @@ class Rectification:
         log("RECTIFICATION", "Homography transform applied.")
         return warped_image
 
-    def rectify_image(self, image):
+    def rectify_image(self, image, file_name, warp = False):
         """
         Process a single image to detect contours and rectify it.
         
@@ -296,27 +296,34 @@ class Rectification:
         Returns:
             np.array: Rectified image if successful; otherwise, None.
         """
+
         rectified_image = None
         try:
+
             # Dummy filename used for saving output.
-            dummy_filename = "image"
+            dummy_filename = file_name
             preprocessed = self.preprocess_image(image)
             processed_rgb, contour_elements = self.generate_contour_elements(preprocessed)
 
+            if warp:
+                detected_contours = []
+                # Loop through each processed element to plot contours.
+                for element in contour_elements:
+                    self.plot_contour(element, detected_contours)
 
-            detected_contours = []
-            # Loop through each processed element to plot contours.
-            for element in contour_elements:
-                self.plot_contour(element, detected_contours)
+                if detected_contours:
+                    for cnt in detected_contours:
+                        rectified_image = self.straighten_image(cnt, processed_rgb)
+                        output_path = os.path.join(self.output_dir, f'{os.path.splitext(dummy_filename)[0]}_rectified.jpg')
+                        cv2.imwrite(output_path, rectified_image)
+                        log("RECTIFICATION", f"Rectified image saved at {output_path}.")
+                else:
+                    log("RECTIFICATION", "No valid contours detected for rectification.")
 
-            if detected_contours:
-                for cnt in detected_contours:
-                    rectified_image = self.straighten_image(cnt, processed_rgb)
-                    output_path = os.path.join(self.output_dir, f'{os.path.splitext(dummy_filename)[0]}_rectified.jpg')
-                    cv2.imwrite(output_path, rectified_image)
+            for i, element in enumerate(contour_elements):
+                    output_path = os.path.join(self.output_dir, f'{dummy_filename}_rectified_{i}.jpg')
+                    cv2.imwrite(output_path, element)
                     log("RECTIFICATION", f"Rectified image saved at {output_path}.")
-            else:
-                log("RECTIFICATION", "No valid contours detected for rectification.")
 
         except Exception as e:
             log("RECTIFICATION", f"Error during rectification: {e}")
@@ -341,7 +348,7 @@ class Rectification:
                 crop_filename = os.path.join(directory, image_file)
                 image = cv2.imread(crop_filename)
                 log("RECTIFICATION", "Image loaded successfully.")
-                rectified = self.rectify_image(image)
+                rectified = self.rectify_image(image, image_file)
                 if rectified is not None:
                     rectified_filename = os.path.join(
                         self.output_dir, f"{os.path.splitext(image_file)[0]}_rectified_{idx+1}.jpg"
@@ -365,8 +372,10 @@ class Rectification:
         Returns:
             np.array or None: Contour with four corners if detected; otherwise, None.
         """
+
         log("RECTIFICATION", "Finding contour points.")
         cnts = cv2.findContours(processed_img.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)[0]
+
         # Sort contours by area (largest first) and consider the top 30.
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:30]
 

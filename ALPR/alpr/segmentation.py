@@ -42,10 +42,14 @@ class Segmentation:
         log("SEGMENTATION", "Upscaled input.")
         return upscaled_image
 
-    def segment_characters(self, image_path, output_dir, zoom):
+    def segment_characters(self, image_path, output_dir, zoom, UPSCALE=True):
         os.makedirs(output_dir, exist_ok=True)
         # Upscale and retrieve the image
-        image = self.upscale_input(image_path)
+        if UPSCALE:
+            image = self.upscale_input(image_path)
+        else: 
+            image = cv2.imread(image_path)
+
         if image is None:
             return 0
 
