@@ -13,6 +13,7 @@ class RectificationConfig:
         self.output_size = (794, 400)
         self.input_height = 640
         self.input_width = 640
+
         # For homography (rectification) purposes
         self.segmentation_width, self.segmentation_height = self.output_size
         
