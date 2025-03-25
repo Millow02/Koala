@@ -1,5 +1,5 @@
-source /home/angewoah/Desktop/koala/Koala/ALPR/.venv/bin/activate
-export PYTHONPATH="/home/angewoah/Desktop/koala/Koala/ALPR"
+./home/angewoah/Desktop/koala/Koala/ALPR/.venv/bin/activate
+export PYTHONPATH="/home/z4hed/COEN490/Koala/ALPR"
 
-cd /home/angewoah/Desktop/koala/Koala/ALPR/
-python demo/alpr_top.py
+cd /home/z4hed/COEN490/Koala/ALPR
+uv run demo/alpr_top.py

@@ -5,3 +5,4 @@ numpy
 matplotlib
 supabase
 python-dotenv
+typing_extensions>=4.5.0
