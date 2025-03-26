@@ -5,6 +5,20 @@ from datetime import datetime
 from sensor.pir import HCSR501
 from sensor.camera import Camera
 
+def handle_pir_event(pir, camera):
+    """
+        
+    """
+    signal = "default"
+    if pir.motion_detected():
+        current_time = time.time()
+        print(f"Time: {current_time}: Motion detected.")
+
+        for _ in range(15):
+            camera.capture_file(f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg")
+            time.sleep(10)
+    return signal
+
 def main():
 
     # Setup
@@ -17,17 +31,8 @@ def main():
         print("System ready. Waiting for trigger...")
 
         while True:
-            if pir.motion_detected():
-                current_time = time.time()
-                print(f"Time: {current_time}: Motion detected.")
-                for _ in range(15):
-                    capture_image(camera)
-                    time.sleep(10)
-
-            else:
-                time.sleep(0.1)
-
-        pir.cleanup()
+            handle_pir_event(pir, camera)
+            time.sleep(0.1)
 
     except KeyboardInterrupt:
         print("\nProgram stopped by user")
