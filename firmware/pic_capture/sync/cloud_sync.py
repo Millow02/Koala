@@ -111,11 +111,18 @@ class CloudSync:
                         stderr=subprocess.PIPE,
                         text=True
                     )
-
-                    [shutil.rmtree(os.path.join(source_folder, f)) if os.path.isdir(os.path.join(source_folder, f)) else os.remove(os.path.join(source_folder, f)) for f in os.listdir(source_folder)]
-                    logger.success("Rsync completed successfully")
-                    logger.info(result.stdout)
+                    if result.returncode == 0:
+                            # Rsync completed successfully, now delete the contents of source_folder
+                            [shutil.rmtree(os.path.join(source_folder, f)) if os.path.isdir(os.path.join(source_folder, f)) 
+                             else os.remove(os.path.join(source_folder, f)) 
+                             for f in os.listdir(source_folder)]
+                            logger.success("Rsync completed successfully")
+                            logger.info(result.stdout)
+                        else:
+                            logger.error("Rsync failed, files not deleted")
+                            logger.error(result.stderr)
                 return True
+
             except subprocess.CalledProcessError as e:
                 logger.error(f"Rsync failed with error: {e}")
                 logger.error(f"Error output: {e.stderr}")
