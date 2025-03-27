@@ -53,7 +53,6 @@ class CloudSync:
                     text=True,
                     timeout=5  # 5 second timeout
                 )
-                [shutil.rmtree(os.path.join(source_folder, f)) if os.path.isdir(os.path.join(source_folder, f)) else os.remove(os.path.join(source_folder, f)) for f in os.listdir(source_folder)]
                 logger.success("Connection test successful")
                 return True
             except subprocess.CalledProcessError as e:
@@ -112,6 +111,8 @@ class CloudSync:
                         stderr=subprocess.PIPE,
                         text=True
                     )
+
+                    [shutil.rmtree(os.path.join(source_folder, f)) if os.path.isdir(os.path.join(source_folder, f)) else os.remove(os.path.join(source_folder, f)) for f in os.listdir(source_folder)]
                     logger.success("Rsync completed successfully")
                     logger.info(result.stdout)
                 return True
