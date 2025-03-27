@@ -15,11 +15,11 @@ import shutil
 
 #============================== GLOBAL CONFIG ================================================
 test_mode = 1
-pir_frequency=2
+pir_frequency=1
 PIR_pin=18
 unprocessed_pics = "./pics1"
 pics = "./pics2"
-BLUR_THRESHOLD = 1  # Adjust this threshold based on testing
+BLUR_THRESHOLD = 8  # Adjust this threshold based on testing
 #============================== IMAGE PREPROCESSING ================================================
 
 def process_images(stop_event):
