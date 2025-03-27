@@ -102,15 +102,16 @@ class CloudSync:
             ]
             
             try:
-                result = subprocess.run(
-                    cmd,
-                    check=True,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True
-                )
-                logger.success("Rsync completed successfully")
-                logger.info(result.stdout)
+                while True:
+                    result = subprocess.run(
+                        cmd,
+                        check=True,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        text=True
+                    )
+                    logger.success("Rsync completed successfully")
+                    logger.info(result.stdout)
                 return True
             except subprocess.CalledProcessError as e:
                 logger.error(f"Rsync failed with error: {e}")
