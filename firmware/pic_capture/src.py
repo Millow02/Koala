@@ -121,8 +121,9 @@ def handle_pir_event(pir, camera, stop_event):
 
     while not stop_event.is_set():
         if test_mode:    
+
+            start_time = 0
             try:
-                start_time = 0
                 if pir.motion_detected():
                     logger.info("Motion detected")
                     activate_image_burst(camera, stop_event, pir_frequency)
@@ -132,7 +133,8 @@ def handle_pir_event(pir, camera, stop_event):
                     current_time = time.time()
                     time_passed = current_time - start_time
                     logger.info("No motion detected")
-                    logger.info(f"Time passed since last motion: {time_passed:.2f} seconds")
+                    if start_time:
+                        logger.info(f"Time passed since last motion: {time_passed:.2f} seconds")
             except Exception as e:
                 logger.error(f"Error in PIR handler: {str(e)}")
         else:
@@ -224,6 +226,7 @@ def run_test_version(camera_1, pir, light_sensor, syncer, camera_2=None):
             cloud_connected = False
         
         # Start sensor threads
+        syncer.sync_folder(os.path.abspath(os.path.join(os.path.dirname(__file__), pics)))
         pir_thread = threading.Thread(target=handle_pir_event, args=(pir, camera_1.camera, stop_event))
         light_thread = threading.Thread(target=handle_ls_event, args=(light_sensor, stop_event))
         preprocess_thread = threading.Thread(target=process_images, args=(stop_event,), name="ImageProcessor")
