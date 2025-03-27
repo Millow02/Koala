@@ -78,7 +78,8 @@ class CloudSync:
         """
         # Use default remote folder if none specified
         remote_folder = remote_folder or self.remote_folder
-        
+        logger.success(f"Remote folder set: {remote_folder}")
+
         # Ensure source folder ends with trailing slash to copy contents
         if not source_folder.endswith('/'):
             source_folder += '/'
