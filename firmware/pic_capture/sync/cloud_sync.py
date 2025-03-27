@@ -21,17 +21,6 @@ class CloudSync:
         self.ip_address = ip_address
         self.remote_folder = remote_folder
         self.password = password
-        # Ensure logs directory exists
-        os.makedirs("../logs", exist_ok=True)
-
-        logger.add(
-            "../logs/cloud_sync.log",
-            rotation="10 MB",
-            retention="1 week",
-            level="INFO",
-            format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}"
-        )
-
 
     def sync_folder(self, source_folder: str, remote_folder: Optional[str] = None) -> bool:
         """Rsync a local folder to the remote server using SSH password authentication.

@@ -19,7 +19,7 @@ def activate_image_burst(frequency=10):
     """
         @param frequency number of images required to be taken in 1 second.
     """
-    time_period = (float) 1/frequency
+    time_period = float(1/frequency)
     for _ in range(frequency):
         if stop_event.is_set():
             break
@@ -31,8 +31,6 @@ def handle_pir_event(pir, camera, stop_event):
     """
     Handler for the PIR sensor event running in a separate thread.
     """
-    os.makedirs("logs", exist_ok=True)
-    logger.add("logs/PIR.log", rotation="1 day")
 
     while not stop_event.is_set():
         if test_mode:    
@@ -70,8 +68,6 @@ def handle_ls_event(light_sensor, stop_event):
     """
     Handler for the light sensor event running in a separate thread.
     """
-    os.makedirs("logs", exist_ok=True)
-    logger.add("logs/light_sensor.log", rotation="1 day")
 
     while not stop_event.is_set():
         try:
@@ -116,8 +112,6 @@ def run_test_version(camera_1, pir, light_sensor, syncer, camera_2=None):
     """
     Simplified test version that checks basic functionality of all components
     """
-    os.makedirs("logs", exist_ok=True)
-    logger.add("logs/test_run.log", rotation="1 day")
     stop_event = threading.Event()
 
     try:
