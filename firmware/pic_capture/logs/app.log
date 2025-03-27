@@ -30753,3 +30753,1450 @@
 2025-03-27 00:25:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049513.70 seconds
 2025-03-27 00:25:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
 2025-03-27 00:25:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049513.80 seconds
+2025-03-27 00:25:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049513.90 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.00 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.10 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.20 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.31 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.41 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.51 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.61 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.72 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.82 seconds
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049514.92 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.02 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.13 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.23 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.33 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.43 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.53 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.64 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.74 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.84 seconds
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049515.94 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.04 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.15 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.25 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.35 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.45 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.55 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 59, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.66 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.76 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.86 seconds
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049516.96 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.06 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.16 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.27 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.37 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.47 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.57 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.67 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.77 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.87 seconds
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049517.98 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.08 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.18 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.28 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.38 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.48 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.58 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.69 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.79 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.89 seconds
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049518.99 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.09 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.20 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.30 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.40 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.50 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.60 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.71 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.81 seconds
+2025-03-27 00:25:19 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049519.91 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.01 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.11 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.21 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.32 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.42 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.52 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.63 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.73 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.83 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049520.93 seconds
+2025-03-27 00:25:20 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 59, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.04 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.14 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.24 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.34 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.44 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.55 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.65 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.75 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.85 seconds
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049521.96 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.06 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.16 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.26 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.36 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.46 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.57 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.67 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.77 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.87 seconds
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049522.98 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.08 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.18 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.28 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.38 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.48 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.58 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.69 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.79 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.89 seconds
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049523.99 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.10 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.20 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.30 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 57, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.40 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.51 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.61 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.71 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.81 seconds
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049524.91 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.02 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.12 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.22 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.33 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.43 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.53 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.63 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.73 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.83 seconds
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049525.93 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.04 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.14 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.24 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.34 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.44 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 56, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.54 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.64 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.75 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.85 seconds
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049526.95 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.05 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.15 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.25 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.35 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.46 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.56 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.66 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.76 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.86 seconds
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049527.96 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.07 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.17 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.27 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.37 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.47 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.57 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.68 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.78 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.88 seconds
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049528.98 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.08 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.18 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.29 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.39 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.49 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.60 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.70 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.80 seconds
+2025-03-27 00:25:29 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049529.90 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.01 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.11 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.21 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.31 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.41 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.52 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.62 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.72 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.82 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049530.93 seconds
+2025-03-27 00:25:30 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.03 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.13 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.23 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.33 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.44 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.54 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.64 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.74 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.85 seconds
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049531.95 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.05 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.15 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.26 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.36 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.46 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.56 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.66 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.77 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.87 seconds
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049532.97 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.07 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.17 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.28 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.38 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.48 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.58 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.69 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.79 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.89 seconds
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049533.99 seconds
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049534.09 seconds
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049534.20 seconds
+2025-03-27 00:25:34 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049534.30 seconds
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049534.40 seconds
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049534.50 seconds
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049534.61 seconds
+2025-03-27 00:25:34 | INFO     | __main__:process_images:96 - Image processing thread stopping...
+2025-03-27 00:25:35 | INFO     | sensors.pir:cleanup:63 - GPIO resources cleaned up
+2025-03-27 00:25:35 | INFO     | __main__:run_test_version:253 - Test completed - GPIO cleaned up
+2025-03-27 00:25:48 | INFO     | sensors.camera:__init__:8 - Initializing Camera class
+2025-03-27 00:25:51 | INFO     | sensors.camera:setup_camera:17 - Camera setup complete
+2025-03-27 00:25:54 | INFO     | sensors.pir:__init__:20 - PIR sensor initialized on pin 18
+2025-03-27 00:25:54 | INFO     | __main__:run_test_version:210 - Starting system test...
+2025-03-27 00:25:54 | INFO     | __main__:run_test_version:213 - Testing component connectivity...
+2025-03-27 00:25:54 | INFO     | __main__:run_test_version:214 - Camera connected: True
+2025-03-27 00:25:54 | INFO     | __main__:run_test_version:215 - PIR sensor pin: 18
+2025-03-27 00:25:54 | INFO     | __main__:run_test_version:216 - Light sensor channel: 1
+2025-03-27 00:25:55 | SUCCESS  | sync.cloud_sync:test_connection:55 - Connection test successful
+2025-03-27 00:25:55 | INFO     | __main__:run_test_version:221 - Cloud sync connection: True
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.26 seconds
+2025-03-27 00:25:55 | INFO     | __main__:process_images:33 - Image processing thread starting...
+2025-03-27 00:25:55 | INFO     | __main__:run_test_version:236 - Running sensor test for 60 seconds...
+2025-03-27 00:25:55 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.36 seconds
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.46 seconds
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.56 seconds
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.67 seconds
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.77 seconds
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.87 seconds
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:55 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049555.97 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.07 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.17 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.27 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.38 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.48 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.58 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.68 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.78 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.89 seconds
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:56 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049556.99 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.09 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.19 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.29 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.39 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 57, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.49 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.59 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.70 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.80 seconds
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:57 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049557.90 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.00 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.10 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.21 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.31 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.41 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.51 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 56, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.61 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.72 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.82 seconds
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:58 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049558.92 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.02 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.12 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.22 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.32 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.43 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.53 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.63 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.73 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.83 seconds
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:25:59 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049559.93 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.04 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.14 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.24 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.34 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.44 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.54 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.65 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.75 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.85 seconds
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:00 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049560.95 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.06 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.16 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.26 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.37 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.47 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.57 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.67 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.78 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.88 seconds
+2025-03-27 00:26:01 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:01 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049561.98 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.08 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.18 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.28 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.38 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.48 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.59 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.69 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.79 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.89 seconds
+2025-03-27 00:26:02 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:02 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049562.99 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.09 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.19 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.30 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.40 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.50 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.61 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.71 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.82 seconds
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:03 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049563.92 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.02 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.12 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.23 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.33 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.43 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.54 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.64 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.74 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.85 seconds
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:04 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049564.95 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.06 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.16 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.26 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.37 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.48 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.58 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.68 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.78 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.89 seconds
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:05 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049565.99 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.09 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.19 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.30 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.40 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.50 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.60 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.70 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.80 seconds
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:06 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049566.91 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.01 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.11 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.21 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.31 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.41 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.51 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.62 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.72 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.82 seconds
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:07 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049567.92 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.02 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.13 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.23 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.33 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.44 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.54 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.64 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.75 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.85 seconds
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:08 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049568.96 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.06 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.16 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.26 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.36 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.47 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.57 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.67 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.78 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.88 seconds
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:09 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049569.98 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.09 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.19 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.29 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.39 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.49 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.59 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.70 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.80 seconds
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:10 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049570.90 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.00 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.10 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.20 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.30 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.41 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.51 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.61 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.71 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.81 seconds
+2025-03-27 00:26:11 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:11 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049571.92 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.02 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.12 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.22 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.32 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.43 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.53 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.63 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.73 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.83 seconds
+2025-03-27 00:26:12 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:12 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049572.93 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.04 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.14 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.24 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.34 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.44 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.54 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.64 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.74 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.85 seconds
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:13 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049573.95 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.05 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.15 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.25 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.35 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.46 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.56 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.66 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.76 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.86 seconds
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:14 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049574.96 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.07 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 56, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.17 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.27 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.37 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.47 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.58 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.68 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.78 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.88 seconds
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:15 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049575.98 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.08 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.18 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 55, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.29 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.39 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.49 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.59 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.69 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.79 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049576.89 seconds
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:16 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.00 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.10 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.20 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.30 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 56, 'ir_light': 30, 'is_dark': True}
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.41 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.51 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.61 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.71 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.81 seconds
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:17 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049577.92 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.02 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.12 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.22 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.33 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.43 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 63, 'ir_light': 34, 'is_dark': True}
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.53 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.64 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.74 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.84 seconds
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:18 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049578.94 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.04 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.14 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.25 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.35 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.45 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 67, 'ir_light': 36, 'is_dark': True}
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.55 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.66 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.76 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.86 seconds
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:19 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049579.96 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.06 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.17 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.27 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.37 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.47 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.57 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 67, 'ir_light': 37, 'is_dark': True}
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.68 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.78 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.88 seconds
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:20 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049580.98 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.08 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.18 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.28 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.39 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.49 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.59 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.69 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 67, 'ir_light': 36, 'is_dark': True}
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.79 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.89 seconds
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:21 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049581.99 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.10 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.20 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.30 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.40 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.50 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.60 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.70 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.81 seconds
+2025-03-27 00:26:22 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 67, 'ir_light': 37, 'is_dark': True}
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:22 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049582.91 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.01 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.11 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.21 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.31 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.42 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.52 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.62 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.72 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.82 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:23 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049583.92 seconds
+2025-03-27 00:26:23 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 67, 'ir_light': 36, 'is_dark': True}
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.03 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.13 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.23 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.33 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.43 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.53 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.63 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.73 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.84 seconds
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:24 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049584.94 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.04 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 68, 'ir_light': 36, 'is_dark': True}
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.14 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.24 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.34 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.44 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.55 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.65 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.75 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.85 seconds
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:25 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049585.95 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.05 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.16 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 66, 'ir_light': 36, 'is_dark': True}
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.26 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.36 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.46 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.56 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.67 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.77 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.87 seconds
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:26 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049586.97 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.08 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.18 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 32, 'is_dark': True}
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.28 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.38 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.49 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.59 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.69 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.79 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049587.90 seconds
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:27 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.00 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.10 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.20 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.30 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 61, 'ir_light': 32, 'is_dark': True}
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.41 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.51 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.61 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.71 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.81 seconds
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:28 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049588.92 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.02 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.12 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.22 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.32 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.42 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.53 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.63 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.73 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.83 seconds
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:29 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049589.93 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.03 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.14 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.24 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.34 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.44 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.54 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.64 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.74 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.85 seconds
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:30 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049590.95 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.05 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.15 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.26 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.36 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.46 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.56 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.66 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 57, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.76 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.86 seconds
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:31 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049591.97 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.07 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.17 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.27 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.38 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.48 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.58 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.68 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 57, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.78 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.89 seconds
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:32 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049592.99 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.09 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.19 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.29 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.40 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.50 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.60 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.70 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.80 seconds
+2025-03-27 00:26:33 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:33 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049593.90 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.01 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.11 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.21 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.31 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.41 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.51 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.61 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.71 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.82 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:34 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049594.92 seconds
+2025-03-27 00:26:34 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.02 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.12 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.22 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.32 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.42 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.53 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.63 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.73 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.83 seconds
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:35 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049595.93 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.04 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.14 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.24 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.34 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.44 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.54 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.65 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.75 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.85 seconds
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:36 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049596.95 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.05 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.15 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.26 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.36 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.46 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.56 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.66 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.76 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.86 seconds
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:37 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049597.97 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.07 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.17 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.27 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 57, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.37 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.48 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.58 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.68 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.78 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.89 seconds
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:38 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049598.99 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.09 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.19 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.29 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.39 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.49 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.60 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.70 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.80 seconds
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:39 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049599.90 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.00 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.10 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.20 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.30 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.41 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 32, 'is_dark': True}
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.51 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.61 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.71 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.81 seconds
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:40 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049600.91 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.01 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.12 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.22 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.32 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.42 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.52 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 59, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.62 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.72 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.83 seconds
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:41 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049601.93 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.03 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.14 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.24 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.35 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.45 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.55 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.65 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 58, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.75 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.86 seconds
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:42 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049602.96 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.06 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.16 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.27 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.37 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.47 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.57 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.67 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.78 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_ls_event:162 - Light sensor readings: {'visible_plus_ir': 59, 'ir_light': 31, 'is_dark': True}
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.88 seconds
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:43 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049603.98 seconds
+2025-03-27 00:26:44 | INFO     | __main__:handle_pir_event:134 - No motion detected
+2025-03-27 00:26:44 | INFO     | __main__:handle_pir_event:135 - Time passed since last motion: 1743049604.08 seconds
