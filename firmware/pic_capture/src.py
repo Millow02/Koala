@@ -15,11 +15,11 @@ import shutil
 
 #============================== GLOBAL CONFIG ================================================
 test_mode = 1
-pir_frequency=1
+pir_frequency=2
 PIR_pin=18
 unprocessed_pics = "./pics1"
 pics = "./pics2"
-BLUR_THRESHOLD = 8  # Adjust this threshold based on testing
+BLUR_THRESHOLD = 1  # Adjust this threshold based on testing
 #============================== IMAGE PREPROCESSING ================================================
 
 def process_images(stop_event):
@@ -83,7 +83,7 @@ def process_images(stop_event):
                         destination = os.path.join(pics, filename)
                         shutil.move(image_path, destination)
                         logger.info(f"Moved good quality image {filename} to {destination} (blur value: {blur_value:.2f})")
-                        
+
                 except Exception as e:
                     logger.error(f"Error processing image {filename}: {str(e)}")
                     continue
@@ -226,7 +226,6 @@ def run_test_version(camera_1, pir, light_sensor, syncer, camera_2=None):
             cloud_connected = False
         
         # Start sensor threads
-        syncer.sync_folder(os.path.abspath(os.path.join(os.path.dirname(__file__), pics)))
         pir_thread = threading.Thread(target=handle_pir_event, args=(pir, camera_1.camera, stop_event))
         light_thread = threading.Thread(target=handle_ls_event, args=(light_sensor, stop_event))
         preprocess_thread = threading.Thread(target=process_images, args=(stop_event,), name="ImageProcessor")
@@ -234,6 +233,7 @@ def run_test_version(camera_1, pir, light_sensor, syncer, camera_2=None):
         pir_thread.start()
         light_thread.start()
         preprocess_thread.start() 
+        syncer.sync_folder(os.path.abspath(os.path.join(os.path.dirname(__file__), pics)))
         
         # Run test for 60 seconds
         logger.info("Running sensor test for 60 seconds...")

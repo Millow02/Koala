@@ -1,0 +1,3 @@
+2025-03-27 16:16:00 | ERROR    | __main__:process_images:67 - Could not read image: capture_20250327_161600_025.jpg
+2025-03-27 16:19:17 | ERROR    | __main__:process_images:67 - Could not read image: capture_20250327_161917_377.jpg
+2025-03-27 16:39:21 | ERROR    | __main__:process_images:67 - Could not read image: capture_20250327_163921_570.jpg
