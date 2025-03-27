@@ -16,7 +16,7 @@ class HCSR501:
             begin_time = time.time()
             while time.time() - begin_time < 3:
                 time_left = begin_time + 60 - time.time()
-                logger.info(f"PIR sensor warming up! Done in {time_left} s.")
+                print(f"PIR sensor warming up! Done in {time_left:.1f} s.", end='\r')
             logger.info(f"PIR sensor initialized on pin {pin}")
         except Exception as e:
             logger.error(f"Failed to initialize PIR sensor on pin {pin}: {str(e)}")
